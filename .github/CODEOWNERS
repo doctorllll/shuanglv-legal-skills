@@ -1,3 +1,15 @@
-# 默认所有文件由仓库维护者初审。
-# 涉及法律业务规则的目录，合并前需作者终审（作者 GitHub 账号确认后补入本文件）。
-*   @doctorllll
+# 规则：最后匹配的行生效；被指定为 owner 的人须对本仓库有写权限。
+# 评审分层：作者层（法律业务规则 / 入口 / 许可）由作者终审；仓库层由维护者负责。
+
+# 作者层：一切默认由作者 @csslaw（蔡诗爽律师）终审
+*                       @csslaw
+
+# 混合文件（作者正文 + 维护者头尾）：任一人可批
+/README.md              @csslaw @doctorllll
+/CONTRIBUTING.md        @csslaw @doctorllll
+/.gitignore             @csslaw @doctorllll
+
+# 仓库层：维护者
+/.github/               @doctorllll
+/assets/                @doctorllll
+/CHANGELOG.md           @doctorllll
