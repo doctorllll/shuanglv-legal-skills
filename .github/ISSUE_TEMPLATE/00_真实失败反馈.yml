@@ -1,0 +1,69 @@
+name: 真实失败反馈
+description: 真实使用中爽律 Skill 没做到 / 做错了：任务背景、期望行为、实际行为、失败点（材料必须脱敏）
+title: "[失败] "
+labels: ["真实失败反馈"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        这是作者最欢迎的一类反馈（CONTRIBUTING 第一节第 1 项）。**请勿粘贴真实案件材料**：优先去标识化的最小片段、自构造的模拟材料，或只描述失败条件与预期输出（CONTRIBUTING 第六节）。
+  - type: dropdown
+    id: skill
+    attributes:
+      label: 主技能
+      options:
+        - 法律研究与多源资料融合
+        - 刑事案件办理
+        - 民商事争议解决
+        - 合同与交易工作
+        - 法律顾问与专项法律分析
+        - 尽职调查与专项调查
+        - 法律文书质量与格式控制
+        - 多模态输入适配（可选）
+        - 路由 / 调度（没进对技能）
+        - 05_工程执行层（执行器 / 清单 / 门控）
+        - 不确定
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: 任务背景
+      description: 律师角色、程序阶段、任务目标、输入材料的类型与规模（脱敏后）
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为与失败点
+      description: 哪一步、哪条规则、哪个门控出了问题；有 Agent 输出片段的话脱敏后贴出
+    validations:
+      required: true
+  - type: textarea
+    id: risk
+    attributes:
+      label: 为什么是问题
+      description: 会造成什么法律或执行风险
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 建议修复方向与依据
+      description: 新增 / 删除 / 调整哪条规则；涉及现行法或案例请给可核验来源
+  - type: input
+    id: platform
+    attributes:
+      label: Agent 平台 / 模型 / 版本
+      placeholder: 例如：Claude Code x.y + claude-…；Codex CLI；Hermes；Cursor
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      options:
+        - label: 本 Issue 不含未脱敏的真实案件、客户或第三方受限材料
+          required: true

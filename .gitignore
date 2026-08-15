@@ -3,3 +3,14 @@ __pycache__/
 .DS_Store
 Thumbs.db
 *.tmp
+
+# --- 仓库层补充（维护者） ---
+._*
+__MACOSX/
+.vscode/
+.idea/
+*.swp
+*.bak
+# 本地案件工作产物，禁止入库
+/工作产物/
+/项目执行说明书_*/

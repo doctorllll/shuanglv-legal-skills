@@ -1,5 +1,8 @@
 blank_issues_enabled: true
 contact_links:
-  - name: 阅读参与共创指南
+  - name: 先读《CONTRIBUTING｜共创与贡献指南》
     url: https://github.com/doctorllll/shuanglv-legal-skills/blob/main/CONTRIBUTING.md
-    about: 提交前请先看目录约定、脱敏要求与评审流程。
+    about: 适合提交什么、不建议提交什么、说明结构、专业质量要求、许可与隐私。
+  - name: 一般性讨论 / 使用交流
+    url: https://github.com/doctorllll/shuanglv-legal-skills/discussions
+    about: 不是明确问题或提案的内容请去 Discussions。
