@@ -65,6 +65,11 @@
       "id": "COMMON-BEHAVIOR",
       "text": "已检查本次任务适用的关键行为契约，没有用流程完成冒充专业完成",
       "critical": true
+    },
+    {
+      "id": "COMMON-SNAPSHOT",
+      "text": "复杂/正式材料任务是否提供事项核心概要和快速理解入口？",
+      "critical": false
     }
   ],
   "skills": {
@@ -161,6 +166,21 @@
       {
         "id": "CON-CLAUSE",
         "text": "风险已落实到具体条款、修改文本或谈判方案",
+        "critical": true
+      },
+      {
+        "id": "CONTRACT-ACTUAL-EDIT",
+        "text": "REVIEW/REVISE 是否已把成熟修改实际写入合同文本，而非只出报告？",
+        "critical": true
+      },
+      {
+        "id": "CONTRACT-INTERPRET",
+        "text": "关键条款是否执行未来争议解释压力测试？",
+        "critical": false
+      },
+      {
+        "id": "CONTRACT-PROOF",
+        "text": "重要履行义务是否可操作、可确认并可证明？",
         "critical": true
       }
     ],

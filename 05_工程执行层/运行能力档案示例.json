@@ -105,9 +105,35 @@
       "scope": [],
       "limitations": [],
       "verified_at": "2026-08-15T00:00:00+08:00"
+    },
+    {
+      "capability_id": "cap-diagram",
+      "capability_type": "DIAGRAM_DELIVERY",
+      "provider_class": "NATIVE_OR_LOCAL",
+      "display_name": "图形化交付",
+      "status": "VERIFIED_SUPPORTED",
+      "trust_level": "NOT_APPLICABLE",
+      "supports_locator": false,
+      "supports_currentness": false,
+      "external_processing_required": false,
+      "data_boundary": "LOCAL_OR_RUNTIME",
+      "scope": [
+        "responsive_html",
+        "inline_svg",
+        "png_export"
+      ],
+      "limitations": [],
+      "verified_at": "2026-08-15T00:00:00+08:00"
     }
   ],
   "limitations": [
     "本文件仅为能力档案格式示例，不代表任何具体 Agent 的真实能力"
-  ]
+  ],
+  "can_create_text_file": true,
+  "can_generate_html": true,
+  "can_render_html": true,
+  "can_render_svg": true,
+  "can_export_png": true,
+  "can_embed_images_docx": true,
+  "can_embed_images_pdf": true
 }

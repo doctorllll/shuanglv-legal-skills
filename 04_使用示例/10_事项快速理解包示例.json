@@ -1,0 +1,55 @@
+{
+  "matter_snapshot": {
+    "schema_version": "0.1",
+    "snapshot_id": "snapshot-demo-001",
+    "matter_id": "matter-demo-001",
+    "one_sentence_summary": "甲公司拟向乙公司采购并由乙公司安装一套生产设备，合同价款与交付、安装、验收及质保分阶段衔接。",
+    "matter_type": "CONTRACT_TRANSACTION",
+    "parties": [
+      {"name": "甲公司", "role": "采购方", "fact_status": "VERIFIED", "source_refs": ["source-contract-demo"]},
+      {"name": "乙公司", "role": "供应、安装和调试方", "fact_status": "VERIFIED", "source_refs": ["source-contract-demo"]}
+    ],
+    "key_elements": [
+      {"label": "交易标的", "value": "生产设备及配套安装调试", "fact_status": "VERIFIED", "source_refs": ["source-contract-demo"]},
+      {"label": "合同价款", "value": "800万元（示例数据）", "fact_status": "VERIFIED", "source_refs": ["source-contract-demo"]}
+    ],
+    "business_or_fact_model": "供应方完成生产、交付、安装调试，经采购方验收后按约定节点支付价款，并进入质保阶段。",
+    "current_stage": "签署前审查",
+    "key_dates": [],
+    "key_amounts": [
+      {"amount": "800万元", "meaning": "合同总价（示例数据）", "fact_status": "VERIFIED", "source_refs": ["source-contract-demo"]}
+    ],
+    "core_concerns": [
+      "验收标准是否可客观判定",
+      "付款节点是否与可验证的履约成果匹配",
+      "延期和整改失败后的救济是否形成闭环"
+    ],
+    "unknowns": ["技术附件是否完整", "是否存在第三方安装调试依赖"],
+    "diagram_ids": ["diagram-demo-001"],
+    "deliverable_navigation": ["合同审查修改稿", "合同清洁稿", "重大风险与修改说明"],
+    "source_refs": ["source-contract-demo"],
+    "status": "FINAL"
+  },
+  "diagram_spec": {
+    "schema_version": "0.1",
+    "diagram_id": "diagram-demo-001",
+    "matter_id": "matter-demo-001",
+    "diagram_type": "TRANSACTION_STRUCTURE",
+    "title": "设备采购交易结构示意图",
+    "purpose": "帮助用户快速理解价款支付与设备交付、安装、验收之间的关系。",
+    "recommended_layout": "HORIZONTAL",
+    "nodes": [
+      {"node_id": "buyer", "label": "甲公司", "subtitle": "采购方", "fact_status": "VERIFIED", "source_refs": ["source-contract-demo"], "locator_refs": ["locator-contract-parties"]},
+      {"node_id": "supplier", "label": "乙公司", "subtitle": "供应/安装方", "fact_status": "VERIFIED", "source_refs": ["source-contract-demo"], "locator_refs": ["locator-contract-parties"]}
+    ],
+    "edges": [
+      {"from": "buyer", "to": "supplier", "label": "分阶段支付价款", "relation_type": "PAYMENT", "fact_status": "VERIFIED", "source_refs": ["source-contract-demo"], "locator_refs": ["locator-contract-payment"]},
+      {"from": "supplier", "to": "buyer", "label": "设备交付、安装、调试", "relation_type": "PERFORMANCE", "fact_status": "VERIFIED", "source_refs": ["source-contract-demo"], "locator_refs": ["locator-contract-performance"]}
+    ],
+    "legend": ["实线表示已有材料直接支持的关系"],
+    "mobile_layout_notes": ["手机端允许横向滚动或改为纵向布局，不压缩文字至不可读"],
+    "preferred_user_formats": ["PNG", "HTML", "DOCX_EMBED"],
+    "rendering_state": "SPEC_ONLY",
+    "status": "FINAL"
+  }
+}

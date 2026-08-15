@@ -138,9 +138,12 @@ def build_plan(args):
     need_docx = bool(getattr(args, "need_docx", False))
     need_pdf = bool(getattr(args, "need_pdf", False))
     native_track_changes_required = bool(getattr(args, "native_track_changes", False))
+    quick_understanding_required = bool(getattr(args, "quick_understanding", False) or (formal_delivery and lead in {"合同与交易工作","刑事案件办理","民商事争议解决","尽职调查与专项调查"}))
+    diagram_required = bool(getattr(args, "diagram", False) or (quick_understanding_required and (args.important or formal_delivery) and lead in {"合同与交易工作","刑事案件办理","民商事争议解决","尽职调查与专项调查"}))
+    contract_actual_edit_required = bool(lead=="合同与交易工作" and any(k in t for k in ["审查","审阅","审核","修改","修订","优化","改一下","改这份","红线","修订稿","redline"]) and not getattr(args,"contract_report_only",False))
     capability_resolution_required = bool(
         requires_current_law or private_knowledge_required or professional_legal_source_required
-        or args.input_gap or need_ocr or need_docx or need_pdf or native_track_changes_required
+        or args.input_gap or need_ocr or need_docx or need_pdf or native_track_changes_required or diagram_required
     )
     context={
         "role": args.role,
@@ -168,6 +171,9 @@ def build_plan(args):
         "need_pdf": need_pdf,
         "native_track_changes_required": native_track_changes_required,
         "capability_resolution_required": capability_resolution_required,
+        "quick_understanding_required":quick_understanding_required,
+        "diagram_required":diagram_required,
+        "contract_actual_edit_required":contract_actual_edit_required,
     }
     supporting=[]
     if lead and requires_current_law and lead != "法律研究与多源资料融合": supporting.append("法律研究与多源资料融合")
@@ -203,6 +209,10 @@ def build_plan(args):
         if need_docx or need_pdf or native_track_changes_required:
             cap_files.append(manifest.get("delivery_tool_contract_file","01_运行规范/交付工具能力契约.md"))
         loads.append({"level":"L1","reason":"本次任务需要外部能力解析与适配","files":list(dict.fromkeys(cap_files))})
+    if quick_understanding_required:
+        loads.append({"level":"L1","reason":"复杂/正式材料任务快速理解入口","files":[manifest.get("matter_quick_understanding_file","00_使用与调度/事项快速理解与图形化交付规范.md")]})
+    if diagram_required:
+        loads.append({"level":"L1","reason":"本次任务需要图形化交付","files":[manifest.get("diagram_capability_file","01_运行规范/图形化交付能力契约.md")]})
     if lead:
         info=manifest["skills"][lead]
         loads.append({"level":"L1","reason":"主技能定义","files":info.get("definition",[])})
@@ -310,6 +320,9 @@ def build_state_template(plan):
             "need_pdf":bool(context.get("need_pdf")),
             "native_track_changes_required":bool(context.get("native_track_changes_required")),
             "capability_resolution_required":bool(context.get("capability_resolution_required")),
+            "quick_understanding_required":bool(context.get("quick_understanding_required")),
+            "diagram_required":bool(context.get("diagram_required")),
+            "contract_actual_edit_required":bool(context.get("contract_actual_edit_required")),
         },
         "checklist":[{"id":i["id"],"status":"PENDING","note":None} for i in ck["items"]],
         "analysis_work":{"required":bool(context.get("important_task")),"status":"PENDING" if context.get("important_task") else "NOT_REQUIRED","argument_record_count":0},
@@ -360,6 +373,8 @@ def build_state_template(plan):
         "escalations":[],
         "output":{"output_contract_checked":False,"claimed_capabilities":[]},
         "research":{"state":"INCOMPLETE" if context.get("requires_current_law") else "NOT_REQUIRED","unqualified_conclusion":False},
+        "quick_understanding":{"required":bool(context.get("quick_understanding_required")),"snapshot_status":"PENDING" if context.get("quick_understanding_required") else "NOT_REQUIRED","snapshot_count":0,"diagram_required":bool(context.get("diagram_required")),"diagram_spec_count":0,"rendered_diagram_count":0,"rendering_state":"PENDING" if context.get("diagram_required") else "NOT_REQUIRED"},
+        "contract_delivery":{"actual_edit_required":bool(context.get("contract_actual_edit_required")),"actual_modified_contract_count":0,"report_only":False,"downgrade_disclosed":False},
         "materials":[],
     }
 
@@ -449,6 +464,21 @@ def validate_state(state):
             blockers.append({"id":"GATE-CLAIM","message":"正式交付中的重要命题尚未全部关联上游分析对象。"})
         else: passed.append("GATE-CLAIM")
     else: passed.append("GATE-CLAIM")
+    qu=state.get("quick_understanding",{})
+    if context.get("quick_understanding_required") and (qu.get("snapshot_status") not in {"COMPLETE","FINAL"} or int(qu.get("snapshot_count") or 0)<=0):
+        blockers.append({"id":"GATE-SNAPSHOT","message":"复杂/正式材料任务尚未形成事项核心概要。"})
+    else: passed.append("GATE-SNAPSHOT")
+    if context.get("diagram_required"):
+        if int(qu.get("diagram_spec_count") or 0)<=0:
+            blockers.append({"id":"GATE-DIAGRAM","message":"本次要求图形化表达，但尚未形成 DiagramSpec。"})
+        elif qu.get("rendering_state") not in {"RENDERED_PNG","RENDERED_HTML","DOWNGRADED_TEXT_SOURCE"}:
+            blockers.append({"id":"GATE-DIAGRAM","message":"DiagramSpec 已形成，但尚未实际渲染或记录可接受降级。"})
+        else: passed.append("GATE-DIAGRAM")
+    else: passed.append("GATE-DIAGRAM")
+    cd=state.get("contract_delivery",{})
+    if context.get("contract_actual_edit_required") and int(cd.get("actual_modified_contract_count") or 0)<=0:
+        blockers.append({"id":"GATE-CONTRACT-EDIT","message":"合同 REVIEW/REVISE 需要实际修改合同文本，不能只交修改报告。"})
+    else: passed.append("GATE-CONTRACT-EDIT")
     adv=state.get("adversarial_review",{})
     if context.get("important_task") and adv.get("status")!="COMPLETE":
         blockers.append({"id":"GATE-ADV","message":"重要任务的对抗性审查尚未完成。"})
@@ -828,6 +858,8 @@ def derive_capability_requirements(plan):
         add("CAP-DOCX","DOCX_OUTPUT","用户要求 DOCX 交付",None,False,False,False)
     if c.get("need_pdf"):
         add("CAP-PDF","PDF_OUTPUT","用户要求 PDF 交付",None,False,False,False)
+    if c.get("diagram_required"):
+        add("CAP-DIAGRAM","DIAGRAM_DELIVERY","本次要求图形化交付；优先 PNG，可降级为自包含 HTML/图源",None,False,False,True)
     if c.get("native_track_changes_required"):
         add("CAP-TRACK","NATIVE_TRACK_CHANGES","用户明确要求原生修订模式",None,False,False,False)
     return reqs
@@ -837,6 +869,16 @@ def capability_check(plan, profile):
     """把任务能力需求与当前运行能力档案对照。只检查声明和结构，不验证第三方服务真实政策。"""
     blockers=[]; warnings=[]; resolutions=[]
     caps=[x for x in profile.get("capabilities",[]) if isinstance(x,dict)]
+    # 图形化交付允许由基础运行能力合成：有渲染+PNG能力视为完整支持；
+    # 只有文本文件+HTML能力时，按自包含 HTML/内嵌 SVG 作为可披露降级方案。
+    if not any(c.get("capability_type")=="DIAGRAM_DELIVERY" for c in caps):
+        can_render = any(bool(profile.get(k)) for k in ["can_render_html","can_render_svg","can_render_mermaid","can_render_graphviz","can_render_plantuml"])
+        can_png = bool(profile.get("can_export_png"))
+        can_html_fallback = bool(profile.get("can_create_text_file")) and bool(profile.get("can_generate_html") or profile.get("can_render_html"))
+        if can_render and can_png:
+            caps.append({"capability_id":"synthetic-diagram-png","capability_type":"DIAGRAM_DELIVERY","status":"VERIFIED_SUPPORTED","trust_level":"NOT_APPLICABLE","supports_locator":False,"supports_currentness":False,"external_processing_required":False})
+        elif can_html_fallback:
+            caps.append({"capability_id":"synthetic-diagram-html","capability_type":"DIAGRAM_DELIVERY","status":"DOWNGRADED","trust_level":"NOT_APPLICABLE","supports_locator":False,"supports_currentness":False,"external_processing_required":False})
     reqs=derive_capability_requirements(plan)
     def trust_ok(cap, req):
         need=req.get("minimum_trust_level")
@@ -906,6 +948,9 @@ def main():
     p.add_argument("--need-docx",action="store_true",help="本次明确要求 DOCX 交付")
     p.add_argument("--need-pdf",action="store_true",help="本次明确要求 PDF 交付")
     p.add_argument("--native-track-changes",action="store_true",help="本次明确要求原生 Track Changes/修订模式")
+    p.add_argument("--quick-understanding",action="store_true",help="本次需要事项快速理解包")
+    p.add_argument("--diagram",action="store_true",help="本次需要至少一项图形化示意")
+    p.add_argument("--contract-report-only",action="store_true",help="合同任务由用户明确要求只出报告/意见，不实际修改合同")
     p.add_argument("--full-checklist",action="store_true")
     p.add_argument("--out")
 

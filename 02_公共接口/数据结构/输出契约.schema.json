@@ -83,6 +83,34 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "quick_understanding_required": {
+      "type": "boolean"
+    },
+    "diagram_required": {
+      "type": "boolean"
+    },
+    "diagram_delivery_preference": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "PNG",
+          "HTML",
+          "PDF_EMBED",
+          "DOCX_EMBED",
+          "RENDER_SOURCE",
+          "UNICODE_FALLBACK"
+        ]
+      }
+    },
+    "mobile_readable_required": {
+      "type": "boolean"
+    },
+    "actual_primary_document_edit_required": {
+      "type": "boolean"
+    },
+    "report_only": {
+      "type": "boolean"
     }
   }
 }

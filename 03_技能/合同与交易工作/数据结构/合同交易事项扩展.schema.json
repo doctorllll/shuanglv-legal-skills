@@ -87,6 +87,36 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "business_model_summary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "key_performance_milestones": {
+      "type": "array"
+    },
+    "key_amounts": {
+      "type": "array"
+    },
+    "interpretation_stress_test_required": {
+      "type": "boolean"
+    },
+    "actual_contract_revision_required": {
+      "type": "boolean"
+    },
+    "report_only_explicitly_requested": {
+      "type": "boolean"
+    },
+    "matter_snapshot_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "diagram_ids": {
+      "type": "array"
     }
   }
 }
