@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": true,
-  "$id": "https://legal-skill.local/schema/issue-record/0.1",
-  "title": "IssueRecord",
+  "$id": "https://legal-skill.local/schema/issue-record/0.3",
+  "title": "IssueRecord v0.3",
   "required": [
     "schema_version",
     "issue_id",
@@ -14,7 +14,11 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1"
+      "enum": [
+        "0.1",
+        "0.2",
+        "0.3"
+      ]
     },
     "issue_id": {
       "type": "string"
@@ -76,6 +80,54 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "source_fact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_rule_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related_case_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "research_request_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "research_result_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "option_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "decision_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "last_writeback_id": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   }
 }

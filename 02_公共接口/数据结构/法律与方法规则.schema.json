@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": true,
-  "$id": "https://legal-skill.local/schema/legal-rule/0.1",
-  "title": "LegalRule",
+  "$id": "https://legal-skill.local/schema/legal-rule/0.2",
+  "title": "LegalRule v0.2",
   "required": [
     "schema_version",
     "rule_id",
@@ -15,7 +15,10 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1"
+      "enum": [
+        "0.1",
+        "0.2"
+      ]
     },
     "rule_id": {
       "type": "string"
@@ -118,6 +121,87 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "pinpoint_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supports_issue_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supported_propositions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "rule_type": {
+            "const": "LEGAL"
+          },
+          "verification_state": {
+            "enum": [
+              "VERIFIED_CURRENT",
+              "VERIFIED_HISTORICAL"
+            ]
+          }
+        },
+        "required": [
+          "rule_type",
+          "verification_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source_refs": {
+            "minItems": 1
+          },
+          "pinpoint_refs": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "source_refs",
+          "pinpoint_refs"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verification_state": {
+            "const": "VERIFIED_CURRENT"
+          }
+        },
+        "required": [
+          "verification_state"
+        ]
+      },
+      "then": {
+        "required": [
+          "last_verified_at",
+          "jurisdiction"
+        ],
+        "properties": {
+          "last_verified_at": {
+            "type": "string",
+            "minLength": 1
+          },
+          "jurisdiction": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ]
 }

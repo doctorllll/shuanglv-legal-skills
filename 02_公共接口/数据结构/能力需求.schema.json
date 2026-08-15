@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schema/capability-requirement/0.1",
+  "title": "CapabilityRequirement",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "requirement_id",
+    "capability_type",
+    "required"
+  ],
+  "properties": {
+    "requirement_id": {
+      "type": "string"
+    },
+    "capability_type": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "minimum_status": {
+      "type": "string"
+    },
+    "minimum_trust_level": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "must_preserve_locator": {
+      "type": "boolean"
+    },
+    "must_support_currentness": {
+      "type": "boolean"
+    },
+    "allow_downgrade": {
+      "type": "boolean"
+    },
+    "sensitive_data_allowed": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fallback_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

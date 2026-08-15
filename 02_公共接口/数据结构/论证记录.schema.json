@@ -1,0 +1,312 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/argument-record/0.3",
+  "title": "论证记录 ArgumentRecord v0.3",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "argument_id",
+    "matter_id",
+    "issue_id",
+    "argument_scope",
+    "proposition",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "0.2",
+        "0.3"
+      ]
+    },
+    "argument_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "matter_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "issue_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "argument_scope": {
+      "enum": [
+        "MATTER_SPECIFIC",
+        "ABSTRACT_RESEARCH",
+        "EVIDENCE_ASSESSMENT",
+        "PROCEDURAL",
+        "STRATEGIC"
+      ]
+    },
+    "proposition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rule_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "case_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supporting_fact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supporting_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supporting_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reasoning_methods": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "SUBSUMPTION",
+          "DEDUCTION",
+          "ANALOGY",
+          "DISTINGUISHING",
+          "INDUCTION",
+          "SYSTEMATIC_INTERPRETATION",
+          "PURPOSIVE_INTERPRETATION",
+          "ABDUCTIVE_COMPARISON",
+          "COUNTERFACTUAL_TEST",
+          "EVIDENCE_EVALUATION",
+          "OPTION_COMPARISON",
+          "OTHER"
+        ]
+      }
+    },
+    "reasoning_summary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "counterarguments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "responses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "flip_points": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "remaining_uncertainty": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "conclusion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "SUPPORTED",
+        "DISPUTED",
+        "INCOMPLETE",
+        "HUMAN_REVIEW_REQUIRED"
+      ]
+    },
+    "supersedes_argument_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "superseded_by_argument_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "adversarial_review_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "writeback_event_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "SUPPORTED"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "reasoning_methods": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "reasoning_methods",
+          "conclusion"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "SUPPORTED"
+          },
+          "argument_scope": {
+            "enum": [
+              "MATTER_SPECIFIC",
+              "EVIDENCE_ASSESSMENT",
+              "PROCEDURAL"
+            ]
+          }
+        },
+        "required": [
+          "status",
+          "argument_scope"
+        ]
+      },
+      "then": {
+        "properties": {
+          "supporting_fact_ids": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "supporting_fact_ids"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "SUPPORTED"
+          },
+          "argument_scope": {
+            "const": "MATTER_SPECIFIC"
+          }
+        },
+        "required": [
+          "status",
+          "argument_scope"
+        ]
+      },
+      "then": {
+        "anyOf": [
+          {
+            "properties": {
+              "rule_refs": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "rule_refs"
+            ]
+          },
+          {
+            "properties": {
+              "case_refs": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "case_refs"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "SUPPORTED"
+          },
+          "argument_scope": {
+            "const": "ABSTRACT_RESEARCH"
+          }
+        },
+        "required": [
+          "status",
+          "argument_scope"
+        ]
+      },
+      "then": {
+        "anyOf": [
+          {
+            "properties": {
+              "rule_refs": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "rule_refs"
+            ]
+          },
+          {
+            "properties": {
+              "case_refs": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "case_refs"
+            ]
+          },
+          {
+            "properties": {
+              "supporting_source_ids": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "supporting_source_ids"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

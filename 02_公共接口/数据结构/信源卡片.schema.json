@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": true,
-  "$id": "https://legal-skill.local/schema/source-card/0.1",
-  "title": "SourceCard",
+  "$id": "https://legal-skill.local/schema/source-card/0.2",
+  "title": "SourceCard v0.2",
   "required": [
     "schema_version",
     "source_id",
@@ -14,7 +14,10 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1"
+      "enum": [
+        "0.1",
+        "0.2"
+      ]
     },
     "source_id": {
       "type": "string"
@@ -104,7 +107,14 @@
     "locators": {
       "type": "array",
       "items": {
-        "type": "object"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object"
+          }
+        ]
       }
     },
     "notes": {
@@ -115,6 +125,43 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "supported_propositions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "source_family": {
+            "enum": [
+              "LEGAL_AUTHORITY",
+              "CASE"
+            ]
+          },
+          "verification_state": {
+            "const": "VERIFIED"
+          }
+        },
+        "required": [
+          "source_family",
+          "verification_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "locators": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "locators"
+        ]
+      }
+    }
+  ]
 }

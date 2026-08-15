@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/cross-module-execution-bundle/0.2",
+  "title": "跨模块执行包 CrossModuleExecutionBundle v0.2",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "matter_id",
+    "issues",
+    "research_requests",
+    "research_results",
+    "arguments",
+    "findings",
+    "options",
+    "decisions",
+    "adversarial_reviews",
+    "writeback_events"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "0.1",
+        "0.2"
+      ]
+    },
+    "matter_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "research_requests": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "research_results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "arguments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "adversarial_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "writeback_events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "task_profiles": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "matter_models": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "issue_trees": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "review_question_sets": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "authority_maps": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "case_matrices": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "argument_maps": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "legal_object_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "plan_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "behavior_contract_records": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

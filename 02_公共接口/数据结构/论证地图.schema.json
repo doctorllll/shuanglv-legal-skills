@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/argument-map/0.1",
+  "title": "论证地图 ArgumentMap v0.1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "map_id",
+    "matter_id",
+    "issue_id",
+    "nodes",
+    "edges",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "map_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "issue_id": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "argument_id",
+          "side"
+        ],
+        "properties": {
+          "argument_id": {
+            "type": "string"
+          },
+          "side": {
+            "enum": [
+              "CLIENT",
+              "OPPONENT",
+              "PROSECUTION",
+              "DEFENSE",
+              "VICTIM",
+              "NEUTRAL",
+              "OTHER"
+            ]
+          },
+          "label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "from_argument_id",
+          "to_argument_id",
+          "relation"
+        ],
+        "properties": {
+          "from_argument_id": {
+            "type": "string"
+          },
+          "to_argument_id": {
+            "type": "string"
+          },
+          "relation": {
+            "enum": [
+              "SUPPORTS",
+              "ATTACKS",
+              "REBUTS",
+              "QUALIFIES",
+              "DEPENDS_ON",
+              "ALTERNATIVE"
+            ]
+          }
+        }
+      }
+    },
+    "key_conflicts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "flip_points": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "COMPLETE",
+        "NEEDS_REVISION"
+      ]
+    }
+  }
+}

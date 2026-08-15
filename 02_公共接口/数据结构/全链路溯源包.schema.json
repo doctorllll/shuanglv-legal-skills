@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/provenance-bundle/0.1",
+  "title": "全链路溯源包 ProvenanceBundle",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "matter_id",
+    "source_locators",
+    "sources",
+    "facts",
+    "evidence_items",
+    "issues",
+    "legal_rules",
+    "case_cards",
+    "arguments",
+    "findings",
+    "deliverable_claims"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "matter_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_locators": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "evidence_items": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "legal_rules": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "case_cards": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "arguments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "deliverable_claims": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "research_requests": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "research_results": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "adversarial_reviews": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "writeback_events": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

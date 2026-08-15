@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/research-request/0.1",
+  "title": "法律研究请求 ResearchRequest v0.1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version","research_request_id","matter_id","issue_id","question","status"],
+  "properties": {
+    "schema_version": {"const":"0.1"},
+    "research_request_id": {"type":"string","minLength":1},
+    "matter_id": {"type":"string","minLength":1},
+    "issue_id": {"type":"string","minLength":1},
+    "question": {"type":"string","minLength":1},
+    "jurisdiction": {"type":["string","null"]},
+    "key_dates": {"type":"array","items":{"type":"string"}},
+    "research_purpose": {"type":["string","null"]},
+    "required_source_types": {"type":"array","items":{"enum":["OFFICIAL_LAW","JUDICIAL_INTERPRETATION","CASE","REGULATORY","SCHOLARLY","USER_KNOWLEDGE","OTHER"]}},
+    "search_directions": {"type":"array","items":{"enum":["SUPPORTING","COUNTER","BOUNDARY","EXCEPTION","SPECIAL_RULE","VALIDITY","HISTORICAL","COMPARATIVE"]}},
+    "dependent_fact_ids": {"type":"array","items":{"type":"string"}},
+    "acceptance_criteria": {"type":"array","items":{"type":"string"}},
+    "requested_by_skill": {"type":["string","null"]},
+    "status": {"enum":["OPEN","IN_PROGRESS","SATURATED","INCOMPLETE","BLOCKED","HUMAN_REVIEW_REQUIRED"]},
+    "research_result_ids": {"type":"array","items":{"type":"string"}},
+    "created_at": {"type":["string","null"]},
+    "extensions": {"type":"object"}
+  }
+}

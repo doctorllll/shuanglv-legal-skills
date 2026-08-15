@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": true,
-  "$id": "https://legal-skill.local/schema/case-card/0.1",
-  "title": "CaseCard",
+  "$id": "https://legal-skill.local/schema/case-card/0.2",
+  "title": "CaseCard v0.2",
   "required": [
     "schema_version",
     "case_id",
@@ -15,7 +15,10 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1"
+      "enum": [
+        "0.1",
+        "0.2"
+      ]
     },
     "case_id": {
       "type": "string"
@@ -128,6 +131,70 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "case_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "document_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_locator_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "holding_locator_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "similarities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "use_rationale": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "verification_state": {
+            "const": "VERIFIED"
+          }
+        },
+        "required": [
+          "verification_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source_locator_refs": {
+            "minItems": 1
+          },
+          "holding_locator_refs": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "source_locator_refs",
+          "holding_locator_refs"
+        ]
+      }
+    }
+  ]
 }

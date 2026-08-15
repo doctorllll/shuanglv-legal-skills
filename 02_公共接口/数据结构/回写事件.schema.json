@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/writeback-event/0.1",
+  "title": "回写事件 WriteBackEvent v0.1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schema_version","writeback_id","matter_id","trigger_type","reason","affected_refs","status"],
+  "properties": {
+    "schema_version": {"const":"0.1"},
+    "writeback_id": {"type":"string","minLength":1},
+    "matter_id": {"type":"string","minLength":1},
+    "trigger_type": {"enum":["NEW_MATERIAL","FACT_CHANGE","EVIDENCE_CHANGE","RESEARCH_RESULT","ADVERSARIAL_REVIEW","HUMAN_DECISION","GOAL_CHANGE","OTHER"]},
+    "trigger_ref_ids": {"type":"array","items":{"type":"string"}},
+    "reason": {"type":"string","minLength":1},
+    "affected_refs": {"type":"array","minItems":1,"items":{"type":"string"}},
+    "updated_refs": {"type":"array","items":{"type":"string"}},
+    "reviewed_unchanged_refs": {"type":"array","items":{"type":"string"}},
+    "new_research_request_ids": {"type":"array","items":{"type":"string"}},
+    "new_decision_ids": {"type":"array","items":{"type":"string"}},
+    "rerun_required": {"type":"array","items":{"enum":["STRUCTURED_REVIEW","FACT_MODEL","LEGAL_RESEARCH","ARGUMENT","ADVERSARIAL_REVIEW","QUALITY_GATE","DELIVERABLE"]}},
+    "status": {"enum":["OPEN","APPLIED","BLOCKED"]},
+    "created_at": {"type":["string","null"]},
+    "extensions": {"type":"object"}
+  },
+  "allOf": [
+    {
+      "if": {"properties":{"status":{"const":"APPLIED"}},"required":["status"]},
+      "then": {"anyOf":[{"properties":{"updated_refs":{"minItems":1}},"required":["updated_refs"]},{"properties":{"reviewed_unchanged_refs":{"minItems":1}},"required":["reviewed_unchanged_refs"]}]}
+    }
+  ]
+}

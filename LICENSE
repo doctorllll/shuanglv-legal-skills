@@ -1,0 +1,9 @@
+爽律 Skill｜律师专业工作流系统采用分轨开放许可：
+
+1. 文本性 Skill 内容（包括 Markdown 工作流、规则、说明和非代码示例）原则上采用 Creative Commons Attribution-ShareAlike 4.0 International（CC BY-SA 4.0）。完整许可证见 LICENSE-CC-BY-SA-4.0.txt。
+
+2. 程序性文件（包括 Python 源代码、JSON Schema、JSON 配置和机器可读程序性数据）原则上采用 Apache License 2.0。完整许可证见 LICENSE-APACHE-2.0.txt。
+
+3. 第三方内容不自动纳入上述许可，仍受其自身版权、许可证、访问权限和服务条款约束。
+
+许可边界、署名方式、贡献和隐私规则详见《许可与使用声明.md》和 CONTRIBUTING.md。

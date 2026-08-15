@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": true,
-  "$id": "https://legal-skill.local/schema/finding/0.1",
-  "title": "Finding",
+  "$id": "https://legal-skill.local/schema/finding/0.3",
+  "title": "Finding v0.3",
   "required": [
     "schema_version",
     "finding_id",
@@ -15,7 +15,11 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1"
+      "enum": [
+        "0.1",
+        "0.2",
+        "0.3"
+      ]
     },
     "finding_id": {
       "type": "string"
@@ -72,13 +76,134 @@
       ]
     },
     "status": {
-      "type": "string"
+      "enum": [
+        "DRAFT",
+        "SUPPORTED",
+        "DISPUTED",
+        "INCOMPLETE",
+        "HUMAN_REVIEW_REQUIRED"
+      ]
     },
     "owner_skill": {
       "type": "string"
     },
     "extensions": {
       "type": "object"
+    },
+    "argument_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supporting_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "case_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "importance": {
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ]
+    },
+    "traceability_state": {
+      "enum": [
+        "FULL",
+        "PARTIAL",
+        "UNTRACED",
+        "NOT_REQUIRED"
+      ]
+    },
+    "supersedes_finding_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "superseded_by_finding_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "adversarial_review_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "writeback_event_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "SUPPORTED"
+          },
+          "importance": {
+            "enum": [
+              "CRITICAL",
+              "HIGH"
+            ]
+          }
+        },
+        "required": [
+          "status",
+          "importance"
+        ]
+      },
+      "then": {
+        "properties": {
+          "traceability_state": {
+            "const": "FULL"
+          }
+        },
+        "required": [
+          "traceability_state"
+        ],
+        "anyOf": [
+          {
+            "properties": {
+              "argument_ids": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "argument_ids"
+            ]
+          },
+          {
+            "properties": {
+              "supporting_fact_ids": {
+                "minItems": 1
+              },
+              "supporting_rule_ids": {
+                "minItems": 1
+              }
+            },
+            "required": [
+              "supporting_fact_ids",
+              "supporting_rule_ids"
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }

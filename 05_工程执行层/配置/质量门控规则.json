@@ -1,0 +1,135 @@
+{
+  "schema_version": "0.1",
+  "blocking_rules": [
+    {
+      "id": "GATE-LEAD",
+      "description": "必须确定唯一主技能"
+    },
+    {
+      "id": "GATE-STRUCT",
+      "description": "明确需要结构化审阅时必须形成实际审阅记录"
+    },
+    {
+      "id": "GATE-ANALYSIS",
+      "description": "重要任务必须完成可审计的分析与推理工作"
+    },
+    {
+      "id": "GATE-LAW",
+      "description": "需要现行法核验时必须实际完成核验"
+    },
+    {
+      "id": "GATE-ADV",
+      "description": "重要任务必须完成对抗性审查"
+    },
+    {
+      "id": "GATE-ESC",
+      "description": "C/D级人工升级事项不得未决"
+    },
+    {
+      "id": "GATE-EXT",
+      "description": "敏感材料外部处理必须有明确授权"
+    },
+    {
+      "id": "GATE-OUT",
+      "description": "正式交付必须完成输出契约检查"
+    },
+    {
+      "id": "GATE-RES",
+      "description": "研究不完整或受阻时不得给出无保留确定结论"
+    },
+    {
+      "id": "GATE-REVIEW",
+      "description": "关键材料声称已审阅时必须有实际审阅范围"
+    },
+    {
+      "id": "GATE-CAP",
+      "description": "不得声称未经验证的运行能力已经实现"
+    },
+    {
+      "id": "GATE-PROV",
+      "description": "重要结论必须具有完整上游溯源链"
+    },
+    {
+      "id": "GATE-INFER",
+      "description": "INFERRED事实必须记录推断依据"
+    },
+    {
+      "id": "GATE-RULESRC",
+      "description": "已核验法律规则必须具有权威来源、精确定位和核验记录"
+    },
+    {
+      "id": "GATE-CLAIM",
+      "description": "正式交付中的重要命题必须能回到上游分析对象"
+    },
+    {
+      "id": "GATE-CROSS",
+      "description": "复杂/跨模块任务必须完成对象交接和回写检查"
+    },
+    {
+      "id": "GATE-HANDOFF",
+      "description": "业务技能需要法律研究时必须形成研究请求并记录研究结果回填"
+    },
+    {
+      "id": "GATE-ADV-WRITEBACK",
+      "description": "重要任务的对抗性审查必须回写受影响结论，或说明维持理由"
+    },
+    {
+      "id": "GATE-OPTION",
+      "description": "明确存在策略选择时必须形成可比较选项和必要的人工决定记录"
+    },
+    {
+      "id": "GATE-WRITEBACK",
+      "description": "存在待处理回写事件时不得把旧分析直接作为最终结果交付"
+    },
+    {
+      "id": "GATE-MODEL",
+      "description": "复杂/跨模块任务需要维护事项工作模型"
+    },
+    {
+      "id": "GATE-PROFILE",
+      "description": "需要事项工作模型时必须形成最小任务配置"
+    },
+    {
+      "id": "GATE-ISSUETREE",
+      "description": "复杂分析需要形成可处理的问题结构"
+    },
+    {
+      "id": "GATE-REVIEWQ",
+      "description": "结构化审阅必须由任务驱动的审阅问题集约束"
+    },
+    {
+      "id": "GATE-AUTHMAP",
+      "description": "重要现行法研究应形成权威来源结构"
+    },
+    {
+      "id": "GATE-CASEMATRIX",
+      "description": "明确要求类案研究时应形成可比较的类案矩阵"
+    },
+    {
+      "id": "GATE-PLANREV",
+      "description": "需要计划确认的高风险/重大分支任务必须完成计划确认或修订"
+    },
+    {
+      "id": "GATE-BEHAVIOR",
+      "description": "重要/正式任务不得存在未修正的关键行为契约违反"
+    }
+  ],
+  "warning_rules": [
+    {
+      "id": "WARN-LOC",
+      "description": "关键来源定位不完整"
+    },
+    {
+      "id": "WARN-GAP",
+      "description": "存在已披露但不阻断当前任务的材料/事实/研究缺口"
+    },
+    {
+      "id": "WARN-DOWNGRADE",
+      "description": "存在能力降级但用户可接受"
+    },
+    {
+      "id": "WARN-PROV",
+      "description": "非关键命题存在部分溯源或定位不完整"
+    }
+  ]
+}

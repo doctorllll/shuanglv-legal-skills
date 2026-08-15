@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": true,
-  "$id": "https://legal-skill.local/schema/research-result/0.1",
-  "title": "ResearchResult",
+  "$id": "https://legal-skill.local/schema/research-result/0.3",
+  "title": "ResearchResult v0.3",
   "required": [
     "schema_version",
     "research_result_id",
@@ -14,7 +14,11 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1"
+      "enum": [
+        "0.1",
+        "0.2",
+        "0.3"
+      ]
     },
     "research_result_id": {
       "type": "string"
@@ -98,6 +102,46 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "argument_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "traceability_state": {
+      "enum": [
+        "FULL",
+        "PARTIAL",
+        "UNTRACED"
+      ]
+    },
+    "research_request_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "affected_argument_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "affected_finding_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "writeback_required": {
+      "type": "boolean"
+    },
+    "writeback_event_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   }
 }

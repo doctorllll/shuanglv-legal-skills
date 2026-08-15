@@ -1,0 +1,689 @@
+{
+  "schema_version": "0.1",
+  "common": [
+    {
+      "id": "COMMON-ROLE",
+      "text": "已明确当前律师/用户角色、任务目标和本次范围",
+      "critical": true
+    },
+    {
+      "id": "COMMON-MATERIAL",
+      "text": "已区分材料的 RECEIVED / REVIEWED / PARTIAL / UNREADABLE / MISSING 状态",
+      "critical": true
+    },
+    {
+      "id": "COMMON-FACT",
+      "text": "未将 ALLEGED、INFERRED、UNKNOWN 静默提升为 VERIFIED",
+      "critical": true
+    },
+    {
+      "id": "COMMON-LOCATOR",
+      "text": "关键事实、证据、法律和案例已保留必要的精确来源定位",
+      "critical": true
+    },
+    {
+      "id": "COMMON-PROV",
+      "text": "重要事实、法律依据、案例和专业判断已保留可回查的来源或上游分析关系",
+      "critical": true
+    },
+    {
+      "id": "COMMON-GAP",
+      "text": "尚未解决的事实、证据、法律和材料缺口已显式保留",
+      "critical": true
+    },
+    {
+      "id": "COMMON-HUMAN",
+      "text": "已检查是否触发人工决策与升级矩阵",
+      "critical": true
+    },
+    {
+      "id": "COMMON-ANALYSIS",
+      "text": "已根据任务复杂度执行必要的事实建模、问题构造、规则适用和竞争解释，而非只完成流程动作",
+      "critical": false
+    },
+    {
+      "id": "COMMON-HANDOFF",
+      "text": "跨模块任务使用稳定对象/ID交接，未要求下一模块重新猜测上一步结论",
+      "critical": true
+    },
+    {
+      "id": "COMMON-WRITEBACK",
+      "text": "新材料、新规则、研究结果或对抗审查改变原判断时，已回写受影响的上游对象",
+      "critical": true
+    },
+    {
+      "id": "COMMON-PROFILE",
+      "text": "复杂任务已明确客户目标、角色、范围、约束和完成标准",
+      "critical": true
+    },
+    {
+      "id": "COMMON-ISSUETREE",
+      "text": "复杂问题已拆成可研究、可证明、可决定的问题结构，并允许后续回写",
+      "critical": false
+    },
+    {
+      "id": "COMMON-BEHAVIOR",
+      "text": "已检查本次任务适用的关键行为契约，没有用流程完成冒充专业完成",
+      "critical": true
+    }
+  ],
+  "skills": {
+    "刑事案件办理": [
+      {
+        "id": "CRIM-ROLE",
+        "text": "已明确辩护/被害人代理/控告等具体角色",
+        "critical": true
+      },
+      {
+        "id": "CRIM-STAGE",
+        "text": "已明确侦查、审查起诉、一审、二审等程序阶段",
+        "critical": true
+      },
+      {
+        "id": "CRIM-URGENT",
+        "text": "已检查人身自由、期限、证据灭失和财产等紧急风险",
+        "critical": true
+      },
+      {
+        "id": "CRIM-PROOF",
+        "text": "证据分析按待证命题和证明体系组织，而非只按证据名称摘要",
+        "critical": true
+      },
+      {
+        "id": "CRIM-ADVERSE",
+        "text": "有利与不利材料均已纳入分析",
+        "critical": true
+      },
+      {
+        "id": "CRIM-OFFENSE",
+        "text": "罪名分析已与构成要件、事实和证据逐项对应",
+        "critical": true
+      }
+    ],
+    "民商事争议解决": [
+      {
+        "id": "CIV-GOAL",
+        "text": "已明确客户目标，而非只回答抽象法律问题",
+        "critical": true
+      },
+      {
+        "id": "CIV-CHANNEL",
+        "text": "已核实诉讼/仲裁渠道、代理位置和程序阶段",
+        "critical": true
+      },
+      {
+        "id": "CIV-CLAIM",
+        "text": "请求、否认、抗辩、反抗辩及备位路径已区分",
+        "critical": true
+      },
+      {
+        "id": "CIV-ELEMENT",
+        "text": "请求路径已拆成要件并映射争议焦点",
+        "critical": true
+      },
+      {
+        "id": "CIV-BURDEN",
+        "text": "已配置举证责任、证据和证据缺口",
+        "critical": true
+      },
+      {
+        "id": "CIV-PROC",
+        "text": "已检查管辖/仲裁、时效、保全和执行可实现性",
+        "critical": true
+      }
+    ],
+    "合同与交易工作": [
+      {
+        "id": "CON-ROLE",
+        "text": "已明确代表哪一方及谈判位置",
+        "critical": true
+      },
+      {
+        "id": "CON-GOAL",
+        "text": "已明确商业目标、不可接受结果和优先级",
+        "critical": true
+      },
+      {
+        "id": "CON-STRUCT",
+        "text": "已理解交易结构、主体、标的和履行流程",
+        "critical": true
+      },
+      {
+        "id": "CON-SCENARIO",
+        "text": "已模拟正常履行、对方违约、我方违约和第三方失败",
+        "critical": true
+      },
+      {
+        "id": "CON-APPROVAL",
+        "text": "审批、条件和第三方依赖已检查",
+        "critical": false
+      },
+      {
+        "id": "CON-CLAUSE",
+        "text": "风险已落实到具体条款、修改文本或谈判方案",
+        "critical": true
+      }
+    ],
+    "法律研究与多源资料融合": [
+      {
+        "id": "RES-JUR",
+        "text": "已明确法域、关键时间和研究目标",
+        "critical": true
+      },
+      {
+        "id": "RES-L0",
+        "text": "关键现行法律规范已核验当前有效文本和时间适用",
+        "critical": true
+      },
+      {
+        "id": "RES-SPECIAL",
+        "text": "已检查特别规则、例外、过渡规则和更高/更新权威来源",
+        "critical": true
+      },
+      {
+        "id": "RES-CASE",
+        "text": "案例比较包含决定性事实和区分点，而非只匹配关键词",
+        "critical": false
+      },
+      {
+        "id": "RES-COUNTER",
+        "text": "已检索支持、反向、边界和例外路径",
+        "critical": true
+      },
+      {
+        "id": "RES-TRACE",
+        "text": "主要检索路径和来源足以回查",
+        "critical": true
+      }
+    ],
+    "法律顾问与专项法律分析": [
+      {
+        "id": "ADV-QUESTION",
+        "text": "已把客户原问题重构为真正需要决策的问题",
+        "critical": true
+      },
+      {
+        "id": "ADV-GOAL",
+        "text": "已明确客户目标、决策者和预期读者",
+        "critical": true
+      },
+      {
+        "id": "ADV-ASSUME",
+        "text": "事实、假设和未知事项已分开",
+        "critical": true
+      },
+      {
+        "id": "ADV-OPTION",
+        "text": "需要方案比较时，各方案使用相同维度比较",
+        "critical": true
+      },
+      {
+        "id": "ADV-SEP",
+        "text": "法律结论、专业建议和客户最终决定已分开",
+        "critical": true
+      },
+      {
+        "id": "ADV-ACTION",
+        "text": "建议已转化为可执行下一步",
+        "critical": false
+      }
+    ],
+    "尽职调查与专项调查": [
+      {
+        "id": "DD-SCOPE",
+        "text": "用途、范围、排除项、截止日和重要性标准已明确",
+        "critical": true
+      },
+      {
+        "id": "DD-PROV",
+        "text": "关键资料来源、版本、完整性和可靠性已记录",
+        "critical": true
+      },
+      {
+        "id": "DD-CROSS",
+        "text": "重大事实尽可能通过独立来源交叉核验",
+        "critical": true
+      },
+      {
+        "id": "DD-NOTFOUND",
+        "text": "未检索到信息没有被自动等同于不存在风险",
+        "critical": true
+      },
+      {
+        "id": "DD-GAP",
+        "text": "信息缺口及其对风险判断的影响已披露",
+        "critical": true
+      },
+      {
+        "id": "DD-ACTION",
+        "text": "重大风险已连接到交易影响和后续保护措施",
+        "critical": false
+      }
+    ],
+    "法律文书质量与格式控制": [
+      {
+        "id": "DOC-PURPOSE",
+        "text": "作者、读者、目的和文种已明确",
+        "critical": true
+      },
+      {
+        "id": "DOC-UPSTREAM",
+        "text": "上游事实、争点和法律结论已可用且未被文书阶段擅自改写",
+        "critical": true
+      },
+      {
+        "id": "DOC-CITE",
+        "text": "法条、案例、附件、证据编号和交叉引用可回查",
+        "critical": true
+      },
+      {
+        "id": "DOC-CONSIST",
+        "text": "主体、术语、日期、金额和版本保持一致",
+        "critical": true
+      },
+      {
+        "id": "DOC-CAP",
+        "text": "修订、批注、PDF 等文件能力陈述真实，降级已说明",
+        "critical": true
+      },
+      {
+        "id": "DOC-OUTPUT",
+        "text": "输出契约和正式交付要求已满足",
+        "critical": true
+      }
+    ],
+    "多模态输入适配（可选）": [
+      {
+        "id": "MM-NEED",
+        "text": "已确认当前 Agent 或用户已有工具确实无法满足输入质量要求",
+        "critical": true
+      },
+      {
+        "id": "MM-LOCAL",
+        "text": "已优先评估原生、本地或用户控制环境",
+        "critical": false
+      },
+      {
+        "id": "MM-SCOPE",
+        "text": "外部处理仅发送完成任务所需最小范围材料",
+        "critical": true
+      },
+      {
+        "id": "MM-CONSENT",
+        "text": "第三方处理前已取得针对提供方、用途和材料范围的明确授权",
+        "critical": true
+      },
+      {
+        "id": "MM-LOC",
+        "text": "处理结果尽可能保留页码、时间戳、Sheet 或图像区域定位",
+        "critical": true
+      },
+      {
+        "id": "MM-UNCERT",
+        "text": "不可读和低置信识别区域已显式标记",
+        "critical": true
+      }
+    ]
+  },
+  "conditional": [
+    {
+      "id": "COND-LAW",
+      "when": {
+        "requires_current_law": true
+      },
+      "text": "本次需要现行法核验，已完成实际权威来源核验而非仅加载法律研究规则",
+      "critical": true
+    },
+    {
+      "id": "COND-STRUCTURED-REVIEW",
+      "when": {
+        "structured_review_required": true
+      },
+      "text": "多文件/跨来源任务已建立结构化审阅记录，并保留审阅状态、来源定位、冲突和关联问题",
+      "critical": true
+    },
+    {
+      "id": "COND-IMPORTANT",
+      "when": {
+        "important_task": true
+      },
+      "text": "重要任务已形成可审计的分析结构并完成统一对抗性审查；反方模型、翻转点和必要修正已回写正文",
+      "critical": true
+    },
+    {
+      "id": "COND-TRACE",
+      "when": {
+        "important_task": true
+      },
+      "text": "重要任务的核心结论已形成事实—证据—规则/案例—论证—结论的完整可追溯链",
+      "critical": true
+    },
+    {
+      "id": "COND-FORMAL",
+      "when": {
+        "formal_delivery": true
+      },
+      "text": "正式交付已检查输出契约、引用、版本、运行能力及重要交付命题的上游溯源关系",
+      "critical": true
+    },
+    {
+      "id": "COND-SENSITIVE",
+      "when": {
+        "sensitive_material": true
+      },
+      "text": "敏感材料已评估脱敏和最小必要范围，外部处理另行检查明确授权",
+      "critical": true
+    },
+    {
+      "id": "COND-INPUTGAP",
+      "when": {
+        "input_capability_gap": true
+      },
+      "text": "输入能力不足已显式处理，未将不可读内容静默送入法律分析",
+      "critical": true
+    },
+    {
+      "id": "CRIM-INV",
+      "skill": "刑事案件办理",
+      "stage_keywords": [
+        "侦查"
+      ],
+      "text": "侦查阶段已检查强制措施、会见、紧急期限和证据保全需求",
+      "critical": true
+    },
+    {
+      "id": "CRIM-PROS",
+      "skill": "刑事案件办理",
+      "stage_keywords": [
+        "审查起诉",
+        "起诉"
+      ],
+      "text": "审查起诉阶段已检查卷宗覆盖、指控证明体系、补充侦查及认罪认罚相关事项",
+      "critical": true
+    },
+    {
+      "id": "CRIM-TRIAL",
+      "skill": "刑事案件办理",
+      "stage_keywords": [
+        "一审",
+        "庭审",
+        "审判"
+      ],
+      "text": "审判阶段已将争点转化为庭前准备、发问、质证和辩论任务",
+      "critical": true
+    },
+    {
+      "id": "CRIM-FILE",
+      "skill": "刑事案件办理",
+      "task_keywords": [
+        "阅卷",
+        "卷宗"
+      ],
+      "text": "阅卷任务已核对卷宗完整性、页码/材料定位、控方证明地图、矛盾和预期证据缺口",
+      "critical": true
+    },
+    {
+      "id": "CRIM-MEET",
+      "skill": "刑事案件办理",
+      "task_keywords": [
+        "会见"
+      ],
+      "text": "会见任务已区分无卷/有卷场景，新陈述默认不作为已核验事实",
+      "critical": true
+    },
+    {
+      "id": "CRIM-VICTIM",
+      "skill": "刑事案件办理",
+      "role_keywords": [
+        "被害人",
+        "控告",
+        "报案"
+      ],
+      "text": "当前角色并非默认辩护侧，已按被害人代理/控告目标重新配置工作流",
+      "critical": true
+    },
+    {
+      "id": "CRIM-VICTIM-BOUNDARY",
+      "skill": "刑事案件办理",
+      "role_keywords": [
+        "被害人",
+        "控告",
+        "报案"
+      ],
+      "text": "已分析犯罪路径与民刑边界/其他替代解释，未把客户定性直接当作已证实事实",
+      "critical": true
+    },
+    {
+      "id": "CRIM-VICTIM-PROOF",
+      "skill": "刑事案件办理",
+      "role_keywords": [
+        "被害人",
+        "控告",
+        "报案"
+      ],
+      "text": "已建立控告待证命题—证据结构，并识别客观证据、证据缺口和需要保全/调取的线索",
+      "critical": true
+    },
+    {
+      "id": "CRIM-VICTIM-PROC",
+      "skill": "刑事案件办理",
+      "role_keywords": [
+        "被害人",
+        "控告",
+        "报案"
+      ],
+      "text": "已根据真实程序状态分析管辖、受理、立案/不立案、监督或后续被害人代理路径",
+      "critical": true
+    },
+    {
+      "id": "CIV-FIRST",
+      "skill": "民商事争议解决",
+      "stage_keywords": [
+        "一审",
+        "起诉",
+        "审理"
+      ],
+      "text": "一审阶段已把请求基础、抗辩、争点、举证责任和证据组织为可庭审执行的结构",
+      "critical": true
+    },
+    {
+      "id": "CIV-APPEAL",
+      "skill": "民商事争议解决",
+      "stage_keywords": [
+        "二审",
+        "上诉",
+        "再审"
+      ],
+      "text": "救济阶段已区分原审事实/法律错误、可审范围、新证据及程序限制",
+      "critical": true
+    },
+    {
+      "id": "CIV-EXEC",
+      "skill": "民商事争议解决",
+      "stage_keywords": [
+        "执行"
+      ],
+      "text": "执行阶段已围绕可执行依据、财产线索、执行障碍和实现路径重新组织任务",
+      "critical": true
+    },
+    {
+      "id": "CIV-PRESERVE",
+      "skill": "民商事争议解决",
+      "task_keywords": [
+        "保全"
+      ],
+      "text": "保全任务已检查紧迫性、标的、担保、管辖和后续执行价值",
+      "critical": true
+    },
+    {
+      "id": "CON-REVIEW",
+      "skill": "合同与交易工作",
+      "task_keywords": [
+        "审查",
+        "审核"
+      ],
+      "text": "合同审查已从交易结构和履行场景出发，而非仅逐条寻找不利表述",
+      "critical": true
+    },
+    {
+      "id": "CON-DRAFT",
+      "skill": "合同与交易工作",
+      "task_keywords": [
+        "起草",
+        "拟定"
+      ],
+      "text": "合同起草已先完成交易建模、条款功能分配和风险场景设计，再形成文本",
+      "critical": true
+    },
+    {
+      "id": "CON-NEG",
+      "skill": "合同与交易工作",
+      "task_keywords": [
+        "谈判",
+        "修改",
+        "修订"
+      ],
+      "text": "谈判/修订任务已区分底线、可交换条件、替代文本和剩余风险",
+      "critical": true
+    },
+    {
+      "id": "RES-CASEONLY",
+      "skill": "法律研究与多源资料融合",
+      "task_keywords": [
+        "案例",
+        "类案"
+      ],
+      "text": "案例研究已比较决定性事实、裁判层级、时间和可比/不可比因素",
+      "critical": true
+    },
+    {
+      "id": "RES-NORM",
+      "skill": "法律研究与多源资料融合",
+      "task_keywords": [
+        "法条",
+        "法律依据",
+        "司法解释",
+        "现行法"
+      ],
+      "text": "规范研究已检查效力层级、时间适用、特别规则和过渡规则",
+      "critical": true
+    },
+    {
+      "id": "DOC-REDLINE",
+      "skill": "法律文书质量与格式控制",
+      "task_keywords": [
+        "修订稿",
+        "批注",
+        "红线",
+        "track changes",
+        "修订模式"
+      ],
+      "text": "需要修订/批注时已核验当前工具是否真实支持相应原生能力，不能支持时已明确降级方案",
+      "critical": true
+    },
+    {
+      "id": "COND-RESEARCH-HANDOFF",
+      "text": "业务技能发起法律研究时已形成明确研究问题，研究结果已回填对应 Issue/Argument/Finding",
+      "critical": true,
+      "when": {
+        "requires_current_law": true
+      }
+    },
+    {
+      "id": "COND-OPTION",
+      "text": "存在多个实质行动方案时已使用共同维度比较选项，并区分专业推荐与用户决定",
+      "critical": true,
+      "when": {
+        "strategy_choice_required": true
+      }
+    },
+    {
+      "id": "COND-CROSS",
+      "text": "本次跨模块执行链的关键交接、回写和未决节点已有记录",
+      "critical": true,
+      "when": {
+        "cross_module_required": true
+      }
+    },
+    {
+      "id": "COND-ADV-WRITEBACK",
+      "text": "重要任务的对抗性审查结果已修正原结论，或记录维持原结论的充分理由",
+      "critical": true,
+      "when": {
+        "important_task": true
+      }
+    },
+    {
+      "id": "COND-REVIEWQ",
+      "text": "结构化审阅已先形成与本次问题和目标一致的审阅问题集",
+      "critical": true,
+      "when": {
+        "structured_review_required": true
+      }
+    },
+    {
+      "id": "COND-AUTHMAP",
+      "text": "重要/正式现行法研究已建立权威来源结构，并检查特别规则、时间效力和来源层级",
+      "critical": true,
+      "when": {
+        "authority_map_required": true
+      }
+    },
+    {
+      "id": "COND-CASEMATRIX",
+      "text": "需要类案研究时已形成支持、反向、区别和边界案例的比较矩阵",
+      "critical": true,
+      "when": {
+        "case_matrix_required": true
+      }
+    },
+    {
+      "id": "COND-PLANREV",
+      "text": "本次涉及重大范围选择/外部动作/高风险分支时，执行计划已经得到所需确认或修订",
+      "critical": true,
+      "when": {
+        "plan_review_required": true
+      }
+    },
+    {
+      "id": "COND-CAPABILITY",
+      "when": {
+        "capability_resolution_required": true
+      },
+      "text": "本次需要的外部能力已根据当前运行环境实际解析；未支持能力没有被静默假定为可用",
+      "critical": true
+    },
+    {
+      "id": "COND-PRIVATE-KB",
+      "when": {
+        "private_knowledge_required": true
+      },
+      "text": "用户要求的私有知识库已真实访问并保留来源定位；如不可用已明确披露范围限制",
+      "critical": true
+    },
+    {
+      "id": "COND-LEGAL-SOURCE",
+      "when": {
+        "professional_legal_source_required": true
+      },
+      "text": "用户指定或任务要求的专业法律信源已真实可用，未用普通搜索或模型记忆冒充指定数据库",
+      "critical": true
+    },
+    {
+      "id": "COND-OCR-CAP",
+      "when": {
+        "need_ocr": true
+      },
+      "text": "扫描件/OCR 能力已真实验证，并标记低质量或不可读区域",
+      "critical": true
+    },
+    {
+      "id": "COND-NATIVE-TRACK",
+      "when": {
+        "native_track_changes_required": true
+      },
+      "text": "用户明确要求原生修订模式时，已验证当前工具真实支持；不支持则阻断而非冒充完成",
+      "critical": true
+    }
+  ]
+}

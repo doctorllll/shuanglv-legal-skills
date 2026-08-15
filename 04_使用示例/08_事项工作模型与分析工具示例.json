@@ -1,0 +1,363 @@
+{
+  "schema_version": "0.2",
+  "matter_id": "MAT-DEMO-038",
+  "task_profiles": [
+    {
+      "schema_version": "0.1",
+      "profile_id": "TP-001",
+      "matter_id": "MAT-DEMO-038",
+      "task_goal": "分析某复杂合同争议的解除与损失问题",
+      "client_goals": [
+        "控制损失",
+        "评估诉讼与和解路径"
+      ],
+      "role": "甲方",
+      "scope": [
+        "解除权",
+        "违约责任",
+        "证据缺口"
+      ],
+      "priority": "HIGH",
+      "urgency": "MEDIUM",
+      "risk_appetite": "BALANCED",
+      "negotiation_position": "BALANCED",
+      "review_mode": "BALANCED",
+      "completion_criteria": [
+        "核心问题形成可溯源初步结论",
+        "列出未解决事实和法律问题"
+      ],
+      "status": "COMPLETE"
+    }
+  ],
+  "matter_models": [
+    {
+      "schema_version": "0.1",
+      "model_id": "MWM-001",
+      "matter_id": "MAT-DEMO-038",
+      "revision": 1,
+      "task_profile_ids": [
+        "TP-001"
+      ],
+      "material_ids": [],
+      "review_record_ids": [],
+      "fact_ids": [],
+      "evidence_ids": [],
+      "issue_ids": [
+        "I-001",
+        "I-002"
+      ],
+      "root_issue_ids": [
+        "I-001"
+      ],
+      "research_request_ids": [],
+      "research_result_ids": [],
+      "rule_ids": [],
+      "case_ids": [],
+      "authority_map_ids": [
+        "AM-001"
+      ],
+      "case_matrix_ids": [
+        "CM-001"
+      ],
+      "argument_ids": [
+        "ARG-001",
+        "ARG-002"
+      ],
+      "argument_map_ids": [
+        "AGM-001"
+      ],
+      "risk_ids": [],
+      "option_ids": [],
+      "decision_ids": [],
+      "finding_ids": [],
+      "deliverable_claim_ids": [],
+      "open_gaps": [
+        "示例不含真实案件事实和法律依据"
+      ],
+      "status": "ACTIVE"
+    }
+  ],
+  "issues": [
+    {
+      "schema_version": "0.3",
+      "issue_id": "I-001",
+      "matter_id": "MAT-DEMO-038",
+      "question": "是否存在合同解除路径？",
+      "issue_type": "SUBSTANTIVE",
+      "status": "RESEARCHING",
+      "priority": "CRITICAL",
+      "sub_issue_ids": [
+        "I-002"
+      ]
+    },
+    {
+      "schema_version": "0.3",
+      "issue_id": "I-002",
+      "matter_id": "MAT-DEMO-038",
+      "question": "解除前提所依赖的关键履行事实是否有充分材料支持？",
+      "issue_type": "EVIDENCE",
+      "status": "OPEN",
+      "priority": "HIGH",
+      "parent_issue_id": "I-001"
+    }
+  ],
+  "issue_trees": [
+    {
+      "schema_version": "0.1",
+      "tree_id": "IT-001",
+      "matter_id": "MAT-DEMO-038",
+      "root_issue_ids": [
+        "I-001"
+      ],
+      "nodes": [
+        {
+          "issue_id": "I-001",
+          "question": "是否存在合同解除路径？",
+          "parent_issue_id": null,
+          "child_issue_ids": [
+            "I-002"
+          ],
+          "priority": "CRITICAL",
+          "research_needed": true,
+          "status": "RESEARCHING"
+        },
+        {
+          "issue_id": "I-002",
+          "question": "解除前提所依赖的关键履行事实是否有充分材料支持？",
+          "parent_issue_id": "I-001",
+          "child_issue_ids": [],
+          "priority": "HIGH",
+          "research_needed": false,
+          "status": "OPEN"
+        }
+      ],
+      "status": "ACTIVE"
+    }
+  ],
+  "review_question_sets": [
+    {
+      "schema_version": "0.1",
+      "question_set_id": "RQS-001",
+      "matter_id": "MAT-DEMO-038",
+      "purpose": "从合同、通知和履行材料中提取与解除前提直接相关的信息",
+      "linked_issue_ids": [
+        "I-001",
+        "I-002"
+      ],
+      "questions": [
+        {
+          "question_id": "RQ-001",
+          "label": "履行义务",
+          "question": "材料显示的核心履行义务是什么？",
+          "answer_type": "TEXT",
+          "source_locator_required": true,
+          "comparison_mode": "CROSS_DOCUMENT",
+          "linked_issue_ids": [
+            "I-002"
+          ],
+          "missing_value_policy": "UNKNOWN"
+        },
+        {
+          "question_id": "RQ-002",
+          "label": "解除通知",
+          "question": "是否存在解除或催告通知，时间与内容是什么？",
+          "answer_type": "TEXT",
+          "source_locator_required": true,
+          "comparison_mode": "TIME_SERIES",
+          "linked_issue_ids": [
+            "I-001"
+          ],
+          "missing_value_policy": "NOT_FOUND"
+        }
+      ],
+      "status": "ACTIVE"
+    }
+  ],
+  "authority_maps": [
+    {
+      "schema_version": "0.1",
+      "authority_map_id": "AM-001",
+      "matter_id": "MAT-DEMO-038",
+      "issue_id": "I-001",
+      "jurisdiction": "中国大陆",
+      "as_of_date": null,
+      "nodes": [
+        {
+          "authority_id": "AUTH-DEMO",
+          "rule_refs": [],
+          "case_refs": [],
+          "source_refs": [
+            "SRC-DEMO"
+          ],
+          "locator_ids": [
+            "LOC-DEMO"
+          ],
+          "role": "INFORMATION_LEAD",
+          "temporal_state": "UNCERTAIN",
+          "proposition_supported": "示例占位：正式任务必须换成实际核验的权威来源",
+          "limitations": [
+            "演示数据，不构成法律依据"
+          ],
+          "parent_authority_ids": [],
+          "relation": "OTHER"
+        }
+      ],
+      "gaps": [
+        "需要在正式任务中核验现行法"
+      ],
+      "conflicts": [],
+      "status": "INCOMPLETE"
+    }
+  ],
+  "case_cards": [
+    {
+      "case_id": "CASE-DEMO-A"
+    },
+    {
+      "case_id": "CASE-DEMO-B"
+    }
+  ],
+  "case_matrices": [
+    {
+      "schema_version": "0.1",
+      "matrix_id": "CM-001",
+      "matter_id": "MAT-DEMO-038",
+      "issue_id": "I-001",
+      "comparison_dimensions": [
+        "解除前提",
+        "履行程度",
+        "通知行为"
+      ],
+      "rows": [
+        {
+          "case_id": "CASE-DEMO-A",
+          "key_facts": [
+            "示例事实A"
+          ],
+          "holding": "示例结论A",
+          "rule_ids": [],
+          "similarities": [
+            "均涉及履行障碍"
+          ],
+          "differences": [
+            "通知方式不同"
+          ],
+          "usage_type": "SUPPORTING",
+          "adverse_points": [],
+          "locator_ids": []
+        },
+        {
+          "case_id": "CASE-DEMO-B",
+          "key_facts": [
+            "示例事实B"
+          ],
+          "holding": "示例结论B",
+          "rule_ids": [],
+          "similarities": [
+            "均涉及解除争议"
+          ],
+          "differences": [
+            "违约程度不同"
+          ],
+          "usage_type": "COUNTER",
+          "adverse_points": [
+            "对解除路径形成压力"
+          ],
+          "locator_ids": []
+        }
+      ],
+      "matrix_conclusion": "演示：案例必须通过相似点和区别点进入论证，不能只列裁判结论。",
+      "limitations": [
+        "演示案例并非真实裁判"
+      ],
+      "status": "INCOMPLETE"
+    }
+  ],
+  "arguments": [
+    {
+      "schema_version": "0.3",
+      "argument_id": "ARG-001",
+      "matter_id": "MAT-DEMO-038",
+      "issue_id": "I-001",
+      "argument_scope": "STRATEGIC",
+      "proposition": "存在支持解除路径的论证",
+      "reasoning_methods": [
+        "SUBSUMPTION"
+      ],
+      "conclusion": "示例论证，待真实来源核验",
+      "status": "DRAFT"
+    },
+    {
+      "schema_version": "0.3",
+      "argument_id": "ARG-002",
+      "matter_id": "MAT-DEMO-038",
+      "issue_id": "I-001",
+      "argument_scope": "STRATEGIC",
+      "proposition": "存在反对解除路径的竞争论证",
+      "reasoning_methods": [
+        "COUNTERFACTUAL_TEST"
+      ],
+      "conclusion": "示例反方，待事实核验",
+      "status": "DRAFT"
+    }
+  ],
+  "argument_maps": [
+    {
+      "schema_version": "0.1",
+      "map_id": "AGM-001",
+      "matter_id": "MAT-DEMO-038",
+      "issue_id": "I-001",
+      "nodes": [
+        {
+          "argument_id": "ARG-001",
+          "side": "CLIENT",
+          "label": "支持解除"
+        },
+        {
+          "argument_id": "ARG-002",
+          "side": "OPPONENT",
+          "label": "反对解除"
+        }
+      ],
+      "edges": [
+        {
+          "from_argument_id": "ARG-002",
+          "to_argument_id": "ARG-001",
+          "relation": "ATTACKS"
+        }
+      ],
+      "key_conflicts": [
+        "解除前提是否已经达到"
+      ],
+      "flip_points": [
+        "关键催告/履行事实"
+      ],
+      "status": "DRAFT"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "SRC-DEMO"
+    }
+  ],
+  "source_locators": [
+    {
+      "locator_id": "LOC-DEMO"
+    }
+  ],
+  "legal_rules": [],
+  "materials": [],
+  "research_requests": [],
+  "research_results": [],
+  "findings": [],
+  "options": [],
+  "decisions": [],
+  "adversarial_reviews": [],
+  "writeback_events": [],
+  "legal_object_candidates": [],
+  "plan_reviews": [],
+  "behavior_contract_records": [],
+  "notes": [
+    "全部内容仅用于展示对象之间的结构关系，不包含真实法律结论、法条或案例。"
+  ]
+}

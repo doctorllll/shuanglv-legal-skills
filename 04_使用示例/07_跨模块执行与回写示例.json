@@ -1,0 +1,204 @@
+{
+  "schema_version": "0.1",
+  "matter_id": "MATTER-DEMO-CHAIN-001",
+  "issues": [
+    {
+      "schema_version": "0.3",
+      "issue_id": "ISSUE-01",
+      "matter_id": "MATTER-DEMO-CHAIN-001",
+      "question": "当前材料支持的法律路径及下一步行动应如何选择？",
+      "issue_type": "LEGAL_AND_STRATEGIC",
+      "status": "PROVISIONALLY_RESOLVED",
+      "research_request_ids": ["RR-01"],
+      "research_result_ids": ["RES-01"],
+      "option_ids": ["OPT-01", "OPT-02"],
+      "decision_ids": ["DEC-01"]
+    }
+  ],
+  "research_requests": [
+    {
+      "schema_version": "0.1",
+      "research_request_id": "RR-01",
+      "matter_id": "MATTER-DEMO-CHAIN-001",
+      "issue_id": "ISSUE-01",
+      "question": "核验当前法律路径的适用条件、例外和反向观点。",
+      "required_source_types": ["OFFICIAL_LAW", "CASE"],
+      "search_directions": ["SUPPORTING", "COUNTER", "BOUNDARY", "EXCEPTION"],
+      "status": "SATURATED",
+      "research_result_ids": ["RES-01"]
+    }
+  ],
+  "research_results": [
+    {
+      "schema_version": "0.3",
+      "research_result_id": "RES-01",
+      "research_request_id": "RR-01",
+      "issue_id": "ISSUE-01",
+      "status": "SATURATED",
+      "issue_summary": "研究结果改变了初步分析中对一个关键适用条件的理解，需要修订原论证。",
+      "limitations": [],
+      "affected_argument_ids": ["ARG-01"],
+      "affected_finding_ids": ["FIND-01"],
+      "writeback_required": true,
+      "writeback_event_ids": ["WB-01"]
+    }
+  ],
+  "arguments": [
+    {
+      "schema_version": "0.3",
+      "argument_id": "ARG-01",
+      "matter_id": "MATTER-DEMO-CHAIN-001",
+      "issue_id": "ISSUE-01",
+      "argument_scope": "MATTER_SPECIFIC",
+      "proposition": "初步法律路径判断。",
+      "rule_refs": ["RULE-DEMO"],
+      "supporting_fact_ids": ["FACT-DEMO"],
+      "reasoning_methods": ["SUBSUMPTION"],
+      "reasoning_summary": "初步分析基于当时已知规则和事实。",
+      "conclusion": "初步倾向路径 A。",
+      "status": "DISPUTED",
+      "superseded_by_argument_id": "ARG-02",
+      "writeback_event_ids": ["WB-01"]
+    },
+    {
+      "schema_version": "0.3",
+      "argument_id": "ARG-02",
+      "matter_id": "MATTER-DEMO-CHAIN-001",
+      "issue_id": "ISSUE-01",
+      "argument_scope": "MATTER_SPECIFIC",
+      "proposition": "研究回填并经对抗审查后的法律路径判断。",
+      "rule_refs": ["RULE-DEMO"],
+      "supporting_fact_ids": ["FACT-DEMO"],
+      "reasoning_methods": ["SUBSUMPTION", "DISTINGUISHING", "OPTION_COMPARISON"],
+      "reasoning_summary": "纳入新研究结果并区分不利路径后，重新比较可行方案。",
+      "counterarguments": ["存在使路径 A 受限的反向解释。"],
+      "responses": ["调整结论边界并保留替代方案。"],
+      "flip_points": ["关键适用事实或特别规则发生变化。"],
+      "conclusion": "路径 A 仍可考虑，但需要附加条件，并保留路径 B。",
+      "status": "SUPPORTED",
+      "supersedes_argument_id": "ARG-01",
+      "adversarial_review_ids": ["ADV-01"],
+      "writeback_event_ids": ["WB-01"]
+    }
+  ],
+  "findings": [
+    {
+      "schema_version": "0.3",
+      "finding_id": "FIND-01",
+      "matter_id": "MATTER-DEMO-CHAIN-001",
+      "issue_id": "ISSUE-01",
+      "statement": "初步建议直接采用路径 A。",
+      "finding_type": "STRATEGIC_OPTION",
+      "status": "DISPUTED",
+      "owner_skill": "示例",
+      "superseded_by_finding_id": "FIND-02",
+      "writeback_event_ids": ["WB-01"]
+    },
+    {
+      "schema_version": "0.3",
+      "finding_id": "FIND-02",
+      "matter_id": "MATTER-DEMO-CHAIN-001",
+      "issue_id": "ISSUE-01",
+      "statement": "修订后建议在满足前提时优先路径 A，同时保留路径 B。",
+      "finding_type": "STRATEGIC_OPTION",
+      "status": "SUPPORTED",
+      "owner_skill": "示例",
+      "argument_ids": ["ARG-02"],
+      "importance": "HIGH",
+      "traceability_state": "FULL",
+      "supersedes_finding_id": "FIND-01",
+      "adversarial_review_ids": ["ADV-01"],
+      "writeback_event_ids": ["WB-01"]
+    }
+  ],
+  "options": [
+    {
+      "schema_version": "0.1",
+      "option_id": "OPT-01",
+      "matter_id": "MATTER-DEMO-CHAIN-001",
+      "issue_id": "ISSUE-01",
+      "label": "路径 A",
+      "description": "在满足特定前提后先采用路径 A。",
+      "supporting_argument_ids": ["ARG-02"],
+      "benefits": ["更直接对应当前主要目标。"],
+      "risks": ["如果关键前提不能成立，需要及时切换。"],
+      "flip_conditions": ["关键前提无法核验。"],
+      "reversibility": "PARTIALLY_REVERSIBLE",
+      "recommendation_state": "PREFERRED",
+      "recommendation_reason": "当前材料与研究结果下更贴近主要目标，但并非无条件选择。",
+      "status": "SELECTED"
+    },
+    {
+      "schema_version": "0.1",
+      "option_id": "OPT-02",
+      "matter_id": "MATTER-DEMO-CHAIN-001",
+      "issue_id": "ISSUE-01",
+      "label": "路径 B",
+      "description": "保留替代路径 B。",
+      "supporting_argument_ids": ["ARG-02"],
+      "benefits": ["在路径 A 前提不足时保留后续空间。"],
+      "risks": ["可能增加时间或程序成本。"],
+      "reversibility": "REVERSIBLE",
+      "recommendation_state": "BACKUP",
+      "status": "AVAILABLE"
+    }
+  ],
+  "decisions": [
+    {
+      "schema_version": "0.1",
+      "decision_id": "DEC-01",
+      "matter_id": "MATTER-DEMO-CHAIN-001",
+      "issue_id": "ISSUE-01",
+      "question": "是否接受附条件优先采用路径 A，并保留路径 B？",
+      "decision_level": "C",
+      "option_ids": ["OPT-01", "OPT-02"],
+      "professional_recommendation": "在前提明确的情况下优先路径 A。",
+      "recommendation_basis_argument_ids": ["ARG-02"],
+      "selected_option_id": "OPT-01",
+      "decision_by": "用户",
+      "decision_at": "2026-08-15T00:00:00+00:00",
+      "decision_note": "示例中的用户已明确选择。",
+      "writeback_required": true,
+      "status": "RESOLVED"
+    }
+  ],
+  "adversarial_reviews": [
+    {
+      "schema_version": "0.1",
+      "review_id": "ADV-01",
+      "matter_id": "MATTER-DEMO-CHAIN-001",
+      "target_finding_ids": ["FIND-01"],
+      "target_argument_ids": ["ARG-01"],
+      "initial_position": "直接采用路径 A。",
+      "strongest_opposing_model": "关键法律条件和不利事实可能使路径 A 受到限制，应保留替代方案。",
+      "vulnerabilities": ["初步结论没有充分处理特别条件和反向路径。"],
+      "flip_points": ["关键适用前提不能成立。"],
+      "resolution_actions": ["修订论证和结论，并建立双路径策略。"],
+      "revised_argument_ids": ["ARG-02"],
+      "revised_finding_ids": ["FIND-02"],
+      "requires_additional_research": false,
+      "requires_additional_material": false,
+      "requires_human_review": true,
+      "status": "COMPLETE_REVISED"
+    }
+  ],
+  "writeback_events": [
+    {
+      "schema_version": "0.1",
+      "writeback_id": "WB-01",
+      "matter_id": "MATTER-DEMO-CHAIN-001",
+      "trigger_type": "RESEARCH_RESULT",
+      "trigger_ref_ids": ["RES-01", "ADV-01"],
+      "reason": "法律研究和对抗性审查均表明初步路径需要增加条件和备选方案。",
+      "affected_refs": ["ARG-01", "FIND-01"],
+      "updated_refs": ["ARG-02", "FIND-02", "OPT-01", "OPT-02", "DEC-01"],
+      "rerun_required": ["ARGUMENT", "ADVERSARIAL_REVIEW", "QUALITY_GATE", "DELIVERABLE"],
+      "status": "APPLIED",
+      "created_at": "2026-08-15T00:00:00+00:00"
+    }
+  ],
+  "notes": [
+    "本示例只展示跨模块交接与回写结构，不表达任何真实案件法律结论。",
+    "RULE-DEMO / FACT-DEMO 代表可由全链路溯源包另行承载的上游对象。"
+  ]
+}

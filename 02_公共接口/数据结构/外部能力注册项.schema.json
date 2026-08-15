@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schema/external-capability-item/0.1",
+  "title": "ExternalCapabilityItem",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "capability_id",
+    "capability_type",
+    "status",
+    "verified_at"
+  ],
+  "properties": {
+    "capability_id": {
+      "type": "string"
+    },
+    "capability_type": {
+      "type": "string"
+    },
+    "provider_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "display_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "VERIFIED_SUPPORTED",
+        "SUPPORTED_BUT_UNVERIFIED",
+        "PARTIAL",
+        "UNSUPPORTED",
+        "DOWNGRADED",
+        "BLOCKED"
+      ]
+    },
+    "trust_level": {
+      "enum": [
+        "PRIMARY_AUTHORITY",
+        "AUTHORIZED_PROFESSIONAL",
+        "USER_CONTROLLED",
+        "RELIABLE_SECONDARY",
+        "GENERAL_WEB",
+        "MODEL_ONLY",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "supports_locator": {
+      "type": "boolean"
+    },
+    "supports_currentness": {
+      "type": "boolean"
+    },
+    "external_processing_required": {
+      "type": "boolean"
+    },
+    "data_boundary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verified_at": {
+      "type": "string"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

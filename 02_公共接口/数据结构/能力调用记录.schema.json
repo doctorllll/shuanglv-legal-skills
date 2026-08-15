@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schema/capability-invocation-record/0.1",
+  "title": "CapabilityInvocationRecord",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "invocation_id",
+    "capability_id",
+    "purpose",
+    "status"
+  ],
+  "properties": {
+    "invocation_id": {
+      "type": "string"
+    },
+    "capability_id": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "SUCCESS",
+        "PARTIAL",
+        "FAILED",
+        "BLOCKED",
+        "DOWNGRADED"
+      ]
+    },
+    "input_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "output_source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "external_processing": {
+      "type": "boolean"
+    },
+    "consent_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "started_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ended_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

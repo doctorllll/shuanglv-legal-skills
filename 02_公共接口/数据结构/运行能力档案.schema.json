@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": true,
-  "$id": "https://legal-skill.local/schema/runtime-capability/0.1",
-  "title": "RuntimeCapabilityProfile",
+  "$id": "https://shuanglv.local/schema/runtime-capability/0.2",
+  "title": "RuntimeCapabilityProfile v0.2",
   "required": [
     "schema_version",
     "runtime_id",
@@ -12,7 +12,10 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1"
+      "enum": [
+        "0.1",
+        "0.2"
+      ]
     },
     "runtime_id": {
       "type": "string"
@@ -79,6 +82,26 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "capability_id",
+          "capability_type",
+          "status",
+          "verified_at"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "capability_invocations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
     }
   }
 }

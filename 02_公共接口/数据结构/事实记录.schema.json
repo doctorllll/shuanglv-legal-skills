@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": true,
-  "$id": "https://legal-skill.local/schema/fact-record/0.1",
-  "title": "FactRecord",
+  "$id": "https://legal-skill.local/schema/fact-record/0.2",
+  "title": "FactRecord v0.2",
   "required": [
     "schema_version",
     "fact_id",
@@ -14,7 +14,10 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1"
+      "enum": [
+        "0.1",
+        "0.2"
+      ]
     },
     "fact_id": {
       "type": "string"
@@ -56,7 +59,8 @@
       "type": "array",
       "items": {
         "type": "string"
-      }
+      },
+      "minItems": 0
     },
     "supports_issue_ids": {
       "type": "array",
@@ -71,7 +75,17 @@
       }
     },
     "inference_basis": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
     },
     "review_state": {
       "type": [
@@ -81,6 +95,74 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "supporting_evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "inference_method": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "competing_explanations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "fact_status": {
+            "const": "VERIFIED"
+          }
+        },
+        "required": [
+          "fact_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source_refs": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "source_refs"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "fact_status": {
+            "const": "INFERRED"
+          }
+        },
+        "required": [
+          "fact_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source_refs": {
+            "minItems": 1
+          },
+          "inference_basis": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "source_refs",
+          "inference_basis"
+        ]
+      }
+    }
+  ]
 }

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/issue-tree/0.1",
+  "title": "问题树 IssueTree v0.1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "tree_id",
+    "matter_id",
+    "root_issue_ids",
+    "nodes",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "tree_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "root_issue_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "issue_id",
+          "question",
+          "status"
+        ],
+        "properties": {
+          "issue_id": {
+            "type": "string"
+          },
+          "question": {
+            "type": "string"
+          },
+          "parent_issue_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "child_issue_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "issue_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "priority": {
+            "enum": [
+              "CRITICAL",
+              "HIGH",
+              "MEDIUM",
+              "LOW",
+              "UNSPECIFIED"
+            ]
+          },
+          "dependent_fact_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "research_needed": {
+            "type": "boolean"
+          },
+          "decision_impact": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "enum": [
+              "OPEN",
+              "RESEARCHING",
+              "PROVISIONALLY_RESOLVED",
+              "RESOLVED",
+              "BLOCKED",
+              "HUMAN_REVIEW"
+            ]
+          }
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "ACTIVE",
+        "NEEDS_REVISION",
+        "COMPLETE_FOR_CURRENT_TASK"
+      ]
+    },
+    "last_writeback_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

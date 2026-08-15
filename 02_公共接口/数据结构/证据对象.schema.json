@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": true,
-  "$id": "https://legal-skill.local/schema/evidence-item/0.1",
-  "title": "EvidenceItem",
+  "$id": "https://legal-skill.local/schema/evidence-item/0.2",
+  "title": "EvidenceItem v0.2",
   "required": [
     "schema_version",
     "evidence_id",
@@ -14,7 +14,10 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1"
+      "enum": [
+        "0.1",
+        "0.2"
+      ]
     },
     "evidence_id": {
       "type": "string"
@@ -82,6 +85,54 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "source_locator_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supports_fact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contradicts_fact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "independence_group": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "review_state": {
+            "const": "REVIEWED"
+          }
+        },
+        "required": [
+          "review_state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source_locator_refs": {
+            "minItems": 1
+          }
+        },
+        "required": [
+          "source_locator_refs"
+        ]
+      }
+    }
+  ]
 }

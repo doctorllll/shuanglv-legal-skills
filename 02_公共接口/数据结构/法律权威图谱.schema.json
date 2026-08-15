@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/authority-map/0.1",
+  "title": "法律权威图谱 AuthorityMap v0.1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "authority_map_id",
+    "matter_id",
+    "issue_id",
+    "nodes",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "authority_map_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "issue_id": {
+      "type": "string"
+    },
+    "jurisdiction": {
+      "type": [
+        "string",
+        "array"
+      ]
+    },
+    "as_of_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "authority_id",
+          "role",
+          "source_refs",
+          "proposition_supported"
+        ],
+        "properties": {
+          "authority_id": {
+            "type": "string"
+          },
+          "rule_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "case_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "locator_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "role": {
+            "enum": [
+              "NORMATIVE_BASIS",
+              "OFFICIAL_INTERPRETATION",
+              "CASE_GUIDANCE",
+              "PERSUASIVE",
+              "EXPLANATORY",
+              "INFORMATION_LEAD",
+              "UNKNOWN"
+            ]
+          },
+          "temporal_state": {
+            "enum": [
+              "VERIFIED_CURRENT",
+              "HISTORICAL",
+              "UNCERTAIN",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "proposition_supported": {
+            "type": "string"
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "parent_authority_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "relation": {
+            "enum": [
+              "SUPERIOR",
+              "SPECIAL",
+              "EXCEPTION",
+              "INTERPRETS",
+              "IMPLEMENTS",
+              "SUPPORTS",
+              "LIMITS",
+              "CONFLICTS",
+              "OTHER"
+            ]
+          }
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "COMPLETE",
+        "INCOMPLETE",
+        "BLOCKED"
+      ]
+    }
+  }
+}

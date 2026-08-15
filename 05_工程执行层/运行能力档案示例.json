@@ -1,0 +1,113 @@
+{
+  "schema_version": "0.2",
+  "runtime_id": "example-runtime",
+  "model_or_agent": "请替换为当前运行环境",
+  "verified_at": "2026-08-15T00:00:00+08:00",
+  "capabilities": [
+    {
+      "capability_id": "cap-official-law",
+      "capability_type": "LEGAL_AUTHORITY_SOURCE",
+      "provider_class": "OFFICIAL_OR_AUTHORIZED",
+      "display_name": "可回查的法律权威信源",
+      "status": "VERIFIED_SUPPORTED",
+      "trust_level": "PRIMARY_AUTHORITY",
+      "supports_locator": true,
+      "supports_currentness": true,
+      "external_processing_required": false,
+      "data_boundary": "PUBLIC_LEGAL_SOURCES",
+      "scope": [
+        "laws",
+        "judicial_interpretations"
+      ],
+      "limitations": [],
+      "verified_at": "2026-08-15T00:00:00+08:00"
+    },
+    {
+      "capability_id": "cap-case-source",
+      "capability_type": "CASE_SOURCE",
+      "provider_class": "OFFICIAL_OR_AUTHORIZED",
+      "display_name": "案例检索能力",
+      "status": "VERIFIED_SUPPORTED",
+      "trust_level": "AUTHORIZED_PROFESSIONAL",
+      "supports_locator": true,
+      "supports_currentness": false,
+      "external_processing_required": false,
+      "data_boundary": "PUBLIC_OR_AUTHORIZED_CASES",
+      "scope": [
+        "case_search"
+      ],
+      "limitations": [],
+      "verified_at": "2026-08-15T00:00:00+08:00"
+    },
+    {
+      "capability_id": "cap-private-kb",
+      "capability_type": "PRIVATE_KNOWLEDGE",
+      "provider_class": "USER_CONTROLLED",
+      "display_name": "用户知识库",
+      "status": "VERIFIED_SUPPORTED",
+      "trust_level": "USER_CONTROLLED",
+      "supports_locator": true,
+      "supports_currentness": false,
+      "external_processing_required": false,
+      "data_boundary": "USER_PRIVATE",
+      "scope": [
+        "user-authorized-documents"
+      ],
+      "limitations": [],
+      "verified_at": "2026-08-15T00:00:00+08:00"
+    },
+    {
+      "capability_id": "cap-ocr",
+      "capability_type": "OCR",
+      "provider_class": "NATIVE_OR_LOCAL",
+      "display_name": "OCR/扫描件读取",
+      "status": "SUPPORTED_BUT_UNVERIFIED",
+      "trust_level": "NOT_APPLICABLE",
+      "supports_locator": true,
+      "supports_currentness": false,
+      "external_processing_required": false,
+      "data_boundary": "LOCAL_OR_RUNTIME",
+      "scope": [
+        "scanned_pdf",
+        "image"
+      ],
+      "limitations": [],
+      "verified_at": "2026-08-15T00:00:00+08:00"
+    },
+    {
+      "capability_id": "cap-docx",
+      "capability_type": "DOCX_OUTPUT",
+      "provider_class": "NATIVE_OR_LOCAL",
+      "display_name": "DOCX 输出",
+      "status": "VERIFIED_SUPPORTED",
+      "trust_level": "NOT_APPLICABLE",
+      "supports_locator": false,
+      "supports_currentness": false,
+      "external_processing_required": false,
+      "data_boundary": "LOCAL_OR_RUNTIME",
+      "scope": [
+        "docx"
+      ],
+      "limitations": [],
+      "verified_at": "2026-08-15T00:00:00+08:00"
+    },
+    {
+      "capability_id": "cap-track",
+      "capability_type": "NATIVE_TRACK_CHANGES",
+      "provider_class": "NATIVE_OR_LOCAL",
+      "display_name": "原生修订模式",
+      "status": "UNSUPPORTED",
+      "trust_level": "NOT_APPLICABLE",
+      "supports_locator": false,
+      "supports_currentness": false,
+      "external_processing_required": false,
+      "data_boundary": "LOCAL_OR_RUNTIME",
+      "scope": [],
+      "limitations": [],
+      "verified_at": "2026-08-15T00:00:00+08:00"
+    }
+  ],
+  "limitations": [
+    "本文件仅为能力档案格式示例，不代表任何具体 Agent 的真实能力"
+  ]
+}

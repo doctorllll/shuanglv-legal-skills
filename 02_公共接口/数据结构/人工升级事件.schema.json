@@ -70,6 +70,12 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "decision_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     }
   }
 }
