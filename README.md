@@ -1,6 +1,15 @@
-# 爽律 Skill｜律师专业工作流系统
+<p align="center">
+  <a href="https://csslaw.cn/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/brand/brand-mark-night.png">
+      <img src="assets/brand/brand-mark-day.png" width="160" height="160" alt="爽律 · 蔡诗爽律师品牌标识">
+    </picture>
+  </a>
+</p>
 
-<p>
+<h1 align="center">爽律 Skill｜律师专业工作流系统</h1>
+
+<p align="center">
   <img alt="version" src="https://img.shields.io/badge/version-0.33-blue?style=flat-square">
   <img alt="stage" src="https://img.shields.io/badge/stage-internal__beta-orange?style=flat-square">
   <img alt="language" src="https://img.shields.io/badge/lang-zh--CN-lightgrey?style=flat-square">
@@ -182,6 +191,7 @@ v0.33 的 `SKILL.md` 是纯 Markdown 入口，尚未附带 YAML frontmatter（`n
 ├── 02_公共接口/                       # 公共接口规范 + 17 个共享数据结构（JSON Schema 2020-12）
 ├── 03_技能/                          # 8 个业务技能，每个含技能定义 / 核心规则 / 详细说明 / 检查清单 / 对抗性审查清单
 ├── 04_使用示例/                       # 端到端使用示例
+├── assets/brand/                    # 「爽律」品牌标识（作者所有，不随仓库许可开放）
 ├── CONTRIBUTING.md                  # 参与共创指南
 ├── CHANGELOG.md                     # 版本记录
 └── .github/                         # Issue / PR 模板、CODEOWNERS
@@ -314,6 +324,7 @@ API Key、账号权限或工具可用，只说明技术上能够调用，并不�
 - **当前以作者的 [《许可与使用声明.md》](许可与使用声明.md) 为准。** v0.33 为定向内测版本：未经作者明确许可，请勿向无关第三方转发、公开发布、对外宣传为正式公开版本，或用于未经授权的再发布和商业化。
 - **公开版许可待作者最终确认。** 作者在许可声明中表明拟对"正式公开版本"采用 Creative Commons 系列许可（原计划参照 [`Legal-Skills-Chinese`](https://github.com/THUYRan/Legal-Skills-Chinese) 采用 CC BY-NC-ND 4.0）；因本仓库将开放共创，具体采用哪一种 CC 变体（是否允许演绎、是否要求相同方式共享）将由作者确认后随公开首版一并发布，并在仓库根目录附 `LICENSE` 文件。
 - **贡献条款**：向本仓库提交内容，即视为同意该内容按本仓库届时生效的许可对外发布，并授权维护者合并、修改与再分发。
+- **品牌标识**：[`assets/brand/`](assets/brand/) 下的「爽律」品牌标识为蔡诗爽律师所有，**不在本仓库内容许可范围之内**，仅用于标识本系统与作者；未经作者许可不得另作他用。
 - **第三方内容**：系统运行中调用、引用或连接的第三方法律数据库、公开资料、软件、模型、API 或其他服务，仍受其自身许可、版权、服务条款和使用规则约束。
 - **责任**：本项目仅供法律研究与实务辅助之用。任何对外的法律工作成果，其专业责任由使用该成果的执业人员承担。
 
@@ -325,7 +336,7 @@ API Key、账号权限或工具可用，只说明技术上能够调用，并不�
 
 **蔡诗爽**，广东卓建律师事务所专职律师，深圳刑事辩护律师，2017 年起执业，专注刑事控告与刑事案件全流程辩护，核心领域为诈骗类犯罪、商标类知识产权刑事犯罪、虚拟货币相关刑事犯罪、印章与国家机关证件类刑事犯罪；广东省刑事辩护律师库首批入库律师，深圳市律师协会数字经济法律专业委员会副秘书长；参与撰写"深圳律师实务丛书"《元宇宙法律实务》（法律出版社）。
 
-爽律 Skill 的系统设计、全部业务规则与工作流均由蔡律师完成，蔡律师亦是本仓库**法律业务规则的终审人**。她的个人主页 **[爽律刑法空间 · csslaw.cn](https://csslaw.cn/)** 收录了刑事观察文章、亲办案例节选与刑事实务工具（刑事程序地图、常见罪名速查），可作为理解本系统刑事工作流设计取向的延伸阅读。
+爽律 Skill 的系统设计、全部业务规则与工作流均由蔡律师完成，蔡律师亦是本仓库**法律业务规则的终审人**。他的个人主页 **[爽律刑法空间 · csslaw.cn](https://csslaw.cn/)** 收录了刑事观察文章、亲办案例节选与刑事实务工具（刑事程序地图、常见罪名速查），可作为理解本系统刑事工作流设计取向的延伸阅读。
 
 ### 维护与反馈
 

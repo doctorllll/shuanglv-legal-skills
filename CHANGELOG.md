@@ -11,6 +11,7 @@
 - 新增 `CONTRIBUTING.md`、`CHANGELOG.md`、`.github/`（Issue / PR 模板、CODEOWNERS）、`.gitignore`。
 - 未新增 `LICENSE` 文件：公开版许可待作者确认（见 README 第十一节）。
 - README 融入作者个人主页「爽律刑法空间」（csslaw.cn）与作者简介；GitHub 仓库 homepage 指向该主页。
+- 新增 `assets/brand/`：作者主页的「爽律」品牌标识（日/夜两版，透明底），README 头部按明暗主题自动切换；标识不在仓库许可范围内，见目录内说明。
 - 加入 `.github/rulesets/protect-main.json`（main 分支保护规则集，转公开后启用）。
 
 ### 待作者确认后进行
