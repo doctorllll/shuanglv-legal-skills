@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/research-trace/0.1",
+  "title": "ResearchTrace",
+  "required": [
+    "schema_version",
+    "trace_id",
+    "issue_id",
+    "source_or_adapter",
+    "query",
+    "searched_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "trace_id": {
+      "type": "string"
+    },
+    "issue_id": {
+      "type": "string"
+    },
+    "source_or_adapter": {
+      "type": "string"
+    },
+    "query": {
+      "type": "string"
+    },
+    "query_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "filters": {
+      "type": [
+        "object",
+        "array",
+        "null"
+      ]
+    },
+    "searched_at": {
+      "type": "string"
+    },
+    "result_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "selected_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rejected_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rejection_reasons": {
+      "type": "array"
+    },
+    "next_search_trigger": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

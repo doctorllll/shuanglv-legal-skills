@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/multimodal-input-adapter/manifest/0.1",
+  "title": "NormalizedInputManifest",
+  "required": [
+    "schema_version",
+    "asset_id",
+    "original_filename",
+    "processing_mode",
+    "quality_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "asset_id": {
+      "type": "string"
+    },
+    "original_filename": {
+      "type": "string"
+    },
+    "processing_mode": {
+      "enum": [
+        "NATIVE",
+        "LOCAL",
+        "USER_CONTROLLED",
+        "THIRD_PARTY_CLOUD",
+        "USER_PROVIDED_SKILL"
+      ]
+    },
+    "processing_provider": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "quality_state": {
+      "enum": [
+        "PASS",
+        "PARTIAL",
+        "UNREADABLE",
+        "UNSUPPORTED",
+        "NEEDS_OCR",
+        "NEEDS_TRANSCRIPTION",
+        "NEEDS_VISUAL_REVIEW",
+        "NEEDS_HUMAN_REVIEW"
+      ]
+    },
+    "recognition_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "locators": {
+      "type": "array"
+    },
+    "warnings": {
+      "type": "array"
+    },
+    "uncertain_regions": {
+      "type": "array"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

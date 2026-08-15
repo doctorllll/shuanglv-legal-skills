@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/source-locator/0.1",
+  "title": "SourceLocator",
+  "required": [
+    "schema_version",
+    "source_id",
+    "source_type",
+    "file_or_resource",
+    "locator_type",
+    "locator_value"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "source_type": {
+      "type": "string"
+    },
+    "file_or_resource": {
+      "type": "string"
+    },
+    "locator_type": {
+      "enum": [
+        "page",
+        "line",
+        "paragraph",
+        "sheet_cell",
+        "slide",
+        "timestamp",
+        "frame",
+        "url_section",
+        "message_id",
+        "database_record",
+        "other"
+      ]
+    },
+    "locator_value": {},
+    "original_uri": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hash_or_integrity_marker": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

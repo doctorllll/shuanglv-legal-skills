@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/transaction-risk-scenario/0.1",
+  "title": "TransactionRiskScenario",
+  "required": [
+    "schema_version",
+    "risk_id",
+    "matter_id",
+    "scenario",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "risk_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "scenario": {
+      "type": "string"
+    },
+    "trigger": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "affected_objective": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "likelihood": {
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "UNKNOWN",
+        "NOT_ASSESSED"
+      ]
+    },
+    "impact": {
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "UNKNOWN"
+      ]
+    },
+    "current_risk_bearer": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "prevention": {
+      "type": "array"
+    },
+    "allocation_options": {
+      "type": "array"
+    },
+    "response_options": {
+      "type": "array"
+    },
+    "remedies": {
+      "type": "array"
+    },
+    "evidence_or_documentation": {
+      "type": "array"
+    },
+    "clause_refs": {
+      "type": "array"
+    },
+    "client_decision_required": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "OPEN",
+        "MITIGATED",
+        "ACCEPTED",
+        "TRANSFERRED",
+        "AVOIDED",
+        "HUMAN_REVIEW"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

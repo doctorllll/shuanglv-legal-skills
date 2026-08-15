@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/runtime-capability/0.1",
+  "title": "RuntimeCapabilityProfile",
+  "required": [
+    "schema_version",
+    "runtime_id",
+    "model_or_agent",
+    "verified_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "runtime_id": {
+      "type": "string"
+    },
+    "model_or_agent": {
+      "type": "string"
+    },
+    "can_read_pdf_text": {
+      "type": "boolean"
+    },
+    "can_view_pdf_pages": {
+      "type": "boolean"
+    },
+    "can_read_docx": {
+      "type": "boolean"
+    },
+    "can_edit_docx": {
+      "type": "boolean"
+    },
+    "can_native_track_changes": {
+      "type": "boolean"
+    },
+    "can_comment_docx": {
+      "type": "boolean"
+    },
+    "can_read_xlsx": {
+      "type": "boolean"
+    },
+    "can_edit_xlsx": {
+      "type": "boolean"
+    },
+    "can_read_pptx": {
+      "type": "boolean"
+    },
+    "can_edit_pptx": {
+      "type": "boolean"
+    },
+    "can_read_images": {
+      "type": "boolean"
+    },
+    "can_ocr": {
+      "type": "boolean"
+    },
+    "can_transcribe_audio": {
+      "type": "boolean"
+    },
+    "can_analyze_video": {
+      "type": "boolean"
+    },
+    "can_generate_pdf": {
+      "type": "boolean"
+    },
+    "can_generate_html": {
+      "type": "boolean"
+    },
+    "can_generate_csv": {
+      "type": "boolean"
+    },
+    "limitations": {
+      "type": "array"
+    },
+    "verified_at": {
+      "type": "string"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/evidence-item/0.1",
+  "title": "EvidenceItem",
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "matter_id",
+    "name",
+    "evidence_type",
+    "source_ref"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "evidence_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "evidence_type": {
+      "type": "string"
+    },
+    "source_ref": {
+      "type": "string"
+    },
+    "proposition_links": {
+      "type": "array"
+    },
+    "authenticity_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "legality_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "relevance_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reliability_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "completeness_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "contradictions": {
+      "type": "array"
+    },
+    "chain_or_context": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ]
+    },
+    "review_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

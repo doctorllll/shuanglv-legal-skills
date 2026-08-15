@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/civil-dispute-extension/0.1",
+  "title": "CivilDisputeExtension",
+  "required": [
+    "schema_version",
+    "forum",
+    "position",
+    "stage",
+    "maturity_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "forum": {
+      "enum": [
+        "LITIGATION",
+        "ARBITRATION",
+        "NEGOTIATION_SETTLEMENT",
+        "PRE_ACTION",
+        "ENFORCEMENT_RELATED"
+      ]
+    },
+    "position": {
+      "enum": [
+        "CLAIMANT_PLAINTIFF",
+        "RESPONDENT_DEFENDANT",
+        "COUNTERCLAIMANT",
+        "COUNTER_RESPONDENT",
+        "THIRD_PARTY",
+        "APPELLANT",
+        "APPELLEE",
+        "ENFORCEMENT_APPLICANT",
+        "ENFORCEMENT_RESPONDENT",
+        "OTHER"
+      ]
+    },
+    "stage": {
+      "enum": [
+        "PRE_ACTION",
+        "FILING",
+        "JURISDICTION_OR_ACCEPTANCE",
+        "SERVICE_AND_RESPONSE",
+        "PRETRIAL",
+        "EVIDENCE_EXCHANGE",
+        "TRIAL_FIRST_INSTANCE",
+        "POST_TRIAL",
+        "APPEAL_SECOND_INSTANCE",
+        "RETRIAL",
+        "ENFORCEMENT",
+        "CLOSED"
+      ]
+    },
+    "claims_or_reliefs": {
+      "type": "array"
+    },
+    "counterclaims": {
+      "type": "array"
+    },
+    "jurisdiction_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "arbitration_agreement_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "limitation_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "preservation_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "enforcement_feasibility": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "critical_dates": {
+      "type": "array"
+    },
+    "maturity_state": {
+      "enum": [
+        "STRONG",
+        "PARTIAL",
+        "LIMITED"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

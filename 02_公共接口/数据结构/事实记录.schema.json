@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/fact-record/0.1",
+  "title": "FactRecord",
+  "required": [
+    "schema_version",
+    "fact_id",
+    "matter_id",
+    "statement",
+    "fact_status",
+    "source_refs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "fact_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "statement": {
+      "type": "string"
+    },
+    "fact_status": {
+      "enum": [
+        "VERIFIED",
+        "ALLEGED",
+        "DISPUTED",
+        "INFERRED",
+        "UNKNOWN"
+      ]
+    },
+    "materiality": {
+      "enum": [
+        "MATERIAL",
+        "POTENTIALLY_MATERIAL",
+        "BACKGROUND",
+        "UNKNOWN"
+      ]
+    },
+    "time": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ]
+    },
+    "actors": {
+      "type": "array"
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supports_issue_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "contradicts_fact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "inference_basis": {
+      "type": "array"
+    },
+    "review_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

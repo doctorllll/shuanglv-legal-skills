@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/due-diligence-extension/0.1",
+  "title": "DueDiligenceExtension",
+  "required": [
+    "schema_version",
+    "mode",
+    "subject",
+    "purpose",
+    "cutoff_date",
+    "maturity_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "mode": {
+      "enum": [
+        "TRANSACTION_DUE_DILIGENCE",
+        "TARGET_DUE_DILIGENCE",
+        "VENDOR_DUE_DILIGENCE",
+        "LEGAL_HEALTH_CHECK",
+        "SPECIAL_FACT_INVESTIGATION"
+      ]
+    },
+    "subject": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "transaction_context": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ]
+    },
+    "scope": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ]
+    },
+    "excluded_scope": {
+      "type": "array"
+    },
+    "cutoff_date": {
+      "type": "string"
+    },
+    "materiality_policy": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ]
+    },
+    "client_priorities": {
+      "type": "array"
+    },
+    "other_professional_teams": {
+      "type": "array"
+    },
+    "maturity_state": {
+      "enum": [
+        "STRONG",
+        "PARTIAL",
+        "LIMITED"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

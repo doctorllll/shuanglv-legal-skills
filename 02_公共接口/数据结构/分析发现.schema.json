@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/finding/0.1",
+  "title": "Finding",
+  "required": [
+    "schema_version",
+    "finding_id",
+    "matter_id",
+    "statement",
+    "finding_type",
+    "status",
+    "owner_skill"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "finding_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "issue_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "statement": {
+      "type": "string"
+    },
+    "finding_type": {
+      "enum": [
+        "INTERMEDIATE",
+        "LEGAL_ANALYSIS",
+        "FACT_ANALYSIS",
+        "RISK",
+        "STRATEGIC_OPTION",
+        "QUALITY_ISSUE"
+      ]
+    },
+    "supporting_fact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supporting_rule_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supporting_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "counterpoints": {
+      "type": "array"
+    },
+    "uncertainty": {
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "UNRESOLVED"
+      ]
+    },
+    "status": {
+      "type": "string"
+    },
+    "owner_skill": {
+      "type": "string"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

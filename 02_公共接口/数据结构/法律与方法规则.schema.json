@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/legal-rule/0.1",
+  "title": "LegalRule",
+  "required": [
+    "schema_version",
+    "rule_id",
+    "rule_type",
+    "rule_level",
+    "rule_statement",
+    "source_refs",
+    "verification_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "rule_id": {
+      "type": "string"
+    },
+    "rule_type": {
+      "enum": [
+        "LEGAL",
+        "METHODOLOGY",
+        "HOUSE_STYLE",
+        "ENGINEERING",
+        "BUSINESS_POLICY"
+      ]
+    },
+    "rule_level": {
+      "enum": [
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ]
+    },
+    "jurisdiction": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rule_statement": {
+      "type": "string"
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "effective_from": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "effective_to": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "temporal_scope": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "territorial_scope": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "personal_scope": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "subject_scope": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "exceptions": {
+      "type": "array"
+    },
+    "conflicts": {
+      "type": "array"
+    },
+    "verification_state": {
+      "enum": [
+        "VERIFIED_CURRENT",
+        "VERIFIED_HISTORICAL",
+        "UNVERIFIED",
+        "CONFLICTED",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "last_verified_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

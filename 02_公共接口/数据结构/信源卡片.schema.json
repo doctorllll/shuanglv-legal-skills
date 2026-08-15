@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/source-card/0.1",
+  "title": "SourceCard",
+  "required": [
+    "schema_version",
+    "source_id",
+    "source_family",
+    "source_type",
+    "title",
+    "verification_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "source_family": {
+      "enum": [
+        "LEGAL_AUTHORITY",
+        "CASE",
+        "PROFESSIONAL_COMMENTARY",
+        "PUBLIC_PLATFORM",
+        "PRIVATE_KNOWLEDGE",
+        "MATTER_EVIDENCE",
+        "METHODOLOGY"
+      ]
+    },
+    "source_type": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "author_or_authority": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "publication_or_issue_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "jurisdiction": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "original_location": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "content_nature": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "authority_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "validity_state": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "verification_state": {
+      "enum": [
+        "VERIFIED",
+        "PARTIALLY_VERIFIED",
+        "UNVERIFIED",
+        "CONFLICTED"
+      ]
+    },
+    "stance": {
+      "enum": [
+        "SUPPORT",
+        "COUNTER",
+        "NEUTRAL",
+        "MIXED",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "related_issue_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "locators": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

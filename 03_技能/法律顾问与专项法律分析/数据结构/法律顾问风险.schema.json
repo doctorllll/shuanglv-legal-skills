@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/advisory-risk/0.1",
+  "title": "AdvisoryRisk",
+  "required": [
+    "schema_version",
+    "risk_id",
+    "matter_id",
+    "scenario",
+    "impact",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "risk_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "scenario": {
+      "type": "string"
+    },
+    "trigger": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "legal_consequence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "implementation_consequence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "likelihood": {
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "UNKNOWN",
+        "NOT_ASSESSED"
+      ]
+    },
+    "impact": {
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "UNKNOWN"
+      ]
+    },
+    "controllability": {
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "UNKNOWN"
+      ]
+    },
+    "mitigation": {
+      "type": "array"
+    },
+    "residual_risk": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "supporting_finding_ids": {
+      "type": "array"
+    },
+    "decision_owner": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "OPEN",
+        "MITIGATED",
+        "ACCEPTED",
+        "AVOIDED",
+        "HUMAN_REVIEW"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "system_id": "shuanglv-legal-skills",
+  "display_name": "爽律 Skill",
+  "full_name": "爽律 Skill｜律师专业工作流系统",
+  "version": "0.33",
+  "language": "zh-CN",
+  "entrypoint": "SKILL.md",
+  "router": "00_使用与调度/爽律 Skill入口.md",
+  "aliases": [
+    "爽律",
+    "调用爽律",
+    "用爽律做",
+    "用爽律处理",
+    "爽律 Skill",
+    "ShuangLaw"
+  ],
+  "skills": [
+    "刑事案件办理",
+    "合同与交易工作",
+    "多模态输入适配（可选）",
+    "尽职调查与专项调查",
+    "民商事争议解决",
+    "法律文书质量与格式控制",
+    "法律研究与多源资料融合",
+    "法律顾问与专项法律分析"
+  ],
+  "optional_skills": [
+    "多模态输入适配（可选）"
+  ],
+  "requires_persistent_memory": false,
+  "bundles_office_engine": false,
+  "bundles_knowledge_base": false,
+  "human_review_policy": "00_使用与调度/人工决策与升级矩阵.md",
+  "adversarial_review_policy": "00_使用与调度/统一对抗性审查规范.md",
+  "name": "爽律 Skill｜律师专业工作流系统",
+  "release_stage": "internal_beta",
+  "author": "卓建律师事务所 蔡诗爽律师",
+  "human_readme": "README.md",
+  "license_status": "internal_beta_restricted",
+  "planned_public_license": "CC BY-NC-ND 4.0"
+}

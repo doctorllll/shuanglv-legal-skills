@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/advisory-extension/0.1",
+  "title": "AdvisoryExtension",
+  "required": [
+    "schema_version",
+    "mode",
+    "client_objective",
+    "maturity_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "mode": {
+      "enum": [
+        "QUICK_CONSULT",
+        "FORMAL_LEGAL_OPINION",
+        "DECISION_SUPPORT",
+        "RISK_ANALYSIS",
+        "PROJECT_ADVISORY",
+        "INTERNAL_MEMO",
+        "CLIENT_UPDATE",
+        "ADVISORY_REPORT"
+      ]
+    },
+    "client_objective": {
+      "type": "string"
+    },
+    "decision_maker": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "intended_readers": {
+      "type": "array"
+    },
+    "scope": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ]
+    },
+    "validity_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "third_party_reliance": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "maturity_state": {
+      "enum": [
+        "STRONG",
+        "PARTIAL",
+        "LIMITED"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

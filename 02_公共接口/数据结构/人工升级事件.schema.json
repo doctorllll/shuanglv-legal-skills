@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/escalation-event/0.1",
+  "title": "EscalationEvent",
+  "required": [
+    "schema_version",
+    "escalation_id",
+    "matter_id",
+    "trigger",
+    "severity",
+    "reason",
+    "blocking",
+    "status",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "escalation_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "trigger": {
+      "type": "string"
+    },
+    "severity": {
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ]
+    },
+    "reason": {
+      "type": "string"
+    },
+    "affected_objects": {
+      "type": "array"
+    },
+    "required_human_role": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "recommended_action": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "blocking": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "OPEN",
+        "ACKNOWLEDGED",
+        "RESOLVED",
+        "WAIVED"
+      ]
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

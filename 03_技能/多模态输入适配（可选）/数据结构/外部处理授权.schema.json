@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/multimodal-input-adapter/external-consent/0.1",
+  "title": "ExternalProcessingConsent",
+  "required": [
+    "schema_version",
+    "provider",
+    "purpose",
+    "asset_scope",
+    "consent_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "asset_scope": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "data_scope": {
+      "type": "string"
+    },
+    "risk_notice_shown": {
+      "type": "boolean"
+    },
+    "consent_state": {
+      "enum": [
+        "GRANTED",
+        "DECLINED",
+        "NOT_REQUESTED",
+        "EXPIRED"
+      ]
+    },
+    "granted_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

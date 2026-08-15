@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/contract-stage-state/0.1",
+  "title": "ContractStageState",
+  "required": [
+    "schema_version",
+    "matter_id",
+    "mode",
+    "stage",
+    "open_tasks",
+    "last_updated"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string"
+    },
+    "stage": {
+      "type": "string"
+    },
+    "open_tasks": {
+      "type": "array"
+    },
+    "completed_tasks": {
+      "type": "array"
+    },
+    "missing_inputs": {
+      "type": "array"
+    },
+    "open_risks": {
+      "type": "array"
+    },
+    "client_decisions": {
+      "type": "array"
+    },
+    "negotiation_items": {
+      "type": "array"
+    },
+    "current_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parent_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "output_contract": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "human_review_points": {
+      "type": "array"
+    },
+    "last_updated": {
+      "type": "string"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/research-result/0.1",
+  "title": "ResearchResult",
+  "required": [
+    "schema_version",
+    "research_result_id",
+    "issue_id",
+    "status",
+    "issue_summary",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "research_result_id": {
+      "type": "string"
+    },
+    "issue_id": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "SATURATED",
+        "INCOMPLETE",
+        "BLOCKED",
+        "HUMAN_REVIEW_REQUIRED"
+      ]
+    },
+    "issue_summary": {
+      "type": "string"
+    },
+    "verified_rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "norm_package": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "case_cards": {
+      "type": "array"
+    },
+    "viewpoint_cards": {
+      "type": "array"
+    },
+    "supporting_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "counter_sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "exceptions": {
+      "type": "array"
+    },
+    "divergences": {
+      "type": "array"
+    },
+    "source_gaps": {
+      "type": "array"
+    },
+    "research_trace_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "provisional_conclusion": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "limitations": {
+      "type": "array"
+    },
+    "human_review_required": {
+      "type": "boolean"
+    },
+    "generated_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

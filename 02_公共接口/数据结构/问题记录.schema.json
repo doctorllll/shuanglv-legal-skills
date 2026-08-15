@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/issue-record/0.1",
+  "title": "IssueRecord",
+  "required": [
+    "schema_version",
+    "issue_id",
+    "matter_id",
+    "question",
+    "issue_type",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "issue_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "question": {
+      "type": "string"
+    },
+    "issue_type": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "OPEN",
+        "RESEARCHING",
+        "PROVISIONALLY_RESOLVED",
+        "RESOLVED",
+        "BLOCKED",
+        "HUMAN_REVIEW"
+      ]
+    },
+    "priority": {
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ]
+    },
+    "dependent_fact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sub_issue_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "parent_issue_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "research_scope": {
+      "type": [
+        "string",
+        "object",
+        "null"
+      ]
+    },
+    "resolution_required": {
+      "type": "boolean"
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

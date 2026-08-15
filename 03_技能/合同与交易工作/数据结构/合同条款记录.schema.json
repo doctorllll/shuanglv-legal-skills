@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "$id": "https://legal-skill.local/schema/contract-clause-record/0.1",
+  "title": "ContractClauseRecord",
+  "required": [
+    "schema_version",
+    "clause_id",
+    "matter_id",
+    "function",
+    "text_or_summary",
+    "review_state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "clause_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "location": {
+      "type": [
+        "object",
+        "string",
+        "null"
+      ]
+    },
+    "function": {
+      "enum": [
+        "OBLIGATION",
+        "RIGHT",
+        "DISCRETION",
+        "REPRESENTATION",
+        "WARRANTY",
+        "DECLARATION",
+        "CONDITION",
+        "DEFINITION",
+        "PROCEDURE",
+        "REMEDY",
+        "RISK_ALLOCATION",
+        "LIMITATION",
+        "TERMINATION",
+        "GOVERNANCE",
+        "NOTICE",
+        "DISPUTE_RESOLUTION",
+        "OTHER"
+      ]
+    },
+    "text_or_summary": {
+      "type": "string"
+    },
+    "bound_party": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "benefited_party": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "trigger": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "performance": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "time": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "standard": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "conditions": {
+      "type": "array"
+    },
+    "exceptions": {
+      "type": "array"
+    },
+    "consequence": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "linked_risk_ids": {
+      "type": "array"
+    },
+    "linked_rule_ids": {
+      "type": "array"
+    },
+    "linked_clause_ids": {
+      "type": "array"
+    },
+    "ambiguity_or_conflict": {
+      "type": "array"
+    },
+    "negotiation_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "review_state": {
+      "enum": [
+        "UNREVIEWED",
+        "OK",
+        "REVISE",
+        "DELETE",
+        "ADD",
+        "COMMENT",
+        "CLIENT_DECISION",
+        "LEGAL_RESEARCH",
+        "HUMAN_REVIEW"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://legal-skill.local/schema/skill-execution-record/0.1",
+  "title": "SkillExecutionRecord",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "execution_id",
+    "lead_skill",
+    "task_objective",
+    "completion_state",
+    "inputs_received",
+    "materials_reviewed",
+    "work_performed",
+    "artifacts_produced",
+    "open_gaps",
+    "next_actions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "execution_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prior_execution_record_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "execution_time": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "lead_skill": {
+      "type": "string"
+    },
+    "supporting_skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "task_objective": {
+      "type": "string"
+    },
+    "task_scope": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "completion_state": {
+      "enum": [
+        "COMPLETE",
+        "PARTIAL",
+        "BLOCKED",
+        "HUMAN_REVIEW_REQUIRED"
+      ]
+    },
+    "inputs_received": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "status"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "source_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "enum": [
+              "RECEIVED",
+              "OPENED",
+              "REVIEWED",
+              "PARTIAL",
+              "NOT_REVIEWED",
+              "UNREADABLE",
+              "MISSING"
+            ]
+          },
+          "sensitivity": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "materials_reviewed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "review_status"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "review_status": {
+            "enum": [
+              "REVIEWED",
+              "PARTIAL",
+              "NOT_REVIEWED",
+              "UNREADABLE",
+              "MISSING"
+            ]
+          },
+          "review_scope": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "locator": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unreviewed_or_unclear": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "research_performed": {
+      "type": "array"
+    },
+    "current_law_check": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "performed": {
+          "type": "boolean"
+        },
+        "scope": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checked_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gaps": {
+          "type": "array"
+        }
+      }
+    },
+    "work_performed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "current_findings": {
+      "type": "array"
+    },
+    "artifacts_produced": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "artifact_type"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "artifact_type": {
+            "type": "string"
+          },
+          "version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "parent_version": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "open_gaps": {
+      "type": "array"
+    },
+    "human_decisions_required": {
+      "type": "array"
+    },
+    "next_actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "action"
+        ],
+        "properties": {
+          "action": {
+            "type": "string"
+          },
+          "recommended_skill": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "required_input": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "priority": {
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW"
+            ]
+          },
+          "blocker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "continuation_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}
