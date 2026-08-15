@@ -1,0 +1,50 @@
+name: 提案（新技能 / 新模块 / 结构变更）
+description: 提出新的业务技能、业务模块、数据结构或较大范围的结构调整，先讨论再动手
+title: "[提案] "
+labels: ["提案"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        较大改动请先在这里达成一致再提 PR。**请勿粘贴任何真实案件信息。**
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 提案类型
+      options:
+        - 新业务技能
+        - 现有技能新增业务模块
+        - 数据结构（schema）新增或不向后兼容变更
+        - 调度 / 路由规则调整
+        - 对抗性审查 / 人工升级边界调整
+        - 平台适配方案
+        - 其它
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 要解决的问题
+      description: 现在的系统在什么场景下做不到 / 做不好什么
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 提案内容
+      description: 拟新增 / 修改什么；边界是什么；与现有技能如何组合；需要同步更新哪些文件
+    validations:
+      required: true
+  - type: textarea
+    id: risk
+    attributes:
+      label: 对抗性审查
+      description: 这个提案最可能被同行质疑的点是什么；有没有削弱人工复核 / 授权门控的风险
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      options:
+        - label: 本 Issue 不含任何真实案件信息
+          required: true
+        - label: 我愿意在提案通过后参与实现或评审

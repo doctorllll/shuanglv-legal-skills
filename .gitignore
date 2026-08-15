@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+._*
+__MACOSX/
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 本地临时 / 案件工作产物（禁止入库）
+*.tmp
+*.bak
+/tmp/
+/工作产物/
+/项目执行说明书_*/

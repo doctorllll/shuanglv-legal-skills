@@ -1,0 +1,55 @@
+name: 问题反馈
+description: 业务规则有误、流程不顺、门控过严 / 过松、某平台加载不了入口等
+title: "[问题] "
+labels: ["问题反馈"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。**请勿粘贴任何真实案件信息**（案号、当事人、身份证号、手机号、卷宗内容等）；需要举例时请用"张三 / 李四 / 某某公司"占位。
+  - type: dropdown
+    id: area
+    attributes:
+      label: 涉及范围
+      options:
+        - 00_使用与调度（入口 / 路由 / 对抗性审查规范 / 人工升级矩阵）
+        - 01_运行规范
+        - 02_公共接口 / 数据结构
+        - 法律研究与多源资料融合
+        - 刑事案件办理
+        - 民商事争议解决
+        - 合同与交易工作
+        - 法律顾问与专项法律分析
+        - 尽职调查与专项调查
+        - 法律文书质量与格式控制
+        - 多模态输入适配（可选）
+        - 04_使用示例
+        - 平台安装 / 加载
+        - README / 仓库层
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 问题描述
+      description: 哪个文件、哪一条规则 / 步骤，出了什么问题
+      placeholder: 例如：《民商事争议解决/核心规则汇总.md》第 x 条要求……，但在……情形下会导致……
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 你认为应当如何
+      description: 涉及业务规则的，请附专业依据（法条 / 司法解释 / 实务惯例 / 反例）
+  - type: input
+    id: platform
+    attributes:
+      label: 使用的 Agent 平台与版本（如与平台相关）
+      placeholder: 例如：Claude Code x.y / Codex CLI / Hermes / Cursor
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      options:
+        - label: 本 Issue 不含任何真实案件信息
+          required: true
