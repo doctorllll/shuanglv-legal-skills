@@ -4,6 +4,12 @@
 
 ---
 
+## [未发布]
+
+- `SKILL.md` 顶部增加 Agent Skills 通用 YAML frontmatter（`name` / `description` / `license` / `metadata`），使 Claude Code、Codex CLI、Hermes 等平台可自动发现并按「调用爽律」触发；只加入口元数据，正文与业务规则未变。README 附录"安装"段（模板）同步。（PR #1）
+
+---
+
 ## [0.41] — 公开共创版｜第一轮实测候选基线（2026-08-16 合并，tag `v0.41`）
 
 作者以 PR #2 自提（squash 合并，commit 归属作者）。相对 v0.40 的主要变化：

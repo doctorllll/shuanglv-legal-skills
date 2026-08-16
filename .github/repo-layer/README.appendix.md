@@ -27,7 +27,7 @@ git clone https://github.com/zj-ai-lab/shuanglv-legal-skills.git ~/.claude/skill
 
 可选的工程执行层（`05_工程执行层/工具/爽律 Skill执行器.py`）只依赖 Python 标准库；没有 Python 的环境直接按规则文档执行即可，不影响核心 Skill。
 
-**平台不能自动识别入口时**：当前 `SKILL.md` 是纯 Markdown 入口、未附带 YAML frontmatter（`name` / `description`），部分平台可能不会把它自动列为可触发技能。此时按作者《安装与调用说明》第五节，在平台的系统指令 / 项目规则（如 `CLAUDE.md`、`AGENTS.md`）中加入一句：
+**自动发现**：`SKILL.md` 顶部附带 Agent Skills 通用的 YAML frontmatter（`name: shuanglv-legal-skills` + `description` 触发说明），Claude Code、Codex CLI、Hermes 等按 `SKILL.md` 约定发现技能的平台放到上表目录后即可自动识别并在用户说"调用爽律"时触发。不支持该约定的平台，按作者《安装与调用说明》第五节，在系统指令 / 项目规则（如 `CLAUDE.md`、`AGENTS.md`）中加入一句：
 
 > 当用户说"调用爽律""用爽律做""用爽律处理"时，读取 `<安装路径>/SKILL.md` 并按其中规则执行。
 

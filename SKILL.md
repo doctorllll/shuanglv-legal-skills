@@ -1,3 +1,14 @@
+---
+name: shuanglv-legal-skills
+description: "爽律 Skill｜律师专业工作流系统：面向中国大陆律师实务的 Agent Skills 工作流。当用户说「调用爽律」「用爽律做」「用爽律处理」「爽律 Skill」「ShuangLaw」，或提出刑事案件办理（辩护、被害人代理与控告、会见、阅卷）、民商事争议解决、合同与交易工作（起草、审查、修改、谈判）、法律顾问与专项法律分析、尽职调查与专项调查、法律研究与多源资料融合、法律文书质量与格式控制、扫描件/音视频等多模态输入适配、事项快速理解与图形化交付等律师专业任务时使用。自动选择主技能并按需组合辅助技能，执行专业工作流、法律分析与推理闭环、全链路溯源与统一对抗性审查，并在重大决定、敏感材料外发和正式交付前停在律师复核/用户授权门控。只提供专业辅助，不替代律师最终判断。"
+license: "文本性内容 CC BY-SA 4.0；程序性文件 Apache-2.0（见 LICENSE、许可与使用声明.md）"
+metadata:
+  author: "卓建律师事务所 蔡诗爽律师"
+  homepage: "https://csslaw.cn/"
+  system_id: "shuanglv-legal-skills"
+  language: "zh-CN"
+---
+
 # 爽律 Skill｜律师专业工作流系统
 
 `system_id: shuanglv-legal-skills`
