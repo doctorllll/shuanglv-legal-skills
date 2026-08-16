@@ -14,7 +14,7 @@
 - 合同与交易工作：技能定义、详细说明、业务模块、分析与推理方法、核心规则、检查清单、对抗性审查清单及两份 schema 更新；其余各技能《技能定义》与部分《详细说明》更新；`00` 层入口 / 基础能力地图 / 事项工作模型规范 / 测试基线与能力边界、`01` 层运行能力契约 / 交付物输出规范 / 外部能力适配规范 / 交付工具能力契约、公共 schema `输出契约` / `运行能力档案` 更新。
 
 ### 仓库层（同日）
-- 仓库自 `doctorllll` 转入 GitHub 组织 **`shuanglaw`**（作者与维护者同为 Owner）；旧地址自动重定向；规则集补回绕过者（仓库管理员 / 组织 Owner）。
+- 仓库自 `doctorllll` 转入 GitHub 组织 **`zj-ai-lab`**（作者与维护者同为 Owner）；旧地址自动重定向；规则集补回绕过者（仓库管理员 / 组织 Owner）。
 - CODEOWNERS：作者层 `@csslaw @doctorllll`（作者自提 PR 由维护者批准）。
 - 新增 `.github/repo-layer/`（README 头部 / 附录、CONTRIBUTING 附录、.gitignore 补充段模板）与 `.github/scripts/apply_repo_layer.py`（幂等地把仓库层套到作者文件上，版本 / 阶段徽章取自 `manifest.json`）；合并作者新版后运行一次即可，PR #2 丢失的头尾据此恢复。
 

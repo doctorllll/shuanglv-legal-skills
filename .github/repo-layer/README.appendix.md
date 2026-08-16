@@ -22,7 +22,7 @@
 以 Claude Code 为例：
 
 ```bash
-git clone https://github.com/shuanglaw/shuanglv-legal-skills.git ~/.claude/skills/shuanglv-legal-skills
+git clone https://github.com/zj-ai-lab/shuanglv-legal-skills.git ~/.claude/skills/shuanglv-legal-skills
 ```
 
 可选的工程执行层（`05_工程执行层/工具/爽律 Skill执行器.py`）只依赖 Python 标准库；没有 Python 的环境直接按规则文档执行即可，不影响核心 Skill。
@@ -76,7 +76,7 @@ git clone https://github.com/shuanglaw/shuanglv-legal-skills.git ~/.claude/skill
 ### 维护、评审与反馈
 
 - **发起及主导 / 业务规则终审**：蔡诗爽律师；
-- **归属**：GitHub 组织 [`shuanglaw`](https://github.com/shuanglaw)，作者与维护者同为组织 Owner；
+- **归属**：GitHub 组织 [`zj-ai-lab`](https://github.com/zj-ai-lab)，作者与维护者同为组织 Owner；
 - **仓库维护**：[@doctorllll](https://github.com/doctorllll)——仓库结构、共创流程、平台适配与发布；
 - **评审分两层**：维护者初审结构、格式、脱敏与平台适配；凡涉及法律业务规则、门控、对抗性审查点、人工升级边界的改动由作者终审；有分歧以作者意见为准；
 - **反馈入口**：[Issues](../../issues/new/choose)（真实失败反馈 / 问题反馈 / 提案）与 [Discussions](../../discussions)；涉及案件材料的反馈请先按 `CONTRIBUTING.md` 第六节脱敏；
