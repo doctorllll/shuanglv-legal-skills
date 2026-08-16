@@ -1,0 +1,54 @@
+{
+  "system_id": "shuanglv-legal-skills",
+  "build": "0.43",
+  "base_runtime_version": "0.42-RC6",
+  "release_status": "RELEASE",
+  "public_release": true,
+  "development_scope": "Agent Native formal release with mandatory v0.42 legacy fallback, independent feature flags, route fallback, personalization/template preservation, and legacy regression gate.",
+  "new_objects": [
+    "ActivationDecision",
+    "SkillCollaborationRequest",
+    "ProactiveSuggestion",
+    "FailureFallbackRecord"
+  ],
+  "new_gates": [
+    "GATE-ACTIVATION-PREFERENCE",
+    "GATE-LEGACY-COMPAT"
+  ],
+  "source_materials_bundled": false,
+  "gold_corpus_text_bundled": false,
+  "full_package": true,
+  "overlay_install_required": false,
+  "skill_root": "shuanglv-legal-skills",
+  "agent_skills_frontmatter": true,
+  "user_personalization_policy": "PRESERVE_USER",
+  "activation_default_new_user": "AUTO",
+  "legacy_alias_compatible": true,
+  "host_auto_activation_dependency": "HOST_MUST_SUPPORT_SKILL_METADATA_SELECTION",
+  "machine_validation": "PASS",
+  "validation_results": {
+    "frontmatter": "PASS",
+    "json_parse": "113/113 PASS",
+    "schema_meta": "83/83 PASS",
+    "python_compile": "3/3 PASS",
+    "trigger_eval_proxy": "36/36 PASS",
+    "business_route_smoke": "6/6 PASS",
+    "activation_modes": "PASS",
+    "legacy_regression": "16/16 PASS",
+    "feature_flag_failover": "PASS",
+    "personalization_precedence": "PASS",
+    "markdown_links": "PASS",
+    "mother_source_leakage": "0 hits",
+    "version_consistency": "PASS"
+  },
+  "validation_caveat": "自动激活的实际执行仍取决于具体宿主是否支持 Skill metadata 发现/选择；宿主不支持或增强层异常时，显式调用和 v0.42 Legacy Fallback 保证旧核心路径继续可用。",
+  "verified_against": [
+    "https://agentskills.io/specification",
+    "https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md"
+  ],
+  "verified_at": "2026-08-17",
+  "legacy_fallback_required": true,
+  "feature_flags_independent": true,
+  "explicit_alias_bypasses_auto_activation": true,
+  "release_date": "2026-08-17"
+}

@@ -65,6 +65,13 @@
 
 公开仓库中的任何内容都应按“可能被长期公开、复制和索引”处理。
 
+
+## 七、贡献署名与致谢
+
+被采纳的实质贡献可以根据贡献者意愿记录在版本开发记录、Release Notes 或 `ACKNOWLEDGEMENTS.md` 中。贡献者可选择实名、GitHub 账号、机构名或匿名；项目不会因为内部协作而擅自公开未确认的个人身份。
+
+致谢用于如实记录贡献，不表示贡献者对项目整体提供背书，也不改变相应文件的许可、版权和专业责任边界。
+
 <!-- repo-appendix:start ｜ 仓库层，由 .github/scripts/apply_repo_layer.py 从 .github/repo-layer/CONTRIBUTING.appendix.md 生成；不要手改本段。以上为作者原文。 -->
 
 ---

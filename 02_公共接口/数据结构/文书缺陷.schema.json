@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schema/draft-defect/0.1",
+  "title": "DraftDefect",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "defect_id",
+    "defect_type",
+    "severity",
+    "location",
+    "reason",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "defect_id": {
+      "type": "string"
+    },
+    "defect_type": {
+      "enum": [
+        "irrelevant_material",
+        "issue_misprioritization",
+        "analysis_leakage",
+        "missing_reason_bridge",
+        "evidence_fact_disconnect",
+        "remedy_mismatch",
+        "counterargument_ignored",
+        "over_reasoning",
+        "under_reasoning",
+        "template_isomorphism",
+        "tone_immaturity",
+        "role_voice_leakage",
+        "disposition_imprecision",
+        "stage_mismatch",
+        "reader_friction_unanswered"
+      ]
+    },
+    "severity": {
+      "enum": [
+        "INFO",
+        "MINOR",
+        "MAJOR",
+        "BLOCKING"
+      ]
+    },
+    "location": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "upstream_links": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "suggested_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "enum": [
+        "OPEN",
+        "ACCEPTED",
+        "FIXED",
+        "WAIVED_WITH_REASON"
+      ]
+    }
+  }
+}

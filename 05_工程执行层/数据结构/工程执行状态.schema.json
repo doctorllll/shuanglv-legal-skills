@@ -30,7 +30,8 @@
         "0.2",
         "0.3",
         "0.4",
-        "0.5"
+        "0.5",
+        "0.6"
       ]
     },
     "lead_skill": {
@@ -128,6 +129,15 @@
           "type": "boolean"
         },
         "capability_resolution_required": {
+          "type": "boolean"
+        },
+        "deliverable_bundle_required": {
+          "type": "boolean"
+        },
+        "bundle_scope_verification_required": {
+          "type": "boolean"
+        },
+        "template_resolution_required": {
           "type": "boolean"
         }
       }
@@ -725,6 +735,32 @@
           ]
         }
       }
+    },
+    "template_resolution": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "deliverable_bundle": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "legacy_compatibility": {
+      "type": "object",
+      "properties": {
+        "policy": {
+          "type": "string"
+        },
+        "feature_flags": {
+          "type": "object"
+        },
+        "fallback_records": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "additionalProperties": true
     }
   }
 }

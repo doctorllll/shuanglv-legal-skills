@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": true,
-  "$id": "https://legal-skill.local/schema/research-trace/0.1",
-  "title": "ResearchTrace",
+  "$id": "https://legal-skill.local/schema/research-trace/0.2",
+  "title": "ResearchTrace v0.2",
   "required": [
     "schema_version",
     "trace_id",
@@ -14,7 +14,10 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "0.1"
+      "enum": [
+        "0.1",
+        "0.2"
+      ]
     },
     "trace_id": {
       "type": "string"
@@ -73,6 +76,57 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "search_stage": {
+      "enum": [
+        "DIRECT",
+        "ELEMENT_FACT",
+        "ANALOGICAL",
+        "SNOWBALL",
+        "INTERPRETATION_PRACTICE",
+        "OTHER",
+        null
+      ]
+    },
+    "discovery_channel": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "target_source_roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evaluated_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "information_gain": {
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "NONE",
+        "UNKNOWN",
+        null
+      ]
+    },
+    "material_new_issue_found": {
+      "type": "boolean"
+    },
+    "saturation_effect": {
+      "enum": [
+        "NOT_ASSESSED",
+        "MOVES_TOWARD_SATURATION",
+        "NO_MATERIAL_CHANGE",
+        "REOPENS_RESEARCH",
+        "UNKNOWN"
+      ]
     }
   }
 }

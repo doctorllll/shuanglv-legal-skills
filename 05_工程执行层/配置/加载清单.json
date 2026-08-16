@@ -3,10 +3,12 @@
   "system": "爽律 Skill｜律师专业工作流系统",
   "base_files": [
     "SKILL.md",
+    "00_使用与调度/自动激活与Agent原生调度规范.md",
     "00_使用与调度/爽律 Skill入口.md",
     "00_使用与调度/技能调度规则.md",
     "00_使用与调度/法律分析与推理规范.md",
-    "00_使用与调度/全链路溯源规范.md"
+    "00_使用与调度/全链路溯源规范.md",
+    "00_使用与调度/旧版能力兼容与失败回退规范.md"
   ],
   "skills": {
     "法律顾问与专项法律分析": {
@@ -91,7 +93,8 @@
       "workflow": [
         "03_技能/法律文书质量与格式控制/详细说明与工作流程.md",
         "03_技能/法律文书质量与格式控制/核心规则汇总.md",
-        "03_技能/法律文书质量与格式控制/分析与推理方法.md"
+        "03_技能/法律文书质量与格式控制/分析与推理方法.md",
+        "03_技能/法律文书质量与格式控制/成文策略与重写规则.md"
       ],
       "checklist": [
         "03_技能/法律文书质量与格式控制/检查清单汇总.md"
@@ -166,7 +169,8 @@
     "01_运行规范/交付物输出规范.md",
     "00_使用与调度/全链路溯源规范.md",
     "00_使用与调度/事项快速理解与图形化交付规范.md",
-    "00_使用与调度/技能行为契约.md"
+    "00_使用与调度/技能行为契约.md",
+    "00_使用与调度/模板资产与成套交付规范.md"
   ],
   "support_triggers": {
     "法律研究与多源资料融合": [
@@ -203,5 +207,12 @@
   "delivery_tool_contract_file": "01_运行规范/交付工具能力契约.md",
   "capability_downgrade_file": "01_运行规范/能力降级与失败处理规范.md",
   "matter_quick_understanding_file": "00_使用与调度/事项快速理解与图形化交付规范.md",
-  "diagram_capability_file": "01_运行规范/图形化交付能力契约.md"
+  "diagram_capability_file": "01_运行规范/图形化交付能力契约.md",
+  "template_bundle_file": "00_使用与调度/模板资产与成套交付规范.md",
+  "research_source_evaluation_file": "01_运行规范/法律信源能力契约.md",
+  "research_method_policy": "00_使用与调度/法律研究权威图谱与类案矩阵规范.md",
+  "auto_activation_file": "00_使用与调度/自动激活与Agent原生调度规范.md",
+  "multi_skill_collaboration_file": "00_使用与调度/多Skill协同与能力请求规范.md",
+  "legacy_compatibility_file": "00_使用与调度/旧版能力兼容与失败回退规范.md",
+  "feature_flags_file": "05_工程执行层/配置/功能开关.json"
 }

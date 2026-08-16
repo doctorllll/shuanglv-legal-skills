@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schema/rewrite-decision/0.1",
+  "title": "RewriteDecision",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "decision_id",
+    "defect_id",
+    "action",
+    "rationale",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "decision_id": {
+      "type": "string"
+    },
+    "defect_id": {
+      "type": "string"
+    },
+    "action": {
+      "enum": [
+        "DELETE",
+        "REPLACE",
+        "MERGE",
+        "REORDER",
+        "FRONTLOAD",
+        "DEFER",
+        "REFRAME",
+        "BRIDGE",
+        "COMPRESS",
+        "EXPAND",
+        "REWRITE_FOR_READER",
+        "DISPOSITION_FIX"
+      ]
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "target_location": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "preserve_meaning": {
+      "type": "boolean"
+    },
+    "requires_upstream_writeback": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "PROPOSED",
+        "APPLIED",
+        "REJECTED_WITH_REASON"
+      ]
+    }
+  }
+}

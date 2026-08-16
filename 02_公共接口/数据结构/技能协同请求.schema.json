@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/skill-collaboration-request/0.1",
+  "title": "SkillCollaborationRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "capability_type",
+    "purpose",
+    "required"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capability_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "input_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "expected_output_contract": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "must_preserve_locator": {
+      "type": "boolean"
+    },
+    "sensitive_material": {
+      "type": "boolean"
+    },
+    "allow_downgrade": {
+      "type": "boolean"
+    },
+    "preferred_implementation": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "result_status": {
+      "enum": [
+        "PENDING",
+        "SATISFIED",
+        "DOWNGRADED",
+        "BLOCKED"
+      ]
+    },
+    "result_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

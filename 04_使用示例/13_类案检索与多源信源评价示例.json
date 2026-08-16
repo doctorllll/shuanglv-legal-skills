@@ -1,0 +1,141 @@
+{
+  "research_request": {
+    "schema_version": "0.2",
+    "research_request_id": "RR-001",
+    "matter_id": "M-001",
+    "issue_id": "I-001",
+    "question": "示例争议问题的类案与实践路径",
+    "status": "SATURATED",
+    "required_source_roles": [
+      "FORMAL_NORM",
+      "JUDGMENT",
+      "PRACTICE_SIGNAL",
+      "PROFESSIONAL_ANALYSIS"
+    ],
+    "research_deliverable_type": "CASE_RESEARCH_REPORT",
+    "user_template_asset_id": "TPL-USER-CASE-REPORT",
+    "saturation_required": true
+  },
+  "source_profiles": [
+    {
+      "schema_version": "0.3",
+      "source_id": "SRC-001",
+      "source_family": "PUBLIC_PLATFORM",
+      "source_type": "official_wechat_article",
+      "title": "某法院官方原创审判实务资料（示例）",
+      "publisher_identity": "某法院",
+      "publication_channel": "WeChat Official Account",
+      "official_account_state": "OFFICIAL_VERIFIED",
+      "originality_state": "ORIGINAL_PRIMARY",
+      "source_role": [
+        "PRACTICE_SIGNAL"
+      ],
+      "verification_state": "VERIFIED",
+      "professional_authority": "HIGH",
+      "normative_force": "PRACTICE_REFERENCE",
+      "fact_proof_weight": "NOT_FOR_FACT_PROOF",
+      "stance": "NEUTRAL",
+      "related_issue_ids": [
+        "I-001"
+      ],
+      "locators": [
+        "示例定位"
+      ],
+      "supported_propositions": [
+        "反映某辖区审判实践的参考思路"
+      ],
+      "limitations": [
+        "不具有正式法律规范效力"
+      ],
+      "permitted_uses": [
+        "司法实践分析"
+      ],
+      "requires_further_verification": false,
+      "content_nature": [
+        "judicial_practice"
+      ]
+    },
+    {
+      "schema_version": "0.3",
+      "source_id": "SRC-002",
+      "source_family": "PUBLIC_PLATFORM",
+      "source_type": "repost",
+      "title": "出处未明转载（示例）",
+      "publication_channel": "web",
+      "official_account_state": "UNKNOWN",
+      "originality_state": "SECONDARY_REPUBLICATION",
+      "source_role": [
+        "RESEARCH_LEAD"
+      ],
+      "verification_state": "UNVERIFIED",
+      "professional_authority": "UNKNOWN",
+      "normative_force": "UNKNOWN",
+      "fact_proof_weight": "SECONDARY_INFORMATION",
+      "stance": "NEUTRAL",
+      "related_issue_ids": [
+        "I-001"
+      ],
+      "locators": [],
+      "supported_propositions": [],
+      "limitations": [
+        "尚未找到原始来源"
+      ],
+      "permitted_uses": [
+        "检索线索"
+      ],
+      "requires_further_verification": true,
+      "content_nature": [
+        "repost"
+      ]
+    }
+  ],
+  "saturation_assessment": {
+    "schema_version": "0.1",
+    "assessment_id": "SAT-001",
+    "issue_id": "I-001",
+    "status": "SATURATED",
+    "core_norm_verified": true,
+    "time_applicability_checked": true,
+    "independent_search_path_count": 3,
+    "support_path_checked": true,
+    "counter_path_checked": true,
+    "boundary_path_checked": true,
+    "exception_path_checked": true,
+    "official_interpretation_or_practice_checked_when_material": true,
+    "theory_or_professional_analysis_checked_when_material": true,
+    "latest_information_gain": "LOW",
+    "remaining_gaps": [
+      "仍有部分非公开裁判不可访问"
+    ],
+    "gap_can_change_conclusion": false,
+    "stop_reason": "新增检索主要重复已识别路径，剩余缺口已披露",
+    "assessed_at": "2026-08-16T00:00:00Z"
+  },
+  "deliverable_profile": {
+    "schema_version": "0.1",
+    "profile_id": "RDP-001",
+    "deliverable_type": "CASE_RESEARCH_REPORT",
+    "audience": "律师内部复核",
+    "purpose": "支持案件策略判断",
+    "required_sections": [
+      "检索问题",
+      "检索范围与方法",
+      "法规基础",
+      "案例矩阵",
+      "裁判路径",
+      "本案可比性",
+      "结论与限制"
+    ],
+    "optional_sections": [
+      "理论与实务观点"
+    ],
+    "sample_scope_disclosure_required": true,
+    "search_method_disclosure_required": true,
+    "template_resolution": {
+      "mode": "USER_TEMPLATE",
+      "template_asset_id": "TPL-USER-CASE-REPORT",
+      "preserve_user_style": true,
+      "conflict_state": "NONE"
+    }
+  }
+}

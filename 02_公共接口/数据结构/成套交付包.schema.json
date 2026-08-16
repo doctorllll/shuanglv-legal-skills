@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/deliverable-bundle/0.1",
+  "title": "成套交付包 DeliverableBundle v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "bundle_id",
+    "matter_id",
+    "status",
+    "deliverables"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "bundle_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "scope_status": {
+      "enum": [
+        "USER_DEFINED",
+        "VERIFIED",
+        "PARTIAL",
+        "UNKNOWN_NEEDS_CHECK"
+      ]
+    },
+    "status": {
+      "enum": [
+        "PLANNED",
+        "IN_PROGRESS",
+        "READY",
+        "DELIVERED",
+        "BLOCKED"
+      ]
+    },
+    "shared_fields_record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "deliverables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "deliverable_id",
+          "document_type",
+          "requirement_level",
+          "status"
+        ],
+        "properties": {
+          "deliverable_id": {
+            "type": "string"
+          },
+          "document_type": {
+            "type": "string"
+          },
+          "requirement_level": {
+            "enum": [
+              "USER_REQUIRED",
+              "VERIFIED_REQUIRED",
+              "RECOMMENDED",
+              "OPTIONAL",
+              "UNKNOWN_NEEDS_CHECK"
+            ]
+          },
+          "requirement_source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "enum": [
+              "PLANNED",
+              "DRAFTED",
+              "READY",
+              "DELIVERED",
+              "STALE",
+              "BLOCKED"
+            ]
+          },
+          "artifact_path": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "template_asset_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "shared_field_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

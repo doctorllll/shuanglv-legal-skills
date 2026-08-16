@@ -124,6 +124,40 @@
     {
       "id": "GATE-CONTRACT-EDIT",
       "description": "合同 REVISE / 默认 REVIEW 不得只出修改报告，必须形成实际修改后的合同文本或明确合法降级"
+    },
+    {
+      "id": "GATE-COMPOSITION",
+      "description": "复杂/正式法律文书在起草前必须形成成文策略或记录合理豁免"
+    },
+    {
+      "id": "GATE-REWRITE",
+      "description": "重大正式文书存在未解决 MAJOR/BLOCKING 成文缺陷时不得最终交付"
+    },
+    {
+      "id": "GATE-PERSONALIZATION-MIGRATION",
+      "description": "升级已有安装时必须保留兼容个性化、阻断硬规则冲突并生成迁移报告与快照",
+      "scope": "UPGRADE_ONLY"
+    },
+    {
+      "id": "GATE-SOURCE-EVAL",
+      "description": "重要法律研究必须完成关键候选来源的渠道中立评价，不得以渠道直接替代权威/效力判断"
+    },
+    {
+      "id": "GATE-RESEARCH-SATURATION",
+      "description": "正式或重要法律研究在宣称SATURATED前必须形成研究充分性判断；不完整时不得无保留结论"
+    },
+    {
+      "id": "GATE-RESEARCH-DELIVERABLE",
+      "description": "正式研究交付必须解析研究交付物类型，并在存在用户/事项模板时保留其个性化模板"
+    },
+    {
+      "id": "GATE-ACTIVATION-PREFERENCE",
+      "description": "不得在用户明确MANUAL或本次明确禁用爽律时强行自动激活",
+      "scope": "ACTIVATION_ONLY"
+    },
+    {
+      "id": "GATE-LEGACY-COMPAT",
+      "description": "v0.43+ 增强功能失败时必须成功回退旧路径或明确阻断；不得因增强层故障破坏 v0.42 可用核心任务"
     }
   ],
   "warning_rules": [

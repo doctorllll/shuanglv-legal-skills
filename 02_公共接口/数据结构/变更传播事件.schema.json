@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/change-propagation-event/0.1",
+  "title": "变更传播事件 ChangePropagationEvent v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "change_id",
+    "matter_id",
+    "shared_field_id",
+    "impacts",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "change_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "shared_field_id": {
+      "type": "string"
+    },
+    "old_value": {},
+    "new_value": {},
+    "change_class": {
+      "enum": [
+        "MECHANICAL_CONSISTENCY",
+        "SUBSTANTIVE_FACT",
+        "LEGAL_OR_STRATEGY"
+      ]
+    },
+    "reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_update_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "strategy_reanalysis_required": {
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "OPEN",
+        "PARTIALLY_APPLIED",
+        "CLOSED",
+        "BLOCKED"
+      ]
+    },
+    "impacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "deliverable_id",
+          "impact_type",
+          "status"
+        ],
+        "properties": {
+          "deliverable_id": {
+            "type": "string"
+          },
+          "impact_type": {
+            "enum": [
+              "TEXT_UPDATE",
+              "RECALCULATE",
+              "REANALYZE",
+              "REVIEW_ONLY",
+              "NO_CHANGE"
+            ]
+          },
+          "status": {
+            "enum": [
+              "PENDING",
+              "APPLIED",
+              "REVIEW_REQUIRED",
+              "NO_CHANGE"
+            ]
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "resolved_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    }
+  }
+}

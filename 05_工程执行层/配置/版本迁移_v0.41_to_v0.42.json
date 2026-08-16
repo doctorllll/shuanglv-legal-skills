@@ -1,0 +1,64 @@
+{
+  "schema_version": "0.1",
+  "from_version": "0.41",
+  "to_version": "0.42",
+  "default_policy": "PRESERVE_USER",
+  "changes": [
+    {
+      "change_id": "V042-DOC-COMPOSE",
+      "change_type": "CORE_CAPABILITY",
+      "description": "新增正式法律文书成文策略与结构性重写能力。",
+      "affected_keys": [
+        "document.composition.show_internal_analysis_labels",
+        "document.composition.rewrite_strength"
+      ],
+      "new_default": "STRUCTURAL_WHEN_NEEDED",
+      "migration_action": "NONE",
+      "replacement_key": null
+    },
+    {
+      "change_id": "V042-PERS-LAYER",
+      "change_type": "CORE_CAPABILITY",
+      "description": "新增个性化继承层、用户空间和升级迁移机制。",
+      "affected_keys": [],
+      "migration_action": "NONE",
+      "replacement_key": null
+    },
+    {
+      "change_id": "V042-PARA",
+      "change_type": "DEFAULT_CHANGE",
+      "description": "文书默认继续避免机械一句话一段；已存在用户显式设置时保留用户设置。",
+      "affected_keys": [
+        "writing.paragraph.single_sentence_policy"
+      ],
+      "new_default": "AVOID",
+      "migration_action": "NONE",
+      "replacement_key": null
+    },
+    {
+      "change_id": "V042-RESEARCH-SOURCE-EVAL",
+      "change_type": "CORE_CAPABILITY",
+      "description": "新增渠道中立SourceProfile/SourceRole评价：公众号、网页、数据库等渠道不直接决定权威等级。",
+      "affected_keys": [],
+      "migration_action": "NONE",
+      "replacement_key": null
+    },
+    {
+      "change_id": "V042-RESEARCH-DELIVERABLE",
+      "change_type": "CORE_CAPABILITY",
+      "description": "新增Research Ladder、Search Saturation与ResearchDeliverableProfile；用户研究报告模板继续按PRESERVE_USER保留。",
+      "affected_keys": [],
+      "migration_action": "NONE",
+      "replacement_key": null
+    }
+  ],
+  "hard_guardrail_prefixes": [
+    "core.fact_status.",
+    "core.legal_verification.",
+    "core.source_integrity.",
+    "core.external_processing.",
+    "core.human_decision."
+  ],
+  "renamed_keys": {},
+  "removed_keys": []
+}

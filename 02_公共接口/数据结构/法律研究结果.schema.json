@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": true,
-  "$id": "https://legal-skill.local/schema/research-result/0.3",
-  "title": "ResearchResult v0.3",
+  "$id": "https://legal-skill.local/schema/research-result/0.4",
+  "title": "ResearchResult v0.4",
   "required": [
     "schema_version",
     "research_result_id",
@@ -17,7 +17,8 @@
       "enum": [
         "0.1",
         "0.2",
-        "0.3"
+        "0.3",
+        "0.4"
       ]
     },
     "research_result_id": {
@@ -142,6 +143,33 @@
       "items": {
         "type": "string"
       }
+    },
+    "source_profile_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_role_summary": {
+      "type": "object"
+    },
+    "saturation_assessment_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "research_deliverable_profile_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "information_gain_note": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   }
 }

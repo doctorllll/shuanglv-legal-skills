@@ -15,6 +15,12 @@ ROOT = Path(__file__).resolve().parents[2]
 ENG = ROOT / "05_工程执行层"
 LOAD_MANIFEST = ENG / "配置" / "加载清单.json"
 CHECKLIST_REGISTRY = ENG / "配置" / "动态清单注册表.json"
+PERSONALIZATION_REGISTRY = ENG / "配置" / "个性化键注册表.json"
+PERSONALIZATION_DEFAULTS = ENG / "配置" / "个性化默认设置.json"
+ACTIVATION_RULES = ENG / "配置" / "自动激活规则.json"
+FEATURE_FLAGS = ENG / "配置" / "功能开关.json"
+LEGACY_ALIASES = ["爽律","调用爽律","用爽律处理","用爽律做","爽律 skill","爽律 skills","shuanglaw"]
+LEGACY_OPT_OUT = ["不要用爽律","不用爽律","这次别用爽律","不要调用爽律"]
 
 SKILLS = [
     "刑事案件办理","民商事争议解决","合同与交易工作","法律研究与多源资料融合",
@@ -33,6 +39,9 @@ ROUTE_KEYWORDS = {
 
 RESEARCH_HINTS = ["现行法","法律依据","法条","司法解释","案例","类案","效力","生效","失效","最新规定","权威来源","反向案例"]
 STRUCTURED_REVIEW_HINTS = ["多文件","多份材料","大量材料","批量","卷宗","多版本","附件很多","交叉比对","证据冲突"]
+BUNDLE_HINTS = ["整套材料","一整套","全套材料","全部材料","配套文书","成套交付","材料包","立案材料包","整套文件"]
+TEMPLATE_HINTS = ["按我的模板","用我的模板","按照这个模板","按这个模板","指定模板","习惯模板","沿用模板"]
+
 FORMAL_HINTS = ["正式文书","法律意见书","律师函","起诉状","答辩状","辩护词","上诉状","清洁稿","修订稿","批注","输出docx","生成docx","出docx","输出pdf","生成pdf","出pdf","word文档"]
 
 TRUST_RANK = {
@@ -58,8 +67,112 @@ def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+
+def resolve_personalization(user_profile_path=None, matter_profile_path=None):
+    """解析版本默认、用户设置和事项设置；硬规则不可被覆盖。"""
+    registry=load_json(PERSONALIZATION_REGISTRY) if PERSONALIZATION_REGISTRY.exists() else {"keys":{},"reserved_hard_guardrail_prefixes":[]}
+    defaults=load_json(PERSONALIZATION_DEFAULTS).get("settings",{}) if PERSONALIZATION_DEFAULTS.exists() else {}
+    effective=dict(defaults); applied=[]; warnings=[]; blocked=[]
+    def is_guardrail(key):
+        meta=registry.get("keys",{}).get(key)
+        if meta is not None and not meta.get("overridable",True): return True
+        return any(key.startswith(p) for p in registry.get("reserved_hard_guardrail_prefixes",[]))
+    def apply_profile(path, layer):
+        if not path: return
+        prof=load_json(Path(path))
+        for item in prof.get("settings",[]):
+            if item.get("status")!="ACTIVE": continue
+            key=item.get("key")
+            if is_guardrail(key):
+                blocked.append({"setting_id":item.get("setting_id"),"key":key,"layer":layer,"reason":"HARD_GUARDRAIL"}); continue
+            if key not in registry.get("keys",{}):
+                warnings.append({"setting_id":item.get("setting_id"),"key":key,"layer":layer,"reason":"UNREGISTERED_KEY"})
+            effective[key]=item.get("value"); applied.append({"setting_id":item.get("setting_id"),"key":key,"layer":layer})
+    apply_profile(user_profile_path,"USER")
+    apply_profile(matter_profile_path,"MATTER")
+    return {"effective_settings":effective,"applied":applied,"warnings":warnings,"blocked_overrides":blocked,
+            "user_profile_loaded":bool(user_profile_path),"matter_profile_loaded":bool(matter_profile_path)}
+
 def norm(s: str) -> str:
     return (s or "").strip().lower()
+
+
+def load_feature_flags():
+    """读取增强功能开关；配置缺失/损坏时默认关闭增强而不是关闭爽律 Core。"""
+    safe={"policy":"ENHANCEMENT_ONLY_WITH_LEGACY_FALLBACK","flags":{
+        "auto_activation":{"enabled":False},"skill_router_v2":{"enabled":False},
+        "multi_skill_collaboration":{"enabled":False},"proactive_suggestion":{"enabled":False}}}
+    try:
+        if FEATURE_FLAGS.exists():
+            data=load_json(FEATURE_FLAGS)
+            if isinstance(data,dict): return data
+    except Exception:
+        pass
+    return safe
+
+def feature_enabled(name: str) -> bool:
+    return bool(load_feature_flags().get("flags",{}).get(name,{}).get("enabled",False))
+
+def activation_decision(task: str, user_profile_path=None, matter_profile_path=None):
+    """本地回退/测试用激活判断。显式别名为永久保底入口；增强层异常时回退旧路径。"""
+    t=norm(task)
+    def raw_hits(items): return [x for x in items or [] if norm(x) in t]
+    # 先用内置最小词表识别退出/显式入口，避免自动激活配置损坏时连旧入口一起失效。
+    hard_optout=raw_hits(LEGACY_OPT_OUT)
+    if hard_optout:
+        return {"schema_version":"0.2","decision":"DO_NOT_ACTIVATE","activation_mode":"UNKNOWN","trigger_type":"USER_OPT_OUT","confidence_tier":"HIGH","reasons":["用户明确要求本次不使用爽律。"],"matched_signals":hard_optout,"show_notice":False,"user_preference_applied":True,"legacy_fallback":{"used":False,"reason":None},"notes":[]}
+    hard_alias=raw_hits(LEGACY_ALIASES)
+    if hard_alias:
+        return {"schema_version":"0.2","decision":"EXPLICIT_ACTIVATE","activation_mode":"BYPASS","trigger_type":"EXPLICIT_ALIAS","confidence_tier":"HIGH","reasons":["检测到显式爽律调用；按兼容契约绕过 AutoActivation。"],"matched_signals":hard_alias,"show_notice":False,"user_preference_applied":False,"legacy_fallback":{"used":True,"reason":"EXPLICIT_ALIAS_BYPASS"},"notes":["显式调用不依赖自动激活模块。"]}
+    try:
+        prefs=resolve_personalization(user_profile_path,matter_profile_path)
+        eff=prefs.get("effective_settings",{})
+        mode=eff.get("activation.mode","AUTO")
+        show_notice=bool(eff.get("activation.show_notice",False))
+        threshold=eff.get("activation.auto_threshold","MEDIUM")
+        if mode=="MANUAL":
+            return {"schema_version":"0.2","decision":"MANUAL_ONLY","activation_mode":mode,"trigger_type":"NON_LEGAL","confidence_tier":"NONE","reasons":["用户个性化设置为MANUAL，仅显式调用时激活。"],"matched_signals":[],"show_notice":show_notice,"user_preference_applied":True,"legacy_fallback":{"used":False,"reason":None},"notes":[]}
+        if not feature_enabled("auto_activation"):
+            return {"schema_version":"0.2","decision":"LEGACY_FALLBACK","activation_mode":mode,"trigger_type":"FEATURE_DISABLED","confidence_tier":"NONE","reasons":["AutoActivation 已关闭；已进入 Skill 的任务回退 v0.42 路径。"],"matched_signals":[],"show_notice":show_notice,"user_preference_applied":mode!="AUTO","legacy_fallback":{"used":True,"reason":"AUTO_ACTIVATION_DISABLED"},"notes":["仅损失无感触发，不影响显式调用和已进入 Skill 的旧工作流。"]}
+        rules=load_json(ACTIVATION_RULES) if ACTIVATION_RULES.exists() else {}
+    except Exception as exc:
+        return {"schema_version":"0.2","decision":"LEGACY_FALLBACK","activation_mode":"UNKNOWN","trigger_type":"ACTIVATION_ERROR","confidence_tier":"NONE","reasons":["自动激活增强层异常，回退 v0.42 已验证路径。"],"matched_signals":[],"show_notice":False,"user_preference_applied":False,"legacy_fallback":{"used":True,"reason":type(exc).__name__},"notes":["增强层错误不得阻断旧核心能力。"]}
+    def hits(items): return [x for x in items or [] if norm(x) in t]
+    optout=hits(rules.get("opt_out_phrases"))
+    aliases=hits(rules.get("aliases"))
+    high=hits(rules.get("high_intent_phrases"))
+    actions=hits(rules.get("legal_action_terms"))
+    objects=hits(rules.get("legal_object_terms"))
+    negatives=hits(rules.get("negative_context_phrases"))
+    reasons=[]; signals=[]
+    if optout:
+        return {"schema_version":"0.1","decision":"DO_NOT_ACTIVATE","activation_mode":mode,"trigger_type":"USER_OPT_OUT","confidence_tier":"HIGH","reasons":["用户明确要求本次不使用爽律。"],"matched_signals":optout,"show_notice":show_notice,"user_preference_applied":True,"notes":[]}
+    if aliases:
+        return {"schema_version":"0.1","decision":"EXPLICIT_ACTIVATE","activation_mode":mode,"trigger_type":"EXPLICIT_ALIAS","confidence_tier":"HIGH","reasons":["检测到爽律显式调用别名。"],"matched_signals":aliases,"show_notice":show_notice,"user_preference_applied":mode!="AUTO","notes":[]}
+    if mode=="MANUAL":
+        return {"schema_version":"0.1","decision":"MANUAL_ONLY","activation_mode":mode,"trigger_type":"NON_LEGAL" if not (high or (actions and objects)) else "SEMANTIC_PROFESSIONAL_LEGAL","confidence_tier":"NONE","reasons":["用户个性化设置为MANUAL，仅显式调用时激活。"],"matched_signals":high+actions+objects,"show_notice":show_notice,"user_preference_applied":True,"notes":[]}
+    # 高置信：明确法律专业任务短语；或同时出现法律对象+专业动作，且不是明显非法律语境。
+    tier="NONE"; trig="NON_LEGAL"
+    if high:
+        tier="HIGH"; trig="SEMANTIC_PROFESSIONAL_LEGAL"; reasons.append("命中明确法律专业任务语义。")
+    elif actions and objects and not negatives:
+        tier="MEDIUM"; trig="BOUNDARY_LEGAL"; reasons.append("同时存在法律对象与专业处理动作。")
+    elif objects:
+        tier="LOW"; trig="BOUNDARY_LEGAL"; reasons.append("仅检测到法律相关对象，尚不足以证明用户需要法律专业工作流。")
+    else:
+        tier="NONE"; trig="NON_LEGAL"; reasons.append("未发现需要律师专业工作流的充分信号。")
+    signals=high+actions+objects+negatives
+    if negatives and not high:
+        tier="LOW" if objects else "NONE"; reasons.append("存在明显非法律任务语境，抑制误触发。")
+    if mode=="CONFIRM" and tier in {"HIGH","MEDIUM"}:
+        decision="CONFIRM"
+    elif mode=="AUTO" and (tier=="HIGH" or (tier=="MEDIUM" and threshold in {"MEDIUM","LOW"})):
+        decision="AUTO_ACTIVATE"
+    elif tier=="MEDIUM":
+        decision="CONFIRM"
+    else:
+        decision="DO_NOT_ACTIVATE"
+    return {"schema_version":"0.1","decision":decision,"activation_mode":mode,"trigger_type":trig,"confidence_tier":tier,"reasons":reasons,"matched_signals":list(dict.fromkeys(signals)),"show_notice":show_notice,"user_preference_applied":mode!="AUTO" or eff.get("activation.auto_threshold")!="MEDIUM","legacy_fallback":{"used":False,"reason":None},"notes":["本地规则仅作回退/评测，不代表宿主Agent的真实语义触发概率。"]}
 
 
 def score_route(task: str):
@@ -79,7 +192,7 @@ def score_route(task: str):
     return ranked
 
 
-def route_task(task: str, override: str | None):
+def route_task_v043(task: str, override: str | None):
     if override:
         if override not in SKILLS:
             raise SystemExit(f"未知技能：{override}\n可选：" + "、".join(SKILLS))
@@ -115,9 +228,51 @@ def route_task(task: str, override: str | None):
     return "RESOLVED", candidates[0], candidates, ranked
 
 
+def legacy_route_task_v042(task: str, override: str | None):
+    """v0.42-RC6 兼容路由。保持旧任务主技能选择规则，不依赖 v0.43 Router Feature。"""
+    if override:
+        if override not in SKILLS:
+            raise SystemExit(f"未知技能：{override}\n可选：" + "、".join(SKILLS))
+        return "USER_OVERRIDE", override, [override], []
+    t=norm(task); ranked=score_route(task); strong_business=None
+    if any(k in t for k in ["辩护","被害人","控告","报案","立案监督","刑事案件","审查起诉","批捕","取保"]): strong_business="刑事案件办理"
+    elif any(k in t for k in ["原告","被告","上诉人","被上诉人"]) and any(k in t for k in ["争议","诉讼","仲裁","起诉","答辩","上诉","执行","保全","案件"]): strong_business="民商事争议解决"
+    elif any(k in t for k in ["合同审查","审合同","合同起草","起草合同","合同修改","修改合同","合同谈判","交易文件","协议审查"]): strong_business="合同与交易工作"
+    elif any(k in t for k in ["尽职调查","尽调","专项调查"]): strong_business="尽职调查与专项调查"
+    elif any(k in t for k in ["法律顾问","专项法律分析","专项意见"]) and not any(k in t for k in ["诉讼","仲裁","原告","被告","刑事","合同审查"]): strong_business="法律顾问与专项法律分析"
+    if strong_business: return "RESOLVED", strong_business, [strong_business], ranked
+    top=ranked[0][1]["score"] if ranked else 0
+    if top<=0: return "UNRESOLVED", None, [], ranked
+    candidates=[ss for ss,dd in ranked if dd["score"]==top]
+    auxiliary={"法律研究与多源资料融合","法律文书质量与格式控制"}; substantive=[ss for ss in candidates if ss not in auxiliary]
+    if len(candidates)>1 and len(substantive)==1: return "RESOLVED", substantive[0], candidates, ranked
+    if len(candidates)!=1: return "UNRESOLVED", None, candidates, ranked
+    return "RESOLVED", candidates[0], candidates, ranked
+
+def route_task_safe(task: str, override: str | None):
+    flags=load_feature_flags()
+    if not flags.get("flags",{}).get("skill_router_v2",{}).get("enabled",False):
+        r=legacy_route_task_v042(task,override)
+        return (*r,{"used_legacy":True,"reason":"SKILL_ROUTER_V2_DISABLED"})
+    try:
+        r=route_task_v043(task,override)
+        return (*r,{"used_legacy":False,"reason":None})
+    except Exception as exc:
+        r=legacy_route_task_v042(task,override)
+        return (*r,{"used_legacy":True,"reason":f"SKILL_ROUTER_V2_ERROR:{type(exc).__name__}"})
+
+
+RESEARCH_DELIVERABLE_HINTS = ["类案检索报告","类案报告","法律研究备忘录","研究备忘录","法规沿革","裁判趋势","司法趋势","研究报告"]
+
 def build_plan(args):
     manifest=load_json(LOAD_MANIFEST)
-    status, lead, candidates, ranked=route_task(args.task,args.skill)
+    personalization=resolve_personalization(getattr(args,"user_profile",None), getattr(args,"matter_profile",None))
+    activation=activation_decision(args.task,getattr(args,"user_profile",None),getattr(args,"matter_profile",None))
+    status, lead, candidates, ranked, route_compat=route_task_safe(args.task,args.skill)
+    if not args.skill and activation.get("decision") in {"DO_NOT_ACTIVATE","MANUAL_ONLY"} and activation.get("trigger_type") in {"USER_OPT_OUT","SEMANTIC_PROFESSIONAL_LEGAL","BOUNDARY_LEGAL"}:
+        status="SKIPPED_BY_ACTIVATION"
+        lead=None
+        candidates=[]
     t=norm(args.task)
     requires_current_law = bool(args.need_current_law or any(norm(x) in t for x in RESEARCH_HINTS))
     formal_delivery = bool(args.formal_delivery or any(norm(x) in t for x in FORMAL_HINTS))
@@ -141,6 +296,15 @@ def build_plan(args):
     quick_understanding_required = bool(getattr(args, "quick_understanding", False) or (formal_delivery and lead in {"合同与交易工作","刑事案件办理","民商事争议解决","尽职调查与专项调查"}))
     diagram_required = bool(getattr(args, "diagram", False) or (quick_understanding_required and (args.important or formal_delivery) and lead in {"合同与交易工作","刑事案件办理","民商事争议解决","尽职调查与专项调查"}))
     contract_actual_edit_required = bool(lead=="合同与交易工作" and any(k in t for k in ["审查","审阅","审核","修改","修订","优化","改一下","改这份","红线","修订稿","redline"]) and not getattr(args,"contract_report_only",False))
+    document_composition_required = bool(formal_delivery and lead in {"法律文书质量与格式控制","刑事案件办理","民商事争议解决","法律顾问与专项法律分析","合同与交易工作","尽职调查与专项调查"})
+    rewrite_validation_required = bool(document_composition_required and (args.important or structured_review_required or lead=="法律文书质量与格式控制"))
+    deliverable_bundle_required = bool(getattr(args,"bundle",False) or any(norm(x) in t for x in BUNDLE_HINTS))
+    bundle_scope_verification_required = bool(deliverable_bundle_required and formal_delivery and any(k in t for k in ["立案","提交","申报","报送","法院","仲裁","申请"]))
+    template_resolution_required = bool(getattr(args,"template_required",False) or any(norm(x) in t for x in TEMPLATE_HINTS))
+    research_workflow_required = bool(lead=="法律研究与多源资料融合" or requires_current_law or case_matrix_required)
+    research_source_evaluation_required = bool(research_workflow_required and (args.important or formal_delivery or lead=="法律研究与多源资料融合"))
+    research_saturation_required = bool(research_workflow_required and (args.important or formal_delivery or lead=="法律研究与多源资料融合"))
+    research_deliverable_required = bool(formal_delivery and lead=="法律研究与多源资料融合" and any(norm(x) in t for x in RESEARCH_DELIVERABLE_HINTS))
     capability_resolution_required = bool(
         requires_current_law or private_knowledge_required or professional_legal_source_required
         or args.input_gap or need_ocr or need_docx or need_pdf or native_track_changes_required or diagram_required
@@ -174,6 +338,17 @@ def build_plan(args):
         "quick_understanding_required":quick_understanding_required,
         "diagram_required":diagram_required,
         "contract_actual_edit_required":contract_actual_edit_required,
+        "document_composition_required":document_composition_required,
+        "rewrite_validation_required":rewrite_validation_required,
+        "deliverable_bundle_required":deliverable_bundle_required,
+        "bundle_scope_verification_required":bundle_scope_verification_required,
+        "template_resolution_required":template_resolution_required,
+        "research_workflow_required":research_workflow_required,
+        "research_source_evaluation_required":research_source_evaluation_required,
+        "research_saturation_required":research_saturation_required,
+        "research_deliverable_required":research_deliverable_required,
+        "personalization_profile_loaded": personalization.get("user_profile_loaded"),
+        "matter_personalization_loaded": personalization.get("matter_profile_loaded"),
     }
     supporting=[]
     if lead and requires_current_law and lead != "法律研究与多源资料融合": supporting.append("法律研究与多源资料融合")
@@ -189,8 +364,11 @@ def build_plan(args):
         loads.append({"level":"L1","reason":"复杂任务事项工作模型","files":[manifest.get("matter_working_model_file","00_使用与调度/事项工作模型与分析地图规范.md")]})
     if structured_review_required:
         loads.append({"level":"L1","reason":"任务驱动的结构化审阅问题集","files":[manifest.get("review_question_set_file","00_使用与调度/结构化审阅问题集规范.md")]})
-    if authority_map_required or case_matrix_required:
-        loads.append({"level":"L2","reason":"重要法律研究的权威图谱/类案矩阵","files":[manifest.get("authority_case_file","00_使用与调度/法律研究权威图谱与类案矩阵规范.md")]})
+    if authority_map_required or case_matrix_required or research_workflow_required:
+        research_files=[manifest.get("authority_case_file","00_使用与调度/法律研究权威图谱与类案矩阵规范.md")]
+        if research_source_evaluation_required:
+            research_files.append(manifest.get("research_source_evaluation_file","01_运行规范/法律信源能力契约.md"))
+        loads.append({"level":"L2","reason":"法律研究的信源评价、权威图谱、类案矩阵与研究充分性","files":list(dict.fromkeys(research_files))})
     if plan_review_required:
         loads.append({"level":"L1","reason":"本次任务需要执行计划确认或修订","files":[manifest.get("plan_review_file","00_使用与调度/复杂任务计划确认与修订规范.md")]})
     if structured_review_required or args.input_gap:
@@ -211,6 +389,8 @@ def build_plan(args):
         loads.append({"level":"L1","reason":"本次任务需要外部能力解析与适配","files":list(dict.fromkeys(cap_files))})
     if quick_understanding_required:
         loads.append({"level":"L1","reason":"复杂/正式材料任务快速理解入口","files":[manifest.get("matter_quick_understanding_file","00_使用与调度/事项快速理解与图形化交付规范.md")]})
+    if deliverable_bundle_required or template_resolution_required:
+        loads.append({"level":"L2","reason":"模板资产/成套交付与共享字段","files":[manifest.get("template_bundle_file","00_使用与调度/模板资产与成套交付规范.md")]})
     if diagram_required:
         loads.append({"level":"L1","reason":"本次任务需要图形化交付","files":[manifest.get("diagram_capability_file","01_运行规范/图形化交付能力契约.md")]})
     if lead:
@@ -232,9 +412,11 @@ def build_plan(args):
             loads.append({"level":"L4","reason":"重要任务/正式交付门","files":files})
     plan={
         "schema_version":"0.2","generated_at":datetime.now(timezone.utc).isoformat(),
-        "task":args.task,"route_status":status,"lead_skill":lead,
+        "task":args.task,"activation":activation,"route_status":status,"lead_skill":lead,
+        "legacy_compatibility":{"policy":"ENHANCEMENT_ONLY_WITH_LEGACY_FALLBACK","feature_flags":load_feature_flags(),"activation_fallback":activation.get("legacy_fallback",{}),"route_fallback":route_compat,"fallback_records":[]},
         "route_candidates":candidates,"route_debug":ranked,"supporting_skills":supporting,
         "context":context,"load_plan":loads,
+        "personalization":personalization,
         "notes":["路由分值仅用于工程辅助，不代表法律概率或模型置信度。"]
     }
     return plan
@@ -291,9 +473,11 @@ def build_state_template(plan):
     ck=build_checklist(plan)
     context=plan.get("context",{})
     return {
-        "schema_version":"0.5",
+        "schema_version":"0.6",
         "task":plan.get("task"),
         "lead_skill":plan.get("lead_skill"),
+        "activation":plan.get("activation",{}),
+        "legacy_compatibility":plan.get("legacy_compatibility",{"policy":"ENHANCEMENT_ONLY_WITH_LEGACY_FALLBACK","fallback_records":[]}),
         "context":{
             "role":context.get("role"),
             "stage":context.get("stage"),
@@ -323,6 +507,15 @@ def build_state_template(plan):
             "quick_understanding_required":bool(context.get("quick_understanding_required")),
             "diagram_required":bool(context.get("diagram_required")),
             "contract_actual_edit_required":bool(context.get("contract_actual_edit_required")),
+            "document_composition_required":bool(context.get("document_composition_required")),
+            "rewrite_validation_required":bool(context.get("rewrite_validation_required")),
+            "deliverable_bundle_required":bool(context.get("deliverable_bundle_required")),
+            "bundle_scope_verification_required":bool(context.get("bundle_scope_verification_required")),
+            "template_resolution_required":bool(context.get("template_resolution_required")),
+            "research_workflow_required":bool(context.get("research_workflow_required")),
+            "research_source_evaluation_required":bool(context.get("research_source_evaluation_required")),
+            "research_saturation_required":bool(context.get("research_saturation_required")),
+            "research_deliverable_required":bool(context.get("research_deliverable_required")),
         },
         "checklist":[{"id":i["id"],"status":"PENDING","note":None} for i in ck["items"]],
         "analysis_work":{"required":bool(context.get("important_task")),"status":"PENDING" if context.get("important_task") else "NOT_REQUIRED","argument_record_count":0},
@@ -372,14 +565,44 @@ def build_state_template(plan):
         "external_processing":{"used":False,"provider":None,"explicit_consent":False},
         "escalations":[],
         "output":{"output_contract_checked":False,"claimed_capabilities":[]},
-        "research":{"state":"INCOMPLETE" if context.get("requires_current_law") else "NOT_REQUIRED","unqualified_conclusion":False},
+        "research":{
+            "state":"INCOMPLETE" if context.get("research_workflow_required") else "NOT_REQUIRED",
+            "unqualified_conclusion":False,
+            "source_evaluation_required":bool(context.get("research_source_evaluation_required")),
+            "key_source_count":0,
+            "evaluated_key_source_count":0,
+            "channel_based_rank_violation_count":0,
+            "saturation_required":bool(context.get("research_saturation_required")),
+            "saturation_assessment_count":0,
+            "deliverable_profile_required":bool(context.get("research_deliverable_required")),
+            "deliverable_profile_count":0,
+            "user_template_required":bool(context.get("research_deliverable_required") and context.get("template_resolution_required")),
+            "user_template_preserved":True
+        },
         "quick_understanding":{"required":bool(context.get("quick_understanding_required")),"snapshot_status":"PENDING" if context.get("quick_understanding_required") else "NOT_REQUIRED","snapshot_count":0,"diagram_required":bool(context.get("diagram_required")),"diagram_spec_count":0,"rendered_diagram_count":0,"rendering_state":"PENDING" if context.get("diagram_required") else "NOT_REQUIRED"},
         "contract_delivery":{"actual_edit_required":bool(context.get("contract_actual_edit_required")),"actual_modified_contract_count":0,"report_only":False,"downgrade_disclosed":False},
+        "document_composition":{"required":bool(context.get("document_composition_required")),"composition_plan_count":0,"plan_status":"PENDING" if context.get("document_composition_required") else "NOT_REQUIRED","exempted":False,"exemption_reason":None,"draft_defect_count":0,"major_or_blocking_open_defect_count":0,"rewrite_decision_count":0,"rewrite_decision_applied_count":0},
+        "template_resolution":{"required":bool(context.get("template_resolution_required")),"requested_or_applicable_template_count":1 if context.get("template_resolution_required") else 0,"resolved_template_count":0,"missing_template_ids":[],"conflict_count":0,"preserved_user_asset_count":0,"silently_overridden_user_asset_count":0},
+        "deliverable_bundle":{"required":bool(context.get("deliverable_bundle_required")),"bundle_count":0,"scope_status":"UNKNOWN_NEEDS_CHECK" if context.get("bundle_scope_verification_required") else "NOT_REQUIRED","required_deliverable_count":0,"ready_required_deliverable_count":0,"stale_deliverable_count":0,"open_propagation_count":0},
         "materials":[],
     }
 
 def validate_state(state):
     blockers=[]; warnings=[]; passed=[]
+    act=state.get("activation",{}) or {}
+    if (act.get("activation_mode")=="MANUAL" and act.get("decision")=="AUTO_ACTIVATE") or (act.get("trigger_type")=="USER_OPT_OUT" and act.get("decision")!="DO_NOT_ACTIVATE"):
+        blockers.append({"id":"GATE-ACTIVATION-PREFERENCE","message":"自动激活与用户MANUAL/明确禁用偏好冲突。"})
+    else:
+        passed.append("GATE-ACTIVATION-PREFERENCE")
+    compat=state.get("legacy_compatibility",{}) or {}
+    compat_blocked=False
+    for rec in compat.get("fallback_records",[]) or []:
+        if rec.get("fallback_status")=="BLOCKED" or (rec.get("task_continuation") is False and rec.get("user_impact")!="LOSS_OF_ENHANCEMENT_ONLY"):
+            blockers.append({"id":"GATE-LEGACY-COMPAT","message":f"增强功能 {rec.get('feature','')} 失败后未能回退旧路径，核心任务受到阻断。"}); compat_blocked=True
+        elif rec.get("fallback_status")=="DOWNGRADED":
+            warnings.append({"id":"WARN-DOWNGRADE","message":f"增强功能 {rec.get('feature','')} 失败后已回退，但存在已披露能力降级。"})
+    if not compat_blocked:
+        passed.append("GATE-LEGACY-COMPAT")
     lead=state.get("lead_skill")
     if not lead or lead not in SKILLS: blockers.append({"id":"GATE-LEAD","message":"未确定唯一有效主技能。"})
     else: passed.append("GATE-LEAD")
@@ -479,6 +702,46 @@ def validate_state(state):
     if context.get("contract_actual_edit_required") and int(cd.get("actual_modified_contract_count") or 0)<=0:
         blockers.append({"id":"GATE-CONTRACT-EDIT","message":"合同 REVIEW/REVISE 需要实际修改合同文本，不能只交修改报告。"})
     else: passed.append("GATE-CONTRACT-EDIT")
+    dc=state.get("document_composition",{})
+    if context.get("document_composition_required"):
+        if dc.get("exempted"):
+            if not dc.get("exemption_reason"):
+                blockers.append({"id":"GATE-COMPOSITION","message":"成文策略被标记豁免，但未记录豁免理由。"})
+            else: passed.append("GATE-COMPOSITION")
+        elif dc.get("plan_status") not in {"CONFIRMED","REVISED","FINAL"} or int(dc.get("composition_plan_count") or 0)<=0:
+            blockers.append({"id":"GATE-COMPOSITION","message":"复杂/正式法律文书尚未形成可用的 DocumentCompositionPlan。"})
+        else: passed.append("GATE-COMPOSITION")
+    else: passed.append("GATE-COMPOSITION")
+    if context.get("rewrite_validation_required"):
+        if int(dc.get("major_or_blocking_open_defect_count") or 0)>0:
+            blockers.append({"id":"GATE-REWRITE","message":"仍存在未解决的 MAJOR/BLOCKING 成文缺陷，不得最终交付。"})
+        elif int(dc.get("rewrite_decision_applied_count") or 0)<=0:
+            blockers.append({"id":"GATE-REWRITE","message":"本次要求结构性重写，但尚未记录已应用 RewriteDecision。"})
+        else: passed.append("GATE-REWRITE")
+    else: passed.append("GATE-REWRITE")
+    tres=state.get("template_resolution",{})
+    if int(tres.get("silently_overridden_user_asset_count") or 0)>0:
+        blockers.append({"id":"GATE-USER-ASSET-PRESERVE","message":"检测到用户模板被系统/导入过程静默覆盖；必须恢复用户资产或取得用户明确选择。"})
+    else: passed.append("GATE-USER-ASSET-PRESERVE")
+    if context.get("template_resolution_required"):
+        if int(tres.get("requested_or_applicable_template_count") or 0)<=0 or int(tres.get("missing_template_ids") and len(tres.get("missing_template_ids")) or 0)>0 or int(tres.get("resolved_template_count") or 0)<int(tres.get("requested_or_applicable_template_count") or 0):
+            blockers.append({"id":"GATE-TEMPLATE-RESOLUTION","message":"用户明确指定/适用模板尚未全部解析；不得静默换成系统默认模板。"})
+        else: passed.append("GATE-TEMPLATE-RESOLUTION")
+    else: passed.append("GATE-TEMPLATE-RESOLUTION")
+    db=state.get("deliverable_bundle",{})
+    if context.get("deliverable_bundle_required"):
+        if int(db.get("bundle_count") or 0)<=0:
+            blockers.append({"id":"GATE-BUNDLE","message":"本次要求成套交付，但尚未建立 DeliverableBundle。"})
+        elif int(db.get("ready_required_deliverable_count") or 0)<int(db.get("required_deliverable_count") or 0):
+            blockers.append({"id":"GATE-BUNDLE","message":"用户明确要求或已核验必需的交付物尚未全部达到 READY/DELIVERED。"})
+        elif context.get("bundle_scope_verification_required") and db.get("scope_status") not in {"VERIFIED","USER_DEFINED"}:
+            blockers.append({"id":"GATE-BUNDLE","message":"正式提交型成套任务尚未核验必需材料范围；不能用通用经验清单冒充当前机构要求。"})
+        else: passed.append("GATE-BUNDLE")
+        if int(db.get("stale_deliverable_count") or 0)>0 or int(db.get("open_propagation_count") or 0)>0:
+            blockers.append({"id":"GATE-BUNDLE-CONSISTENCY","message":"共享字段变更后仍有 STALE 交付物或未关闭的变更传播事件。"})
+        else: passed.append("GATE-BUNDLE-CONSISTENCY")
+    else:
+        passed += ["GATE-BUNDLE","GATE-BUNDLE-CONSISTENCY"]
     adv=state.get("adversarial_review",{})
     if context.get("important_task") and adv.get("status")!="COMPLETE":
         blockers.append({"id":"GATE-ADV","message":"重要任务的对抗性审查尚未完成。"})
@@ -511,6 +774,25 @@ def validate_state(state):
     if research.get("state") in {"INCOMPLETE","BLOCKED","HUMAN_REVIEW_REQUIRED"} and research.get("unqualified_conclusion"):
         blockers.append({"id":"GATE-RES","message":"研究未达到无保留结论条件，但当前仍标记准备给出无保留结论。"})
     else: passed.append("GATE-RES")
+    if research.get("source_evaluation_required"):
+        if int(research.get("channel_based_rank_violation_count") or 0)>0:
+            blockers.append({"id":"GATE-SOURCE-EVAL","message":"存在仅凭数据库/官网/公众号/网页渠道直接决定来源等级的记录。"})
+        elif int(research.get("key_source_count") or 0)>int(research.get("evaluated_key_source_count") or 0):
+            blockers.append({"id":"GATE-SOURCE-EVAL","message":"存在关键研究来源尚未完成 SourceProfile/SourceCard 评价。"})
+        else: passed.append("GATE-SOURCE-EVAL")
+    else: passed.append("GATE-SOURCE-EVAL")
+    if research.get("saturation_required"):
+        if research.get("state")=="SATURATED" and int(research.get("saturation_assessment_count") or 0)<=0:
+            blockers.append({"id":"GATE-RESEARCH-SATURATION","message":"研究声称 SATURATED，但没有 ResearchSaturationAssessment 或等价充分性记录。"})
+        else: passed.append("GATE-RESEARCH-SATURATION")
+    else: passed.append("GATE-RESEARCH-SATURATION")
+    if research.get("deliverable_profile_required"):
+        if int(research.get("deliverable_profile_count") or 0)<=0:
+            blockers.append({"id":"GATE-RESEARCH-DELIVERABLE","message":"正式研究交付尚未确定 ResearchDeliverableProfile。"})
+        elif research.get("user_template_required") and not research.get("user_template_preserved"):
+            blockers.append({"id":"GATE-RESEARCH-DELIVERABLE","message":"研究交付存在用户/事项模板，但系统默认模板覆盖了用户资产。"})
+        else: passed.append("GATE-RESEARCH-DELIVERABLE")
+    else: passed.append("GATE-RESEARCH-DELIVERABLE")
     # material review integrity
     for m in state.get("materials",[]):
         if m.get("critical") and m.get("status")=="REVIEWED" and not (m.get("review_scope") or m.get("locator")):
@@ -951,8 +1233,18 @@ def main():
     p.add_argument("--quick-understanding",action="store_true",help="本次需要事项快速理解包")
     p.add_argument("--diagram",action="store_true",help="本次需要至少一项图形化示意")
     p.add_argument("--contract-report-only",action="store_true",help="合同任务由用户明确要求只出报告/意见，不实际修改合同")
+    p.add_argument("--bundle",action="store_true",help="本次任务需要成套交付/多文书材料包")
+    p.add_argument("--template-required",action="store_true",help="本次任务明确要求使用用户/事项模板")
+    p.add_argument("--user-profile",help="可选：用户个性化档案 user-profile.json")
+    p.add_argument("--matter-profile",help="可选：当前事项个性化档案")
     p.add_argument("--full-checklist",action="store_true")
     p.add_argument("--out")
+
+    acheck=sub.add_parser("activation-check",help="评估当前任务是否应自动激活爽律（本地回退/测试）")
+    acheck.add_argument("--task",required=True)
+    acheck.add_argument("--user-profile")
+    acheck.add_argument("--matter-profile")
+    acheck.add_argument("--out")
 
     c=sub.add_parser("checklist",help="根据执行计划生成本次动态清单")
     c.add_argument("--plan",required=True)
@@ -985,11 +1277,17 @@ def main():
     capcheck.add_argument("--out")
 
     args=parser.parse_args()
+    if args.cmd=="activation-check":
+        report=activation_decision(args.task,args.user_profile,args.matter_profile); write_json(report,args.out)
+        return 0 if report["decision"] in {"AUTO_ACTIVATE","EXPLICIT_ACTIVATE"} else (2 if report["decision"]=="CONFIRM" else 4)
     if args.cmd=="plan":
         plan=build_plan(args); write_json(plan,args.out)
         if plan["route_status"]=="UNRESOLVED":
             print("提示：路由未唯一确定，应由 Agent 结合语义或由用户指定主技能。",file=sys.stderr)
             return 2
+        if plan["route_status"]=="SKIPPED_BY_ACTIVATION":
+            print("提示：根据用户激活偏好/本次禁用要求，不应自动进入爽律。",file=sys.stderr)
+            return 4
         return 0
     if args.cmd=="checklist":
         plan=load_json(Path(args.plan)); ck=build_checklist(plan)

@@ -1,10 +1,23 @@
+---
+name: shuanglv-legal-skills
+description: >-
+  Chinese-law professional workflow skill for lawyers. Use automatically for substantive legal professional tasks involving PRC legal research or case search, criminal defense or victim representation, civil/commercial litigation or arbitration, contract drafting/review/revision or transaction support, legal opinions/advisory, due diligence/investigation, evidence analysis, formal legal document drafting/review, or multi-document legal task completion. Trigger even when the user does not say “爽律” or ask to use a skill, whenever lawyer-grade fact/evidence analysis, source verification, legal reasoning, workflow control, or formal legal deliverables would materially help. Do not trigger merely because casual, business, or everyday text contains legal-sounding words.
+license: CC BY-SA 4.0 for textual Skill content; Apache-2.0 for programmatic files. See bundled licenses.
+compatibility: Designed for Agent Skills-compatible agents. Python 3 is optional for engineering helpers. External legal databases, web, OCR, file and Office tools are capability-adapted rather than hard dependencies.
+metadata:
+  author: 蔡诗爽律师
+  version: 0.43
+  language: zh-CN
+  display-name: 爽律 Skill｜律师专业工作流系统
+---
+
 # 爽律 Skill｜律师专业工作流系统
 
 `system_id: shuanglv-legal-skills`
 
-> 当前版本：**v0.41 公开共创版｜第一轮实测候选基线**
-> 发起及主导：**卓建律师事务所 蔡诗爽律师**
-> 使用前请先阅读根目录 `README.md`、`公开共创版本说明.md`、`许可与使用声明.md`；需要确认当前覆盖范围时读取 `00_使用与调度/测试基线与能力边界.md`。
+> 当前版本：**v0.43 正式版｜Agent Native｜公开共创｜基于 v0.42-RC6 兼容演进**
+> 发起及主导：**广东卓建律师事务所 蔡诗爽律师**
+> 使用前请先阅读根目录 `README.md`、`RELEASE_NOTES_v0.43.md`、`许可与使用声明.md`；需要确认当前覆盖范围时读取 `00_使用与调度/测试基线与能力边界.md`。
 
 ## 命名约定
 
@@ -21,9 +34,19 @@
 - 爽律 Skills
 - ShuangLaw
 
-## 调用规则
+## 激活规则｜默认无感，显式调用继续兼容
 
-当用户提出“调用爽律”“用爽律处理”“用爽律做”等请求时：
+在支持 Agent Skills 自动发现/自动激活的宿主中，**不得要求用户每次说“调用爽律”**。只要用户提出实质性的中国法律专业任务，例如法律研究、类案检索、刑事案件、民商事争议、合同起草/审查/修订、法律意见、尽调、证据分析或正式法律文书工作，即应依据本文件 frontmatter 的 `description` 自动判断是否加载本 Skill。
+
+- 明确属于法律专业任务：默认静默激活，不额外播报“正在调用爽律”；
+- 仅有商业/日常/非法律语词重叠：不得仅凭关键词误触发；
+- 边界任务：结合用户 `activation.mode`、专业风险和任务复杂度决定自动进入、询问或保持普通模式；
+- 用户明确要求不用爽律或设置为 `MANUAL`：不得强制自动激活；
+- 用户仍可说“调用爽律”“用爽律处理”“ShuangLaw”等作为显式强制入口，兼容旧习惯。
+
+详细规则见 `00_使用与调度/自动激活与Agent原生调度规范.md`。宿主平台若不支持依据 Skill metadata 自动激活，爽律不能越过宿主强行自启动，此时仍可用显式别名或平台自身的 Skill 绑定方式。
+
+当本 Skill 已被自动或显式激活后：
 
 1. 阅读 `00_使用与调度/爽律 Skill入口.md`；
 2. 自动识别任务类型；
@@ -48,6 +71,25 @@
 20. 正式交付前执行质量门控；
 21. 按用户要求形成最终交付物；
 22. 复杂、多文件、需后续继续的事项生成项目执行说明书。
+
+
+## 旧版能力兼容｜新功能失败必须保底
+
+v0.43 的 AutoActivation、Router v2、多 Skill 协同和主动建议都属于**增强层**，不得成为 v0.42 已验证法律工作流的前置依赖。新功能被关闭、宿主不支持、配置损坏或运行异常时，必须按 `00_使用与调度/旧版能力兼容与失败回退规范.md` 回退。
+
+- 用户显式说“调用爽律 / ShuangLaw”时，直接走保底入口，不依赖 AutoActivation；
+- Router v2 失败时回退 v0.42 主技能路由；
+- 主动建议失败时直接跳过，不影响主任务；
+- 多 Skill 协同失败时优先使用既有能力适配/降级路径；
+- 任何回退继续保留用户个性化和模板资产。
+
+**发布底线：关闭全部 v0.43 新增增强能力后，v0.42 原本能够完成的核心任务仍必须可执行。**
+
+## Agent Native 与多 Skill 协同
+
+爽律 Skill 负责法律专业方法、路由、分析与质量门，不把 OCR、Office、Web、数据库或其他工具硬编码成自己的子系统。当任务还需要其他能力时，先形成 `CapabilityRequirement / SkillCollaborationRequest`，由当前 Agent 选择其可用工具或其他 Skill；返回结果必须保留来源、限制和可核验状态。详见 `00_使用与调度/多Skill协同与能力请求规范.md`。
+
+主动建议默认克制：仅在与用户当前目标直接相关、能明显减少遗漏或返工时提出，原则上一轮至多一个高价值建议；不把建议变成替用户作重大法律决定。
 
 ## 可用技能
 
@@ -100,3 +142,19 @@
 ## 事项快速理解与图形化交付
 
 复杂材料任务同时适用 `00_使用与调度/事项快速理解与图形化交付规范.md`。图形不要求底层模型具备生图能力；模型先形成 `DiagramSpec`，当前运行环境再按能力优先渲染 PNG，或降级为自包含响应式 HTML。真正只能文本时必须明确没有实际图片文件。
+
+## 个性化继承与升级
+
+已安装用户存在个人工作习惯时，优先读取 `00_使用与调度/个性化继承与版本升级规范.md`。个性化应保存在独立“爽律用户空间”，升级 Core 时默认 `PRESERVE_USER`；事项设置优先于用户设置，用户设置优先于版本默认，但任何设置不得覆盖 Hard Guardrails。
+
+支持 Python 的环境可使用 `05_工程执行层/工具/爽律升级助手.py` 完成初始化、迁移、导出和重置。用户从旧版本升级时，不应要求其重新调教全部偏好；只有真实冲突、废弃设置或硬规则冲突才需要人工决定。
+
+
+## 模板资产与成套交付
+
+用户存在自己的模板或长期习惯时，优先适用 Personalization Layer；新版系统默认不得静默覆盖用户资产。用户要求“整套/配套/全部材料”或同一任务产生多份共享事实基础的成果时，读取 `00_使用与调度/模板资产与成套交付规范.md`，按需建立 `TemplateAssetRegistry / SharedMatterFields / DeliverableBundle / ChangePropagationEvent`。正式提交型材料清单中的“必需文件”必须核验当前要求，不能用通用模板清单替代。
+
+
+## v0.42-RC6 法律研究增强
+
+涉及法规、案例、司法实践、理论或专业观点时，不以“数据库/官网/公众号/网页”直接判定来源等级。使用 SourceRole/SourceProfile 评价发布主体、内容、原始性、规范效力与允许用途；重要研究按 Research Ladder 和 Search Saturation 推进。正式研究报告先解析 ResearchDeliverableProfile，并继续优先保留用户/事项模板与长期习惯。

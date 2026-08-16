@@ -35,7 +35,7 @@ def strip_block(text: str, start_marker: str, end_marker: str) -> str:
 readme = (ROOT / "README.md").read_text(encoding="utf-8")
 body = strip_block(readme, "<!-- repo-header:start", "<!-- repo-header:end -->")
 body = strip_block(body, "<!-- repo-appendix:start", "<!-- repo-appendix:end -->").strip("\n")
-if not body.startswith("# "):
+if not re.search(r"(?m)^\s*# ", body):
     sys.exit("README.md 作者正文应以 H1 开头，请检查")
 (ROOT / "README.md").write_text(render("README.header.md").rstrip("\n") + "\n\n" + body + "\n\n" + render("README.appendix.md").rstrip("\n") + "\n", encoding="utf-8")
 

@@ -4,6 +4,19 @@
 
 ---
 
+## [0.43] — 正式版｜Agent Native｜公开共创（2026-08-17，tag `v0.43`）
+
+作者交付的 v0.43 正式版完整运行包原样导入；仓库层重新套用。相对 v0.42-RC6 的主要变化：
+
+- Agent Skills 标准 frontmatter 与自动激活规则；
+- AUTO / CONFIRM / MANUAL 个性化激活模式；
+- 多 Skill 协同、主动建议与外部能力请求接口；
+- Feature Flags、显式调用旁路、Router v2 故障回退和 Legacy Regression；
+- 个性化、模板资产、成套交付、版本迁移和失败回退相关 Schema、配置与示例；
+- 本地验证：Python 4 个文件编译检查、JSON 115 个文件解析检查、Legacy Regression 16/16 通过。
+
+---
+
 ## [0.41] — 公开共创版｜第一轮实测候选基线（2026-08-16 合并，tag `v0.41`）
 
 作者以 PR #2 自提（squash 合并，commit 归属作者）。相对 v0.40 的主要变化：

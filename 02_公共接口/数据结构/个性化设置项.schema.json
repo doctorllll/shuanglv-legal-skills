@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/personalization-item/0.1",
+  "title": "个性化设置项 PersonalizationItem v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "setting_id",
+    "key",
+    "scope",
+    "status",
+    "source_type",
+    "value"
+  ],
+  "properties": {
+    "setting_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "enum": [
+        "USER",
+        "MATTER"
+      ]
+    },
+    "matter_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "category": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "value": {},
+    "status": {
+      "enum": [
+        "ACTIVE",
+        "DISABLED",
+        "SUGGESTED",
+        "DEPRECATED",
+        "ORPHANED",
+        "BLOCKED_BY_GUARDRAIL"
+      ]
+    },
+    "source_type": {
+      "enum": [
+        "EXPLICIT_USER",
+        "IMPORTED",
+        "MIGRATED",
+        "SUGGESTED_BY_SYSTEM",
+        "LEGACY_CORE_CUSTOMIZATION"
+      ]
+    },
+    "source_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "applies_from_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_confirmed_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "registered": {
+      "type": "boolean",
+      "default": true
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "scope": {
+            "const": "MATTER"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "matter_id"
+        ]
+      }
+    }
+  ]
+}

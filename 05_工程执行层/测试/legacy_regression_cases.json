@@ -1,0 +1,36 @@
+{
+  "schema_version": "0.1",
+  "baseline": "v0.42-RC6",
+  "cases": [
+    {
+      "id": "LEGACY-CRIM-001",
+      "task": "帮我分析这个刑事案件的阅卷重点",
+      "expected_lead": "刑事案件办理"
+    },
+    {
+      "id": "LEGACY-CIV-001",
+      "task": "原告准备起诉被告并申请财产保全，帮我梳理诉讼方案",
+      "expected_lead": "民商事争议解决"
+    },
+    {
+      "id": "LEGACY-CONTRACT-001",
+      "task": "审合同，重点看付款、验收和违约条款",
+      "expected_lead": "合同与交易工作"
+    },
+    {
+      "id": "LEGACY-RESEARCH-001",
+      "task": "做一次法律研究，核验现行司法解释并检索类案",
+      "expected_lead": "法律研究与多源资料融合"
+    },
+    {
+      "id": "LEGACY-ADVISORY-001",
+      "task": "做一份专项法律分析，比较几个处理方案",
+      "expected_lead": "法律顾问与专项法律分析"
+    },
+    {
+      "id": "LEGACY-DD-001",
+      "task": "对这个项目做法律尽职调查",
+      "expected_lead": "尽职调查与专项调查"
+    }
+  ]
+}

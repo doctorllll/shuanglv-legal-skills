@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schemas/matter-personalization-profile/0.1",
+  "title": "事项个性化档案 MatterPersonalizationProfile v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "profile_id",
+    "profile_type",
+    "matter_id",
+    "settings"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "profile_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile_type": {
+      "const": "MATTER"
+    },
+    "matter_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "client_label": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "settings": {
+      "type": "array",
+      "items": {
+        "$ref": "https://shuanglv.local/schemas/personalization-item/0.1"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "template_asset_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  <img alt="version" src="https://img.shields.io/badge/version-0.41-blue?style=flat-square">
-  <img alt="stage" src="https://img.shields.io/badge/stage-%E5%85%AC%E5%BC%80%E5%85%B1%E5%88%9B%E7%89%88%20%C2%B7%20%E5%AE%9E%E6%B5%8B%E5%80%99%E9%80%89%E5%9F%BA%E7%BA%BF-orange?style=flat-square">
+  <img alt="version" src="https://img.shields.io/badge/version-0.43-blue?style=flat-square">
+  <img alt="stage" src="https://img.shields.io/badge/stage-release-orange?style=flat-square">
   <a href="LICENSE-CC-BY-SA-4.0.txt"><img alt="content license" src="https://img.shields.io/badge/%E6%96%87%E6%9C%AC-CC%20BY--SA%204.0-2ea44f?style=flat-square"></a>
   <a href="LICENSE-APACHE-2.0.txt"><img alt="code license" src="https://img.shields.io/badge/%E7%A8%8B%E5%BA%8F%E6%80%A7%E6%96%87%E4%BB%B6-Apache--2.0-2ea44f?style=flat-square"></a>
   <img alt="format" src="https://img.shields.io/badge/format-Agent%20Skills-8a2be2?style=flat-square">
@@ -21,19 +21,136 @@
 
 <!-- repo-header:end -->
 
+<div align="center">
+
 # 爽律 Skill｜律师专业工作流系统
 
-> **当前版本：v0.41 公开共创版｜第一轮实测候选基线**  
-> **发起及主导：卓建律师事务所 蔡诗爽律师**
+**把成熟律师处理案件、合同、法律研究与法律文书的隐性工作方法，转化为 AI Agent 可执行、可核验、可追溯、可持续迭代的专业工作流。**
 
-> **公开共创**  
-> 本版本可公开上传、使用、修改和参与共创。文本性 Skill 内容原则上采用 CC BY-SA 4.0，程序性文件原则上采用 Apache-2.0。使用真实案件或客户材料时仍应先评估敏感性并做必要脱敏。详见《许可与使用声明》《CONTRIBUTING》。
+[![version](https://img.shields.io/badge/version-v0.43-blue?style=flat-square)](#v043-agent-native-关键变化)
+[![stage](https://img.shields.io/badge/stage-%E6%AD%A3%E5%BC%8F%E7%89%88%20%C2%B7%20%E5%85%AC%E5%BC%80%E5%85%B1%E5%88%9B-2ea44f?style=flat-square)](RELEASE_NOTES_v0.43.md)
+[![format](https://img.shields.io/badge/format-Agent%20Skills-8a2be2?style=flat-square)](SKILL.md)
+[![language](https://img.shields.io/badge/lang-zh--CN-lightgrey?style=flat-square)](#)
+[![text license](https://img.shields.io/badge/文本-CC%20BY--SA%204.0-2ea44f?style=flat-square)](LICENSE-CC-BY-SA-4.0.txt)
+[![code license](https://img.shields.io/badge/程序性文件-Apache--2.0-2ea44f?style=flat-square)](LICENSE-APACHE-2.0.txt)
+
+**发起及主导：广东卓建律师事务所 蔡诗爽律师**  
+[爽律刑法空间 · csslaw.cn](https://csslaw.cn/) · [快速上手](00_使用与调度/快速上手.md) · [安装与调用](00_使用与调度/安装与调用说明.md) · [v0.43 发布说明](RELEASE_NOTES_v0.43.md) · [参与共创](CONTRIBUTING.md) · [致谢](ACKNOWLEDGEMENTS.md)
+
+</div>
+
+> **当前版本：v0.43 正式版｜Agent Native｜公开共创。可整包升级；v0.42-RC6 为上一兼容基线。**
+
+## 30 秒理解爽律
+
+爽律 Skill 不是一组“万能提示词”，也不是法律数据库或 SaaS。它更接近一套给 AI Agent 使用的**律师专业工作流操作系统**：把材料接管、事实建模、证据审查、法律研究、策略比较、文书起草、对抗性审查、质量门控和正式交付连接成可复核的工作链。
+
+用户不需要记住内部 Skill 名称。加载本系统后，可以直接说：
+
+- “分析这套刑事卷宗，梳理证据问题和辩护方向。”
+- “审查并直接修改这份合同。”
+- “研究这个法律问题并核验案例。”
+- “整理证据、提炼争点并形成代理意见。”
+- “对这份文书做一轮对抗性审查。”
+
+在支持 Agent Skills 自动激活的宿主中，上述任务**不需要先说“调用爽律”**；“调用爽律 / ShuangLaw”继续作为显式兼容入口。
+
+系统会根据任务自动选择主技能，并在必要时组合法律研究、文书质量控制、文件处理等辅助能力。
+
+## v0.43：从“调用一个 Skill”到“Agent 自己知道什么时候用”
+
+v0.43 的第一项变化不是新增法律模块，而是把爽律改造成更接近 Agent Native 的能力层。`SKILL.md` 现在使用 Agent Skills 规范的 YAML frontmatter，并把“什么时候应自动使用爽律”写进 `description`。在支持 metadata 自动发现的宿主中，专业法律任务可静默激活；普通写作、日常问题或仅有法律词汇重叠的任务不应误触发。
+
+用户可以把激活方式个性化为 `AUTO / CONFIRM / MANUAL`。默认无感不等于黑箱：需要调试时可以查看 `ActivationDecision`；宿主平台若本身不支持自动 Skill 选择，则仍需使用平台提供的绑定方式或旧“调用爽律”入口，爽律不会假装越过宿主完成了自动调用。
+
+同时新增多 Skill 协同接口：爽律负责法律专业方法和质量控制，OCR、Web、数据库、Office 等通过 `CapabilityRequirement / SkillCollaborationRequest` 交给当前 Agent 的可用能力实现，不绑定具体厂商。
+
+## 它怎样工作
+
+```mermaid
+flowchart TD
+    A[用户任务与材料] --> B[爽律入口：理解任务与自动路由]
+    B --> C{主技能}
+    C --> C1[刑事案件办理]
+    C --> C2[民商事争议解决]
+    C --> C3[合同与交易工作]
+    C --> C4[法律研究与多源资料融合]
+    C --> C5[法律顾问 / 尽调等]
+    C1 --> D[事实 · 证据 · 法律 · 论证 · 策略]
+    C2 --> D
+    C3 --> D
+    C4 --> D
+    C5 --> D
+    D --> E[对抗性审查 / 质量门 / 必要人工决定]
+    E --> F[文书 · 报告 · 表格 · 图形 · 结构化记录]
+```
+
+对于复杂事项，爽律还会保留来源定位、事实状态、研究轨迹和重要结论的映射，使专业判断不仅“有依据”，而且能够回到依据。
+
+## 为什么持续升级不会把你的习惯洗掉
+
+从 v0.42 起，爽律将 Core 与用户个性化分开。后续升级默认采用 **PRESERVE_USER**：升级核心能力，同时保留用户已经明确确认的合法工作习惯。只有发生真实冲突时才提示用户选择；事实核验、法律准确性、敏感材料风险控制和重大人工决定等 Hard Guardrails 不能被个性化关闭。
+
+个性化可以单独查看、导出、导入、停用或重置。详见 `00_使用与调度/个性化继承与版本升级规范.md`。
+
+### 你的模板也不会被新版洗掉
+
+用户自己的 DOCX/Markdown 等模板属于用户资产，不属于 Core。爽律升级时系统默认模板可以改进，但**不会静默替换用户已经保存并启用的模板**。同一文种存在事项模板、用户模板和系统默认时，按“事项明确要求 → 用户长期模板 → 系统默认”解析；用户也可以在某次任务中明确改用新版默认，而不改变长期习惯。
+
+## 从“写一个文件”到“完成一项任务”
+
+当任务需要一整套相互关联的文书，爽律可以建立 `DeliverableBundle`，先明确哪些成果是用户要求、哪些是已经核验的必需材料、哪些只是建议或可选项；多个文件共享主体、日期、金额等信息时，使用 `SharedMatterFields`，信息发生变化后检查并回写所有受影响成果。这样做的目标不是机械“一次生成九个文件”，而是避免多文书之间事实漂移，同时不把未经核验的机构材料清单冒充当前要求。
+
+详见 `00_使用与调度/模板资产与成套交付规范.md`。
+
+---
+
+## 法律研究：不按“数据库 / 官网 / 公众号”一刀切
+
+爽律把“在哪里搜到”与“这个来源值不值得用”分开。数据库、官网、微信公众号、网页和知识库都可以用于发现材料；真正进入研究时，再评价**谁发布、是什么内容、是否原始、能否核验、在当前问题中承担什么 SourceRole，以及它的专业权威性、规范效力和事实证明力分别是什么**。
+
+因此，法院、检察机关等官方公众号发布的原创典型案例、审判白皮书、司法解释解读或实务总结，不会因为“发布在公众号”就被机械降级；同样，商业数据库里的摘要也不会因为“来自数据库”就自动变成已核验原文。
+
+重要研究采用：
+
+```text
+Issue
+→ SourceRole
+→ Source Discovery
+→ Source Evaluation
+→ Research Ladder
+→ AuthorityMap / CaseMatrix
+→ Search Saturation
+→ Research Deliverable Profile
+→ 用户模板 / 个性化表达
+```
+
+类案检索报告、法律研究备忘录、法规沿革报告和裁判趋势分析不再共用一套固定模板。若用户已经有自己的研究报告模板和写作习惯，继续由 Personalization / Template Asset Layer 优先保留。
 
 ---
 
 ## 当前测试基线
 
-v0.41 作为第一轮真实律师使用测试的候选基线。测试开始后，系统原则上不再因为主观设想继续增加大模块，而优先依据真实使用中的失败和遗漏迭代。当前存在少量明确的部分支持范围，例如民商事再审专项和员工/举报等专项事实调查；详见 `00_使用与调度/测试基线与能力边界.md`。
+v0.43 正式版在既有真实律师使用基线上，累计加入文书成文策略、个性化安全升级、模板与成套交付、法律研究闭环和 Agent Native 调度能力。后续版本优先依据真实使用中的失败、遗漏和共创需求迭代。当前存在少量明确的部分支持范围，例如民商事再审专项和员工/举报等专项事实调查；详见 `00_使用与调度/测试基线与能力边界.md`。
+
+
+## v0.43 Agent Native 关键变化
+
+- `SKILL.md` 增加规范 YAML frontmatter，`name=shuanglv-legal-skills`，description 直接承担自动触发语义；
+- 新增 AutoActivation Layer：专业法律任务可无感触发，普通任务抑制误触发；
+- 新增 `activation.mode=AUTO / CONFIRM / MANUAL`，继续纳入 Personalization Layer；
+- 新增 `ActivationDecision / SkillCollaborationRequest / ProactiveSuggestion`；
+- 新增多 Skill 协同与能力请求规则，不绑定具体 OCR、数据库或 Office Skill；
+- 新增触发评测集与本地 `activation-check` 回退测试；
+- 为满足 Agent Skills 规范，Skill 内部根目录标准化为 `shuanglv-legal-skills`，中文品牌名保留在 README/显示名称/ZIP 文件名；
+
+- 正式复杂文书新增成文策略与结构性重写闭环；
+- 新增个性化继承层，升级默认保留用户显式设置；
+- Core 与用户空间分离，支持迁移、快照、导出/导入和旧 Core 修改识别；
+- 用户个性化不得覆盖事实核验、法律准确性、安全和重大人工决定等 Hard Guardrails。
+- 用户自己的模板、格式资产和长期习惯独立保存在用户空间，新版系统默认不得静默覆盖；
+- 新增 Template Asset Layer、Deliverable Bundle、SharedMatterFields 与变更联动，把“单文件生成”扩展为“完整任务交付”。
+- 法律研究新增渠道中立 SourceProfile/SourceRole、Research Ladder、Search Saturation 与 Research Deliverable Profile；官方公众号/网页等按主体、内容、原始性和用途评价，不按渠道一刀切。
 
 ## 名称约定
 
@@ -55,11 +172,7 @@ v0.41 作为第一轮真实律师使用测试的候选基线。测试开始后�
 
 **爽律 Skill｜律师专业工作流系统**是一套面向律师专业工作的 Agent Skills 工作流系统。
 
-用户在已经加载本系统的 Agent 中，可以直接说：
-
-> **“调用爽律来做。”**
-
-系统会根据任务自动判断应使用哪个主技能，并在必要时组合其他辅助技能完成工作。
+在支持 Agent Skills 自动发现的 Agent 中，用户直接提出法律任务即可；不需要每次先说“调用爽律”。显式别名继续兼容。系统会先判断是否应激活爽律，再自动选择主技能，并在必要时组合其他能力完成工作。
 
 爽律 Skill 的目标不是替律师“自动给答案”，而是把律师日常工作中应当完成的分析步骤、质量控制、对抗性审查、风险提示和交付要求，固化成可调用的专业工作流程。
 
@@ -323,7 +436,7 @@ API Key、账号权限或工具可用，只说明技术上能够调用，并不�
 
 ---
 
-## 十一、人工判断与责任边界
+## 十二、人工判断与责任边界
 
 爽律 Skill 可以提供分析和建议，但以下事项原则上应由律师或用户作最终决定：
 
@@ -341,7 +454,7 @@ API Key、账号权限或工具可用，只说明技术上能够调用，并不�
 
 ---
 
-## 十二、对抗性审查
+## 十三、对抗性审查
 
 对于重要任务，爽律 Skill 在形成初步结论后，应主动进行第二遍审查，例如：
 
@@ -357,7 +470,7 @@ API Key、账号权限或工具可用，只说明技术上能够调用，并不�
 
 ---
 
-## 十三、复杂事项的续接
+## 十四、复杂事项的续接
 
 对于多文件、多轮或需要后续继续的事项，爽律 Skill 可以生成《项目执行说明书》，记录：
 
@@ -373,15 +486,25 @@ API Key、账号权限或工具可用，只说明技术上能够调用，并不�
 
 ---
 
-## 十四、发起与共创
+## 十五、发起与共创
 
-**发起及主导：卓建律师事务所 蔡诗爽律师**
+**发起及主导：广东卓建律师事务所 蔡诗爽律师**
 
 本版本进入公开共创阶段。欢迎基于真实使用提出问题、改进工作流、补充分析方法、完善兼容性和提交修订。公开反馈和贡献应遵守 `CONTRIBUTING.md`，不得提交未经脱敏的客户/案件材料或无权公开的第三方内容。
 
 ---
 
-## 十五、许可与使用
+## 十六、致谢
+
+爽律 Skill 的形成不是单一作者在封闭环境中的一次性产物。特别感谢 **方冬律师** 协助早期版本整理、GitHub 仓库发布与首页呈现优化；感谢 **古鉴璇律师** 就合同与法律文书质量提出优化建议。也感谢在真实律师工作场景中参与试用、提出问题、提供反馈和帮助校正工作流的律师同事与用户。
+
+在公开规范与工程启发方面，感谢 **Anthropic** 团队推动 Agent Skills 并开放相关实现、示例与规范资料；感谢 **[THUYRan/Legal-Skills-Chinese](https://github.com/THUYRan/Legal-Skills-Chinese)** 在中文法律 Agent Skills 方面提供可对照的先行实践。也感谢公开法律资料、研究成果、实务著作和其他开源项目的作者、维护者与公共机构，为本项目的方法研究、工程比较和质量校验提供知识基础。**被参考或致谢不表示相关个人、机构或项目参与了爽律 Skill 的开发，也不表示其对本项目提供认可、背书或专业责任承担。**
+
+完整致谢、署名原则与后续贡献者记录方式见 [`ACKNOWLEDGEMENTS.md`](ACKNOWLEDGEMENTS.md)。
+
+---
+
+## 十七、许可与使用
 
 本版本采用分轨开放许可：
 
@@ -394,7 +517,7 @@ API Key、账号权限或工具可用，只说明技术上能够调用，并不�
 
 ---
 
-## 十六、文件入口
+## 十八、文件入口
 
 - `SKILL.md`：Agent 机器入口；
 - `00_使用与调度/爽律 Skill入口.md`：系统调用与自动路由；
@@ -411,7 +534,13 @@ API Key、账号权限或工具可用，只说明技术上能够调用，并不�
 - `03_技能/`：具体业务技能；
 - `05_工程执行层/工具/爽律 Skill执行器.py`：可选工程执行增强；
 - `CONTRIBUTING.md`：公开共创指南；
+- `ACKNOWLEDGEMENTS.md`：项目致谢、署名边界与贡献者记录；
 - `许可与使用声明.md`：许可范围与贡献规则。
+
+
+### 新功能失败时怎么办？
+
+v0.43 的自动激活、多 Skill 协同和主动建议均为增强能力。它们不可用时，爽律会优先退回 v0.42 已验证工作路径。用户仍可直接说“调用爽律”进入专业模式；升级不会因此清空个人模板或使用习惯。详见 `00_使用与调度/旧版能力兼容与失败回退规范.md`。
 
 <!-- repo-appendix:start ｜ 仓库层，由 .github/scripts/apply_repo_layer.py 从 .github/repo-layer/README.appendix.md 生成；不要手改本段。以上为作者 README 正文。 -->
 
@@ -446,7 +575,7 @@ git clone https://github.com/zj-ai-lab/shuanglv-legal-skills.git ~/.claude/skill
 
 > 当用户说"调用爽律""用爽律做""用爽律处理"时，读取 `<安装路径>/SKILL.md` 并按其中规则执行。
 
-### 仓库结构（v0.41）
+### 仓库结构（v0.43）
 
 ```text
 .

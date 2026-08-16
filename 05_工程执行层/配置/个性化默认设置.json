@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1",
+  "system_version": "0.43",
+  "settings": {
+    "writing.paragraph.single_sentence_policy": "AVOID",
+    "writing.transition.mechanical_sequence_policy": "AVOID",
+    "writing.heading_density": "BALANCED",
+    "writing.detail_level": "BALANCED",
+    "writing.conclusion_position": "CONTEXTUAL",
+    "deliverable.default_format": "AUTO",
+    "deliverable.include_fact_summary": "AUTO_FOR_COMPLEX",
+    "visualization.core_diagram_for_complex": "AUTO",
+    "document.composition.show_internal_analysis_labels": false,
+    "document.composition.rewrite_strength": "STRUCTURAL_WHEN_NEEDED",
+    "template.default_selection_policy": "USER_ASSET_FIRST",
+    "deliverable.bundle.auto_detect": "AUTO",
+    "activation.mode": "AUTO",
+    "activation.show_notice": false,
+    "activation.auto_threshold": "MEDIUM",
+    "proactive_suggestion.enabled": true,
+    "proactive_suggestion.max_per_turn": 1
+  }
+}

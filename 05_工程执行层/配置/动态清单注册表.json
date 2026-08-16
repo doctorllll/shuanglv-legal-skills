@@ -70,6 +70,16 @@
       "id": "COMMON-SNAPSHOT",
       "text": "复杂/正式材料任务是否提供事项核心概要和快速理解入口？",
       "critical": false
+    },
+    {
+      "id": "COMMON-TEMPLATE",
+      "text": "存在用户/事项模板时已按个性化优先级解析，未被新版系统默认静默覆盖",
+      "critical": true
+    },
+    {
+      "id": "COMMON-BUNDLE",
+      "text": "需要成套交付时已区分用户要求、已核验必需、建议、可选和待核验材料，并检查共享字段一致性",
+      "critical": true
     }
   ],
   "skills": {
@@ -214,6 +224,26 @@
         "id": "RES-TRACE",
         "text": "主要检索路径和来源足以回查",
         "critical": true
+      },
+      {
+        "id": "RES-SOURCE-EVAL",
+        "text": "关键来源已按发布主体、内容、原始性、SourceRole、规范效力与允许用途评价，没有按渠道一刀切",
+        "critical": true
+      },
+      {
+        "id": "RES-LADDER",
+        "text": "关键问题已按缺口使用递进式独立检索路径，不是在单一平台机械换关键词",
+        "critical": false
+      },
+      {
+        "id": "RES-SAT",
+        "text": "如声称研究已充分，已记录Search Saturation依据和剩余缺口",
+        "critical": true
+      },
+      {
+        "id": "RES-DELIV",
+        "text": "正式研究交付已选择正确Deliverable Profile，并保留用户/事项已有模板与合法习惯",
+        "critical": true
       }
     ],
     "法律顾问与专项法律分析": [
@@ -310,6 +340,21 @@
         "id": "DOC-OUTPUT",
         "text": "输出契约和正式交付要求已满足",
         "critical": true
+      },
+      {
+        "id": "DOC-COMPOSITION",
+        "text": "复杂/正式文书已形成成文策略：读者、目标、核心阻力、切入角度、论点排序、展开尺度和停止条件",
+        "critical": true
+      },
+      {
+        "id": "DOC-REWRITE",
+        "text": "重大初稿已执行结构性缺陷诊断和可执行重写，而不是仅做语言润色",
+        "critical": true
+      },
+      {
+        "id": "DOC-ANTI-TEMPLATE",
+        "text": "没有无业务理由地复制其他案件的开篇、标题树、推进方式或结尾请求",
+        "critical": false
       }
     ],
     "多模态输入适配（可选）": [
@@ -704,6 +749,22 @@
       },
       "text": "用户明确要求原生修订模式时，已验证当前工具真实支持；不支持则阻断而非冒充完成",
       "critical": true
+    },
+    {
+      "id": "COND-COMPOSITION",
+      "text": "本次复杂/正式法律文书已形成 DocumentCompositionPlan 或记录合理豁免理由",
+      "critical": true,
+      "when": {
+        "document_composition_required": true
+      }
+    },
+    {
+      "id": "COND-REWRITE",
+      "text": "本次要求结构性重写时，MAJOR/BLOCKING DraftDefect 已处理且至少一项 RewriteDecision 已应用",
+      "critical": true,
+      "when": {
+        "rewrite_validation_required": true
+      }
     }
   ]
 }

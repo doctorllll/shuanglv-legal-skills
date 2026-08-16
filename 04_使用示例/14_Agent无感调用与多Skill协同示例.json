@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.1",
+  "scenario": "用户未说调用爽律，直接要求合同审查",
+  "user_request": "帮我审一下这份采购合同，重点看付款和验收，直接给我修改稿。",
+  "activation_decision": {
+    "decision": "AUTO_ACTIVATE",
+    "activation_mode": "AUTO",
+    "trigger_type": "SEMANTIC_PROFESSIONAL_LEGAL",
+    "confidence_tier": "HIGH",
+    "show_notice": false
+  },
+  "lead_skill": "合同与交易工作",
+  "supporting_skills": [
+    "法律文书质量与格式控制"
+  ],
+  "collaboration_requests": [
+    {
+      "request_id": "COLLAB-001",
+      "capability_type": "DOCX_OUTPUT",
+      "purpose": "生成用户要求的正式DOCX修改稿",
+      "required": true,
+      "must_preserve_locator": false,
+      "sensitive_material": true,
+      "allow_downgrade": true,
+      "result_status": "PENDING"
+    }
+  ],
+  "personalization": {
+    "template_policy": "USER_ASSET_FIRST",
+    "activation_mode": "AUTO"
+  },
+  "notes": [
+    "若用户已有合同模板/格式习惯，继续优先保留；自动激活不改变模板优先级。"
+  ]
+}
