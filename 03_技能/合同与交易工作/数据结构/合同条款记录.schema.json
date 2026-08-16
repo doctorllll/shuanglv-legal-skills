@@ -134,6 +134,63 @@
     },
     "extensions": {
       "type": "object"
+    },
+    "controllability": {
+      "enum": [
+        "CONTROLLED",
+        "PARTIALLY_CONTROLLED",
+        "THIRD_PARTY_DEPENDENT",
+        "UNKNOWN",
+        "NOT_APPLICABLE"
+      ]
+    },
+    "proof_mechanism": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "boundary_time": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "boundary_place": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "boundary_actor": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "boundary_action": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "interpretation_risk": {
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW",
+        "UNKNOWN",
+        "NOT_ASSESSED"
+      ]
+    },
+    "interpretation_factors": {
+      "type": "array"
+    },
+    "actual_revision_text": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   }
 }

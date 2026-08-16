@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shuanglv.local/schema/diagram-spec/0.1",
+  "title": "DiagramSpec",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "diagram_id",
+    "matter_id",
+    "diagram_type",
+    "title",
+    "nodes",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "diagram_id": {
+      "type": "string"
+    },
+    "matter_id": {
+      "type": "string"
+    },
+    "diagram_type": {
+      "enum": [
+        "ENTITY_RELATIONSHIP",
+        "TRANSACTION_STRUCTURE",
+        "MONEY_FLOW",
+        "TIMELINE",
+        "SWIMLANE_TIMELINE",
+        "PERFORMANCE_FLOW",
+        "EVIDENCE_MAP",
+        "ISSUE_TREE",
+        "OPTION_TREE",
+        "ARGUMENT_MAP",
+        "OTHER"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "recommended_layout": {
+      "enum": [
+        "AUTO",
+        "HORIZONTAL",
+        "VERTICAL",
+        "HIERARCHICAL",
+        "NETWORK",
+        "SWIMLANE",
+        "RADIAL"
+      ]
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "node_id",
+          "label"
+        ],
+        "properties": {
+          "node_id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fact_status": {
+            "enum": [
+              "VERIFIED",
+              "ALLEGED",
+              "DISPUTED",
+              "INFERRED",
+              "UNKNOWN",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "source_refs": {
+            "type": "array"
+          },
+          "locator_refs": {
+            "type": "array"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "label"
+        ],
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "relation_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fact_status": {
+            "enum": [
+              "VERIFIED",
+              "ALLEGED",
+              "DISPUTED",
+              "INFERRED",
+              "UNKNOWN",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "source_refs": {
+            "type": "array"
+          },
+          "locator_refs": {
+            "type": "array"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "legend": {
+      "type": "array"
+    },
+    "mobile_layout_notes": {
+      "type": "array"
+    },
+    "preferred_user_formats": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "PNG",
+          "HTML",
+          "PDF_EMBED",
+          "DOCX_EMBED",
+          "SVG_SOURCE",
+          "MERMAID_SOURCE",
+          "DOT_SOURCE",
+          "PLANTUML_SOURCE",
+          "UNICODE_FALLBACK"
+        ]
+      }
+    },
+    "rendering_state": {
+      "enum": [
+        "SPEC_ONLY",
+        "RENDERED_PNG",
+        "RENDERED_HTML",
+        "RENDERED_OTHER",
+        "DOWNGRADED",
+        "BLOCKED"
+      ]
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "REVIEWED",
+        "FINAL",
+        "NEEDS_UPDATE"
+      ]
+    },
+    "extensions": {
+      "type": "object"
+    }
+  }
+}

@@ -165,6 +165,7 @@
     "00_使用与调度/人工决策与升级矩阵.md",
     "01_运行规范/交付物输出规范.md",
     "00_使用与调度/全链路溯源规范.md",
+    "00_使用与调度/事项快速理解与图形化交付规范.md",
     "00_使用与调度/技能行为契约.md"
   ],
   "support_triggers": {
@@ -200,5 +201,7 @@
   "private_knowledge_contract_file": "01_运行规范/用户知识库能力契约.md",
   "file_multimodal_contract_file": "01_运行规范/文件与多模态能力契约.md",
   "delivery_tool_contract_file": "01_运行规范/交付工具能力契约.md",
-  "capability_downgrade_file": "01_运行规范/能力降级与失败处理规范.md"
+  "capability_downgrade_file": "01_运行规范/能力降级与失败处理规范.md",
+  "matter_quick_understanding_file": "00_使用与调度/事项快速理解与图形化交付规范.md",
+  "diagram_capability_file": "01_运行规范/图形化交付能力契约.md"
 }

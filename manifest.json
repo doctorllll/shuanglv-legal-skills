@@ -2,7 +2,7 @@
   "system_id": "shuanglv-legal-skills",
   "display_name": "爽律 Skill",
   "full_name": "爽律 Skill｜律师专业工作流系统",
-  "version": "0.40",
+  "version": "0.41",
   "language": "zh-CN",
   "entrypoint": "SKILL.md",
   "router": "00_使用与调度/爽律 Skill入口.md",
@@ -33,7 +33,7 @@
   "human_review_policy": "00_使用与调度/人工决策与升级矩阵.md",
   "adversarial_review_policy": "00_使用与调度/统一对抗性审查规范.md",
   "name": "爽律 Skill｜律师专业工作流系统",
-  "release_stage": "public_co_creation_testing_baseline",
+  "release_stage": "public_co_creation_pretest_candidate",
   "author": "卓建律师事务所 蔡诗爽律师",
   "human_readme": "README.md",
   "license_status": "mixed_open_license",
@@ -72,7 +72,14 @@
       "private_knowledge_contract",
       "file_multimodal_contract",
       "delivery_tool_contract",
-      "capability_downgrade_gate"
+      "capability_downgrade_gate",
+      "matter_snapshot",
+      "diagram_spec",
+      "mobile_first_diagram_delivery",
+      "html_svg_fallback",
+      "png_render_preference",
+      "contract_direct_revision_gate",
+      "contract_interpretation_stress_test"
     ],
     "requires_python_for_automation": true,
     "python_required_for_core_skill": false
@@ -100,5 +107,7 @@
     "民商事争议解决：再审专项仅提供通用框架，具体程序与现行法必须专项核验",
     "尽职调查与专项调查：专项事实调查仅提供通用调查框架；员工调查、举报保护、劳动/隐私、纪律处分等需专项规则与人工复核",
     "多模态输入适配：能力取决于当前 Agent 或外部工具"
-  ]
+  ],
+  "matter_quick_understanding_policy": "00_使用与调度/事项快速理解与图形化交付规范.md",
+  "diagram_delivery_policy": "01_运行规范/图形化交付能力契约.md"
 }

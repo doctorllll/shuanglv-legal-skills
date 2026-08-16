@@ -102,6 +102,33 @@
         "type": "object",
         "additionalProperties": true
       }
+    },
+    "can_create_text_file": {
+      "type": "boolean"
+    },
+    "can_render_html": {
+      "type": "boolean"
+    },
+    "can_render_svg": {
+      "type": "boolean"
+    },
+    "can_render_mermaid": {
+      "type": "boolean"
+    },
+    "can_render_graphviz": {
+      "type": "boolean"
+    },
+    "can_render_plantuml": {
+      "type": "boolean"
+    },
+    "can_export_png": {
+      "type": "boolean"
+    },
+    "can_embed_images_docx": {
+      "type": "boolean"
+    },
+    "can_embed_images_pdf": {
+      "type": "boolean"
     }
   }
 }

@@ -112,6 +112,18 @@
     {
       "id": "GATE-BEHAVIOR",
       "description": "重要/正式任务不得存在未修正的关键行为契约违反"
+    },
+    {
+      "id": "GATE-SNAPSHOT",
+      "description": "复杂/正式材料任务需要形成事项核心概要或等价快速理解入口"
+    },
+    {
+      "id": "GATE-DIAGRAM",
+      "description": "事项存在显著关系/时间/流程结构且要求图形化时，应形成 DiagramSpec 并按能力实际渲染或明示降级"
+    },
+    {
+      "id": "GATE-CONTRACT-EDIT",
+      "description": "合同 REVISE / 默认 REVIEW 不得只出修改报告，必须形成实际修改后的合同文本或明确合法降级"
     }
   ],
   "warning_rules": [
