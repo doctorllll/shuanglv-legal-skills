@@ -10,6 +10,7 @@
 
 - **开 Issue（无需 Git）**：[New issue](../../issues/new/choose) 选模板——「真实失败反馈」「问题反馈」「提案」；模板字段就是第三节要求的说明结构。
 - **Pull Request**：Fork → 从 `main` 切分支（建议 `fix/…`、`docs/…`、`skill/…`、`schema/…`）→ 修改 → 过一遍 PR 模板自检 → 发起 PR。小改动一个 PR 一件事；新技能、新模块、不向后兼容的 schema 变更请先开「提案」Issue 讨论范围与边界。
+- 作者与仓库维护者（组织 Owner）可直接提交到 `main`；作者提交新版时请先运行 `python3 .github/scripts/apply_repo_layer.py`，README / CONTRIBUTING 的仓库层头尾不会丢。
 
 ### 7.2 目录与联动更新
 
@@ -40,7 +41,7 @@ grep -rnoiE '(sk|key|token|secret)[-_ ]?[a-z0-9]{20,}' .      # 凭证
 
 1. 维护者初审：结构、格式、脱敏、平台适配、联动文件是否同步；
 2. 作者终审：凡涉及法律业务规则、门控、对抗性审查点、人工升级边界的改动；有分歧以作者意见为准；
-3. 通过后 squash 合并到 `main`，记入 `CHANGELOG.md`；`main` 受分支保护，不接受直接推送；
+3. 通过后 squash 合并到 `main`，记入 `CHANGELOG.md`；`main` 禁止强推与删除，非 Owner 的改动一律经 PR；
 4. 作者交付的每个版本按原样导入（或由作者自提 PR 合并）并打 tag；仓库层（README / CONTRIBUTING 头尾、`.github/`、`CHANGELOG.md`）与作者正文分层维护，合并作者新版后运行 `python3 .github/scripts/apply_repo_layer.py` 即可套回，见 `.github/MAINTAINING.md`。
 
 <!-- repo-appendix:end -->
