@@ -4,6 +4,22 @@
 
 ---
 
+## [0.41] — 公开共创版｜第一轮实测候选基线（2026-08-16 合并，tag `v0.41`）
+
+作者以 PR #2 自提（squash 合并，commit 归属作者）。相对 v0.40 的主要变化：
+
+- 状态：`release_stage` 由 `public_co_creation_testing_baseline` 改为 **`public_co_creation_pretest_candidate`**（"第一轮实测候选基线"）。
+- **新增"事项快速理解与图形化交付"能力**：`00_使用与调度/事项快速理解与图形化交付规范.md`、`01_运行规范/图形化交付能力契约.md`、公共 schema `事项核心概要` 与 `法律图形描述`、示例 `04_使用示例/10_事项快速理解包示例.md/.json`、`05_工程执行层/工具/响应式法律示意图模板.html`（纯内联，无外链）；`manifest.json` 新增 `matter_quick_understanding_policy`、`diagram_delivery_policy`。
+- 工程执行层能力新增：`matter_snapshot`、`diagram_spec`、`mobile_first_diagram_delivery`、`png_render_preference`、`html_svg_fallback`、`contract_direct_revision_gate`、`contract_interpretation_stress_test`；执行器与配置（加载清单 / 动态清单注册表 / 质量门控规则）同步。
+- 合同与交易工作：技能定义、详细说明、业务模块、分析与推理方法、核心规则、检查清单、对抗性审查清单及两份 schema 更新；其余各技能《技能定义》与部分《详细说明》更新；`00` 层入口 / 基础能力地图 / 事项工作模型规范 / 测试基线与能力边界、`01` 层运行能力契约 / 交付物输出规范 / 外部能力适配规范 / 交付工具能力契约、公共 schema `输出契约` / `运行能力档案` 更新。
+
+### 仓库层（同日）
+- 仓库自 `doctorllll` 转入 GitHub 组织 **`shuanglaw`**（作者与维护者同为 Owner）；旧地址自动重定向；规则集补回绕过者（仓库管理员 / 组织 Owner）。
+- CODEOWNERS：作者层 `@csslaw @doctorllll`（作者自提 PR 由维护者批准）。
+- 新增 `.github/repo-layer/`（README 头部 / 附录、CONTRIBUTING 附录、.gitignore 补充段模板）与 `.github/scripts/apply_repo_layer.py`（幂等地把仓库层套到作者文件上，版本 / 阶段徽章取自 `manifest.json`）；合并作者新版后运行一次即可，PR #2 丢失的头尾据此恢复。
+
+---
+
 ## [0.40] — 公开共创版｜第一轮实测基线（2026-08-15，tag `v0.40`）
 
 作者交付的 v0.40 文件夹逐字节导入（191 个文件）。相对 v0.33 的主要变化：

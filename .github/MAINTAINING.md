@@ -9,7 +9,7 @@
 | 作者层 | 除下列仓库层文件外的一切：`SKILL.md`、`manifest.json`、`00`–`05` 目录、`LICENSE*`、`NOTICE`、`许可与使用声明.md`、`公开共创版本说明.md`、`系统说明.md`，以及 `README.md` / `CONTRIBUTING.md` / `.gitignore` 的**作者正文部分** | 作者（蔡诗爽律师）；社区 PR 经作者终审后并入 | 整体以新版替换 |
 | 仓库层 | `.github/`、`assets/`、`CHANGELOG.md`；`README.md` 的头部（`repo-header`）与文末附录（`repo-appendix`）；`CONTRIBUTING.md` 文末附录；`.gitignore` 的"仓库层补充"段 | 仓库维护者 | 重新套在新版作者文件上 |
 
-`README.md` / `CONTRIBUTING.md` / `.gitignore` 里仓库层片段都用 `<!-- repo-header:start/end -->`、`<!-- repo-appendix:start/end -->`、`# --- 仓库层补充 ---` 标出。
+`README.md` / `CONTRIBUTING.md` / `.gitignore` 里仓库层片段都用 `<!-- repo-header:start/end -->`、`<!-- repo-appendix:start/end -->`、`# --- 仓库层补充 ---` 标出；它们由 `.github/scripts/apply_repo_layer.py` 从 `.github/repo-layer/` 模板生成。作者以 PR 提交新版时若整体覆盖了 README / CONTRIBUTING，不必在 PR 里修，合并后维护者跑一次脚本即可。
 
 ## 升级作者新版本的步骤
 
@@ -17,7 +17,7 @@
 2. 跑一遍脱敏与凭证扫描（命令见 `CONTRIBUTING.md` 7.4）；
 3. 删除工作树中作者层旧文件（保留 `.github/`、`assets/`、`CHANGELOG.md`），`rsync -a --exclude .DS_Store SRC/ ./`；`diff -rq SRC . -x .git -x .github -x assets -x CHANGELOG.md` 必须 IDENTICAL；
 4. 提交「升级到 vX.Y（作者原始交付逐字节导入）」并打 tag `vX.Y`；
-5. 把仓库层重新套上：README 头部 + 附录、CONTRIBUTING 附录、`.gitignore` 补充段；更新徽章版本号、附录里的结构树与 `CHANGELOG.md`；
+5. 运行 `python3 .github/scripts/apply_repo_layer.py` 把仓库层套回（README 头部 + 附录、CONTRIBUTING 附录、`.gitignore` 补充段；版本 / 阶段徽章自动取自 `manifest.json`；可重复运行）。要改头尾内容，改 `.github/repo-layer/` 下的模板再运行脚本，**不要直接改 README / CONTRIBUTING 里的仓库层片段**。然后更新 `CHANGELOG.md`；
 6. 第二个提交「仓库层：套用于 vX.Y」，推送。
 
 ## 归属与权限
