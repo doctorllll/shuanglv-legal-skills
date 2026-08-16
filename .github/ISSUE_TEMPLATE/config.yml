@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
   - name: 先读《CONTRIBUTING｜共创与贡献指南》
-    url: https://github.com/doctorllll/shuanglv-legal-skills/blob/main/CONTRIBUTING.md
+    url: https://github.com/shuanglaw/shuanglv-legal-skills/blob/main/CONTRIBUTING.md
     about: 适合提交什么、不建议提交什么、说明结构、专业质量要求、许可与隐私。
   - name: 一般性讨论 / 使用交流
-    url: https://github.com/doctorllll/shuanglv-legal-skills/discussions
+    url: https://github.com/shuanglaw/shuanglv-legal-skills/discussions
     about: 不是明确问题或提案的内容请去 Discussions。

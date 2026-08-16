@@ -20,6 +20,10 @@
 5. 把仓库层重新套上：README 头部 + 附录、CONTRIBUTING 附录、`.gitignore` 补充段；更新徽章版本号、附录里的结构树与 `CHANGELOG.md`；
 6. 第二个提交「仓库层：套用于 vX.Y」，推送。
 
+## 归属与权限
+
+仓库归 GitHub 组织 **`shuanglaw`**（2026-08-16 自 `doctorllll` 转入，旧地址自动重定向）。组织 Owner = 全部仓库管理员；作者 @csslaw 与维护者 @doctorllll 均应为 Owner。作者交付版本既可由维护者按下文步骤直接导入，也可由作者自己以 PR 形式提交（如 v0.41 的 PR #2）——后者合并后维护者仍需补做第 5–6 步（把仓库层套回去、更新徽章版本与 CHANGELOG）。
+
 ## 分支保护
 
 `main` 使用 `.github/rulesets/protect-main.json`（禁删除 / 禁强推 / 须 PR + 1 个批准 + CODEOWNERS 审查 / squash 合并；管理员可绕过）。作者交付版本的导入由维护者以管理员身份直接推送到 `main`，社区改动一律走 PR。
@@ -27,7 +31,7 @@
 启用 / 更新规则集（免费账号仅公开仓可用）：
 
 ```bash
-gh api -X POST repos/doctorllll/shuanglv-legal-skills/rulesets \
+gh api -X POST repos/shuanglaw/shuanglv-legal-skills/rulesets \
   -H "Accept: application/vnd.github+json" \
   --input .github/rulesets/protect-main.json
 ```
