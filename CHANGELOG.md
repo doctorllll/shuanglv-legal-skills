@@ -1,78 +1,9 @@
-# 版本记录 · Changelog
+# CHANGELOG
 
-系统版本号沿用作者 `manifest.json` 的 `version`，每个作者交付版本原样导入并打同名 tag。仓库层（README 头部 / 附录、CONTRIBUTING 附录、`.github/`、`assets/`、本文件）的变化单列，不改变系统版本号。
+## v0.48｜正式版
 
----
-
-## [0.43] — 正式版｜Agent Native｜公开共创（2026-08-17，tag `v0.43`）
-
-作者交付的 v0.43 正式版完整运行包原样导入；仓库层重新套用。相对 v0.42-RC6 的主要变化：
-
-- Agent Skills 标准 frontmatter 与自动激活规则；
-- AUTO / CONFIRM / MANUAL 个性化激活模式；
-- 多 Skill 协同、主动建议与外部能力请求接口；
-- Feature Flags、显式调用旁路、Router v2 故障回退和 Legacy Regression；
-- 个性化、模板资产、成套交付、版本迁移和失败回退相关 Schema、配置与示例；
-- 本地验证：Python 4 个文件编译检查、JSON 115 个文件解析检查、Legacy Regression 16/16 通过。
-
----
-
-## [0.41] — 公开共创版｜第一轮实测候选基线（2026-08-16 合并，tag `v0.41`）
-
-作者以 PR #2 自提（squash 合并，commit 归属作者）。相对 v0.40 的主要变化：
-
-- 状态：`release_stage` 由 `public_co_creation_testing_baseline` 改为 **`public_co_creation_pretest_candidate`**（"第一轮实测候选基线"）。
-- **新增"事项快速理解与图形化交付"能力**：`00_使用与调度/事项快速理解与图形化交付规范.md`、`01_运行规范/图形化交付能力契约.md`、公共 schema `事项核心概要` 与 `法律图形描述`、示例 `04_使用示例/10_事项快速理解包示例.md/.json`、`05_工程执行层/工具/响应式法律示意图模板.html`（纯内联，无外链）；`manifest.json` 新增 `matter_quick_understanding_policy`、`diagram_delivery_policy`。
-- 工程执行层能力新增：`matter_snapshot`、`diagram_spec`、`mobile_first_diagram_delivery`、`png_render_preference`、`html_svg_fallback`、`contract_direct_revision_gate`、`contract_interpretation_stress_test`；执行器与配置（加载清单 / 动态清单注册表 / 质量门控规则）同步。
-- 合同与交易工作：技能定义、详细说明、业务模块、分析与推理方法、核心规则、检查清单、对抗性审查清单及两份 schema 更新；其余各技能《技能定义》与部分《详细说明》更新；`00` 层入口 / 基础能力地图 / 事项工作模型规范 / 测试基线与能力边界、`01` 层运行能力契约 / 交付物输出规范 / 外部能力适配规范 / 交付工具能力契约、公共 schema `输出契约` / `运行能力档案` 更新。
-
-### 仓库层（同日）
-- 仓库自 `doctorllll` 转入 GitHub 组织 **`zj-ai-lab`**（作者与维护者同为 Owner）；旧地址自动重定向；规则集补回绕过者（仓库管理员 / 组织 Owner）。
-- CODEOWNERS：作者层 `@csslaw @doctorllll`（作者自提 PR 由维护者批准）。
-- 新增 `.github/repo-layer/`（README 头部 / 附录、CONTRIBUTING 附录、.gitignore 补充段模板）与 `.github/scripts/apply_repo_layer.py`（幂等地把仓库层套到作者文件上，版本 / 阶段徽章取自 `manifest.json`）；合并作者新版后运行一次即可，PR #2 丢失的头尾据此恢复。
-
----
-
-## [0.40] — 公开共创版｜第一轮实测基线（2026-08-15，tag `v0.40`）
-
-作者交付的 v0.40 文件夹逐字节导入（191 个文件）。相对 v0.33 的主要变化：
-
-**状态与许可**
-- 由"定向内测版"转为"公开共创版"：作者明确"本版本可以上传至公开代码仓库"（`公开共创版本说明.md`），`manifest.json` `release_stage: public_co_creation_testing_baseline`、`public_distribution: true`。
-- 分轨开放许可：文本性 Skill 内容 **CC BY-SA 4.0**，程序性文件（`.py` / JSON Schema / JSON 配置）**Apache-2.0**；新增 `LICENSE`、`LICENSE-CC-BY-SA-4.0.txt`、`LICENSE-APACHE-2.0.txt`、`NOTICE`，重写 `许可与使用声明.md`；作者自带 `CONTRIBUTING.md`、`README.md`、`.gitignore`。
-- 删除 `内测版本提示.md`、`00_使用与调度/系统使用入口.md`。
-- v0.40 被定为"第一轮真实律师使用测试的固定基线"，覆盖范围与已知部分支持项见 `00_使用与调度/测试基线与能力边界.md` 与 `manifest.json` `known_partial_capabilities`。
-
-**新增 `05_工程执行层/`（可选）**
-- 渐进式加载规则、动态清单规则、质量门控规则；配置 JSON（加载清单、动态清单注册表、质量门控规则、技能行为契约）；`工具/爽律 Skill执行器.py`（仅标准库，不联网）及使用说明；执行计划 / 工程执行状态 schema 与示例。
-
-**`00_使用与调度/`（+13）**
-- 基础能力地图、技能行为契约、全链路溯源规范、法律分析与推理规范、测试基线与能力边界、通用结构化审阅规范、法律对象候选提取规范、结构化审阅问题集规范、跨模块执行与回写规范、策略选项与人工决定规范、事项工作模型与分析地图规范、复杂任务计划确认与修订规范、法律研究权威图谱与类案矩阵规范；入口、调度规则、对抗性审查规范、人工决策矩阵、项目执行说明书模板 / 规范等同步更新。
-
-**`01_运行规范/`（+6）**
-- 外部能力适配规范；法律信源 / 用户知识库 / 文件与多模态 / 交付工具四份能力契约；能力降级与失败处理规范；运行能力契约、交付物输出规范、法律文书统一样式规范更新。
-
-**`02_公共接口/`**
-- 共享 JSON Schema 17 → 42（新增问题树、任务配置、回写事件、材料记录、能力需求、论证地图、论证记录、审阅问题集、事项工作模型、交付命题记录、人工决定记录、全链路溯源包、法律对象候选、法律权威图谱、法律研究请求、溯源关系记录、策略选项记录、类案比较矩阵、能力调用记录、跨模块执行包、外部能力注册项、对抗性审查记录、结构化审阅记录、执行计划确认记录、技能行为契约记录）；11 个既有 schema 更新。
-
-**`03_技能/`**
-- 8 个技能各新增《分析与推理方法.md》；刑事案件办理新增《被害人代理与刑事控告工作流.md》（技能范围扩展到被害人代理与控告报案）；多份技能定义 / 详细说明 / 业务模块 / 核心规则 / 检查清单更新。
-
-**`04_使用示例/`**
-- 3 → 9 组：新增刑事控告、多文件民商事材料审阅、全链路溯源、跨模块执行与回写、事项工作模型与分析工具、外部能力适配（后四组附 JSON 对象示例）。
-
-### 仓库层（同日）
-- README：作者 v0.40 正文原样保留，外套维护者头部（logo / 徽章 / 作者主页）与文末附录（安装、仓库结构、关于作者、维护与评审、品牌标识、致谢），以 HTML 注释分界。
-- CONTRIBUTING：作者原文 + 第七节"仓库操作细则"（Issue / PR 路径、联动更新清单、schema 约定、脱敏自查、评审与发布）。
-- `.github/`：Issue 模板改为「真实失败反馈 / 问题反馈 / 提案」三种、PR 模板改为作者第三节的说明结构；新增 `MAINTAINING.md`（分层与升级步骤）；`.gitignore` 合并作者版本与仓库层补充。
-- 仓库转为公开，启用 `main` 分支保护规则集。
-
----
-
-## [0.33] — 内测版（2026-08-15 导入，tag `v0.33`）
-
-- 作者交付的 v0.33 内测版原始内容逐字节导入（110 个文件），未作任何修改。
-- 8 个业务技能、17 个公共数据结构、3 个使用示例；系统标识 `shuanglv-legal-skills`；作者：卓建律师事务所 蔡诗爽律师。
-
-### 仓库层（同日）
-- 建仓 `doctorllll/shuanglv-legal-skills`（先 private）；首版维护者 README、CONTRIBUTING、Issue / PR 模板、CODEOWNERS、`assets/brand/`（作者主页「爽律」品牌标识，日 / 夜两版）、`main` 分支保护规则集 JSON。
+- 以 v0.48 新架构替换 v0.43 旧运行层。
+- 采用 Thin SKILL.md、按需能力、领域扩展、条件 Guard、Minimal Matter State 与 Loose Interop。
+- 补充用户指南、正式交付边界、法律信源连接器和研究校准修复。
+- 许可证统一为 ShuangLaw Professional Use License 1.0。
+- v0.43 及更早版本保留在 Git 历史和 tag 中。

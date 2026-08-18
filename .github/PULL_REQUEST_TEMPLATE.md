@@ -41,4 +41,4 @@
 - [ ] 说明正文统一用"爽律 Skill"，只有用户调用示例里才单用"爽律"
 - [ ] 新增 / 重命名技能已同步 `manifest.json`、《技能总览》《技能调度规则》、README 技能表、`05_工程执行层/配置/` 加载清单与动态清单注册表
 - [ ] 不向后兼容的 schema 变更已递增 `$id` 与 `schema_version`
-- [ ] 已阅读并同意 `CONTRIBUTING.md` 第五节"版权、许可和署名"（文本 CC BY-SA 4.0 / 程序性文件 Apache-2.0）
+- [ ] 已阅读并同意 `CONTRIBUTING.md` 版权、许可和署名规定（ShuangLaw Professional Use License 1.0）

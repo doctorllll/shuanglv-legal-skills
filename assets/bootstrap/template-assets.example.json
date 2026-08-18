@@ -1,0 +1,26 @@
+{
+  "schema_version": "0.47-bootstrap-1",
+  "registry_id": "TEMPLATE-REGISTRY-DEMO",
+  "persistence_owner": "HOST",
+  "assets": [
+    {
+      "asset_id": "TPL-USER-001",
+      "name": "我的民事起诉状模板",
+      "scope": "USER",
+      "document_types": [
+        "民事起诉状"
+      ],
+      "file_path": "custom-templates/我的民事起诉状模板.docx",
+      "format": "DOCX",
+      "source_type": "USER_PROVIDED",
+      "application_mode": "GUIDED_STRUCTURE",
+      "status": "ACTIVE",
+      "sha256": null,
+      "version_label": "user-v1"
+    }
+  ],
+  "notes": [
+    "示例，不包含真实模板文件。",
+    "当前事项明确指定 > 事项/客户模板 > 用户长期模板 > 系统默认；找不到用户模板时不得冒充已按模板执行。"
+  ]
+}

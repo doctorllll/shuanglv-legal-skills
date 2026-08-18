@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.47-bootstrap-1",
+  "profile_id": "USER-DEMO-001",
+  "profile_type": "USER",
+  "owner_label": "示例用户",
+  "persistence_owner": "HOST",
+  "default_upgrade_policy": "PRESERVE_USER",
+  "settings": [
+    {
+      "key": "writing.paragraph.single_sentence_policy",
+      "value": "AVOID",
+      "status": "ACTIVE",
+      "source_type": "EXPLICIT_USER"
+    },
+    {
+      "key": "deliverable.default_format",
+      "value": "DOCX",
+      "status": "ACTIVE",
+      "source_type": "EXPLICIT_USER"
+    },
+    {
+      "key": "activation.mode",
+      "value": "AUTO",
+      "status": "ACTIVE",
+      "source_type": "EXPLICIT_USER"
+    }
+  ],
+  "notes": [
+    "示例文件；不得据此推断真实用户偏好。",
+    "Capability available ≠ persistent storage available."
+  ]
+}

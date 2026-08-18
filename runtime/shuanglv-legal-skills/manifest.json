@@ -1,0 +1,23 @@
+{
+  "name": "爽律Skill｜律师专业工作流系统",
+  "version": "0.48",
+  "base_runtime_version": "0.47",
+  "architecture": "Thin SKILL.md + On-demand Shared Capabilities + Domain Extensions + Conditional Guards + Minimal Matter State + Loose Interop",
+  "l0_files": [
+    "SKILL.md"
+  ],
+  "planner_load_unit_count": 29,
+  "shared_capability_count": 7,
+  "domain_count": 5,
+  "guard_count": 7,
+  "matter_units": 3,
+  "interop_units": 3,
+  "external_units": 2,
+  "preference_units": 2,
+  "build_source": "exact v0.47 baseline + v0.48 failure-driven minimal fixes: Internal Analysis→External Deliverable Boundary + vendor-neutral Legal Source Connector Contract + Jurisdiction Stack Closure research calibration + restored Agent Skills discovery metadata after capability-preservation regression",
+  "status": "RELEASED",
+  "semantic_benchmark_status": "V048_FINAL_SPEC_10_OF_10_PASS__MUTATION_6_OF_6_CAUGHT__V047_RELATIONAL_11_OF_11_PRESERVED__PAIRWISE_BEHAVIORAL_NONINFERIORITY_PASS",
+  "highest_engineering_principle": "Capability / Quality Preservation > Runtime Size Reduction",
+  "release_status": "FINAL_RELEASE",
+  "maintenance_correction": "README product-home refinement + installed Runtime author and brand attribution visibility; Agent Skills discovery preserved; no new Runtime files"
+}
