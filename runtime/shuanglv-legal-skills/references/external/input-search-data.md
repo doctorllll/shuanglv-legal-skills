@@ -54,9 +54,9 @@
 
 ### Legal Source Adapter Boundary
 
-法律数据库、官方检索源、用户知识库、MCP/其他数据库等均通过 Adapter 执行各自的查询语法、认证、分页和原始字段解析；爽律 Runtime 不绑定供应商。Adapter 返回法律研究候选结果时，应归一化到 Interop 的 `Legal Source Connector Contract`，至少真实传递 `retrieval_scope`、`source_completeness`、`failure_or_degradation`、原文定位和权限/敏感性状态。
+法律数据库、官方检索源、用户知识库、MCP/其他数据库等均通过 Adapter 执行各自的查询语法、认证、分页和原始字段解析；爽律skill Runtime 不绑定供应商。Adapter 返回法律研究候选结果时，应归一化到 Interop 的 `Legal Source Connector Contract`，至少真实传递 `retrieval_scope`、`source_completeness`、`failure_or_degradation`、原文定位和权限/敏感性状态。
 
-Adapter 不得把片段返回伪装成全文，不得把元数据缺失静默补齐，也不得把 provider 自带的“权威/相关度”标签直接升级为爽律的 SourceRole、规范效力判断或案例可比性结论。连接器降级时保留真实范围与失败状态，由 Research 决定继续检索、限制结论或阻断。
+Adapter 不得把片段返回伪装成全文，不得把元数据缺失静默补齐，也不得把 provider 自带的“权威/相关度”标签直接升级为爽律skill 的 SourceRole、规范效力判断或案例可比性结论。连接器降级时保留真实范围与失败状态，由 Research 决定继续检索、限制结论或阻断。
 
 ### Knowledge Base Boundary
 

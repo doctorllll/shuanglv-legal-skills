@@ -1,7 +1,12 @@
-# 爽律用户空间 Bootstrap（示例）
+# 用户偏好与模板初始化示例
 
-本目录仅提供初始化示例，不包含真实用户数据，也不意味着爽律自身拥有 Memory Engine。
+本目录提供可选的初始化示例，不包含真实用户数据。
 
-Host 如果支持持久化，可将用户明确确认的合法偏好、模板资产和 Matter 续接信息保存在 Host 的用户空间；不支持持久化时必须如实说明。
+如果当前 Agent / 宿主支持持久化，可以保存用户明确确认的合法工作偏好、模板登记和复杂事项续接信息；不支持持久化时，应如实说明。
 
-推荐逻辑分离：`user-profile.json`（偏好状态）/ `template-assets.json`（模板登记）/ `custom-templates/`（实际模板）/ `matters/`（Host-managed Matter data）。Core 升级不得静默覆盖这些用户资产。
+示例文件仅用于说明数据如何分开保存：
+
+- `user-profile.example.json`：法律工作偏好示例；
+- `template-assets.example.json`：用户模板登记示例。
+
+版本升级不应静默覆盖用户自己的模板、偏好或事项资料。

@@ -40,7 +40,7 @@
 
 ## 一、目的
 
-爽律 Skill 的对抗性审查不是为了“故意唱反调”，而是为了在正式交付前主动寻找：
+爽律skill 的对抗性审查不是为了“故意唱反调”，而是为了在正式交付前主动寻找：
 
 - 当前结论可能错在哪里；
 - 哪些事实被忽略；
@@ -141,7 +141,7 @@
 
 ## 一、目的
 
-爽律 Skill 对重要专业结论实行**全链路可追溯**：不仅要求“有引用”，还要求能够回答以下问题：
+爽律skill 对重要专业结论实行**全链路可追溯**：不仅要求“有引用”，还要求能够回答以下问题：
 
 - 事实从哪份材料、哪个位置获得；
 - 某项证据究竟支持或反驳哪个事实命题；
@@ -359,3 +359,65 @@ DeliverableClaim（交付物中的重要命题）
 - 是否存在断链、悬空引用或不存在的对象 ID。
 
 未满足上述条件时，应返回 `BLOCKED` 或明确警告，而不是把缺少依据的结论作为正式完成成果交付。
+
+
+# VerificationLedger｜统一核验台账
+
+`VerificationLedger` 是**可见的核验状态投影**，用于把分散在 SourceCard、FactRecord、EvidenceItem、LegalRule、CaseCard、Finding、DeliverableClaim 等对象中的状态汇总给律师检查。它不是第二套事实真值系统，也不得覆盖各 canonical owner 的原生状态。
+
+## 1. Row contract
+
+每个重要对象/命题可形成一行，至少包括：
+
+- `ledger_id`；
+- `object_ref`；
+- `object_type`：`SOURCE / FACT / EVIDENCE / LAW / CASE / FINDING / DELIVERABLE_CLAIM / OTHER`；
+- `proposition_or_summary`；
+- `source_ref`；
+- `source_locator`；
+- `native_status`：保留 canonical owner 的真实状态，例如 `VERIFIED / ALLEGED / INFERRED / VERIFIED_CURRENT / STALE`；
+- `display_status`：仅用于汇总展示，不替代 native status；
+- `status_authority`：谁拥有该状态的最终语义，例如 Facts / Evidence / Current-law Guard / Research / Matter Invalidation；
+- `conflict_refs`；
+- `human_review_required`；
+- `material_to_core_conclusion`：该未解决项是否足以改变核心结论；
+- `affected_result_refs`；
+- `last_checked_at`。
+
+## 2. Display status projection
+
+为方便律师浏览，可以把不同 native status 投影为有限展示类，例如：
+
+- `CONFIRMED`；
+- `PARTIAL`；
+- `DISPUTED`；
+- `UNRESOLVED`；
+- `STALE`；
+- `BLOCKED`；
+- `NEEDS_HUMAN`。
+
+但必须同时保留 `native_status + status_authority`。不得把法律“已核验现行有效”、事实“有来源支持”、证据“证明力充分”压成同一个含义。
+
+## 3. VerificationLedgerSummary
+
+重要任务或正式交付前，可以输出 `VerificationLedgerSummary`：
+
+- 各 `object_type` 总量；
+- 各 `display_status` 数量；
+- materially unresolved 数量；
+- source conflict 数量；
+- 待人工判断数量；
+- STALE / BLOCKED 数量；
+- 影响核心结论的 unresolved item 列表。
+
+统计只反映当前台账状态，不得以“确认项数量很多”替代法律分析，也不得用百分比制造虚假的科学确定性。
+
+## 4. Update / invalidation
+
+上游 Source/Fact/Law/Case 状态变化时，Ledger 行随 canonical object 更新；如果对象进入 STALE，Ledger 只展示 STALE，不得自行重新核验。需要重新检索、证据评价或事实核验时，回到相应 owner。
+
+## 5. Formal-delivery boundary
+
+- materially relevant 的 `UNRESOLVED / STALE / BLOCKED / NEEDS_HUMAN` 必须在正式交付前关闭、降格表达、披露限制或阻断；
+- 非决定性未解决项可以保留，但不得在成品中被写成已确认事实/法律；
+- 最终文书不必展示内部 ledger ID，但关键命题应能够反向追溯到 ledger/object chain。

@@ -13,7 +13,7 @@
 ## Essential Procedure
 1. Preserve semantic content constraints. FORMAT_ONLY must not silently alter facts, legal conclusions, clauses, dates, amounts or other substantive meaning.
 2. Resolve the applicable `DocumentStyleProfile` before rendering.
-3. Apply style priority: specific authority/platform mandatory requirement > official document-type rule or designated template > current national language/format convention > 爽律 default legal-document baseline > renderer default.
+3. Apply style priority: specific authority/platform mandatory requirement > official document-type rule or designated template > current national language/format convention > 爽律skill default legal-document baseline > renderer default.
 4. Use actual renderer capability.
 5. Claim native Track Changes/comments only if supported and executed.
 6. Keep semantic changes distinguishable from rendering changes.
@@ -108,34 +108,55 @@ This baseline fills gaps only. It is **not** represented as a mandatory court/pr
 
 ## Graphical Delivery Contract｜图形化法律交付
 
-当图形相较自然语言能够显著降低理解成本、揭示关系/时间/资金/证据结构，或用户明确要求时，Document Render 负责把上游结构化结果渲染为用户可见图形；**不得仅因“可以画图”就自动生成。**
+法律可视化的**方法所有权**属于 `unit.cap.visualization`：是否值得可视化、目的/受众、结构识别、图型路由、信息精简、stance/emphasis、静态/交互决策均在该能力中完成。Document Render 不重新从原材料理解案件，而是消费同一 `LegalVisualSpec / DiagramSpec v2`，负责确定性布局、实体生成、文件真实性和几何 QA。
 
-### DiagramSpec 中间层
+### Semantic input contract
 
-上游 Capability 先提供可追溯 `DiagramSpec`，至少描述节点、关系、标签、事实状态、来源引用和推荐布局。常见类型：
+Renderer 至少接收：`visual_id / visual_type / object_refs / source_refs / native_status / presentation_modes / visual_profile / ordering/grouping constraints / data_version_or_hash`。需要 artifact 快照时可以保存 display snapshot，但必须保留 `object_ref + snapshot_at`；不得创建 VisualFact / VisualEvidence 等第二套事实模型。
 
-`ENTITY_RELATIONSHIP / TRANSACTION_STRUCTURE / MONEY_FLOW / TIMELINE / SWIMLANE_TIMELINE / PERFORMANCE_FLOW / EVIDENCE_MAP / ISSUE_TREE / OPTION_TREE / ARGUMENT_MAP`。
+模型不得以最终像素坐标作为语义真相。Canonical geometry 是 renderer 对 `LegalVisualSpec` 的派生结果；同一 Spec 可派生静态、交互和演示版本。
 
-一图一主题；复杂事项拆图，不把所有信息塞成一张蜘蛛网。
+### Deterministic static render
 
-### 渲染能力与降级顺序
+可按 Host 真实能力生成 `SVG / PNG / PDF / PPTX / editable diagram format`。关键文字、金额、日期、证据编号、箭头方向、关系和事实状态必须直接来自确定性语义层。
 
-实际能力应按 Host 验证，而不是按模型想象：
+### Interactive render
 
-1. 有可靠本地/受控 PNG 渲染能力 → 优先 PNG；
-2. 无 PNG 但可创建/打开 HTML → 自包含响应式 HTML（内嵌 SVG/CSS，不依赖外部网络）；
-3. Mermaid / Graphviz / PlantUML 等可作为中间图源并尽量渲染成用户可见格式；
-4. 只能文本 → `DiagramSpec + 可渲染图源 + 最简文本安全版`，并明确**未实际生成图片文件**。
+Host 真实支持 `INTERACTIVE_VISUAL_RENDER` 时，可生成 self-contained HTML/Web 或 Host-native artifact。正式交付优先自包含资源，不依赖未披露 CDN；至少支持与任务相称的详情查看、来源定位、搜索/筛选、图层状态、恢复默认和静态快照。ViewState 与底层事实数据必须分离。
 
-不得因本地无渲染器而静默把敏感案件信息发送到第三方在线图形服务；需外部处理时进入 External Processing Guard。
+用户未明确要求交互时，Document Render 不自行升级交互；由 Visualization Capability 在“交互明显有增益 + Host 支持”时决定是否向用户提供增强选项。用户已明确要求交互时直接执行能力路径。
 
-### 图形 QA
+### Snapshot / version
 
-- 主体、金额、日期、关系不得超出上游支持；
-- 重要节点保留 source/locator；
-- 手机可读，过密时拆图；
-- 关键法律含义不只依赖颜色；
-- 文字重叠、箭头错误、节点截断或图片模糊时不得作为正式成果。
+正式交互成果应能冻结 `ViewState + data_version_or_hash + timestamp`，并原则上保留静态 companion。动态与静态来自同一语义源，不得重新抽取或重新解释事实后另画一套。
+
+### Optional generative enhancement
+
+`GENERATIVE_VISUAL_ENHANCEMENT` 只能作用于确定性成果之上的背景、非语义图标、插画或视觉气氛。不得改变或生成法律事实、人物身份、金额、日期、比例、证据编号、箭头方向、法律关系、FactStatus/EvidenceStatus。涉及敏感案件内容且需要外部处理时进入 External Processing Guard。
+
+### Renderer QA / hard failures
+
+以下问题在正式成果中属于阻断缺陷：
+
+- node/relation target 不存在、orphan/dangling 结构错误；
+- 箭头方向漂移、金额/日期/文字漂移；
+- 非有限坐标、off-canvas、严重 overlap/clipping/text overflow；
+- 过密导致不可读却未拆图；
+- 关键含义只依赖颜色、黑白打印无法区分；
+- CJK 字体缺失导致乱码/截断；
+- 交互筛选状态不可见或默认隐藏决定性反向信息；
+- 动态文件打不开、快照与当前视图语义不一致；
+- 声称存在 PNG/PDF/PPTX/HTML，而 Host 实际未创建或未验证。
+
+### Capability fallback ladder
+
+1. 目标静态格式可真实生成 → 生成并验证；
+2. 目标交互格式可真实生成 → 生成交互 + 静态 companion，并验证；
+3. 交互不支持但静态能满足核心正确性 → `DOWNGRADED` 到静态并披露；
+4. 只能输出 `LegalVisualSpec + 可渲染图源` → 明确**未生成目标实体图形文件**；
+5. 用户强制要求某种无法提供且不可接受降级的原生/交互能力 → `BLOCKED`。
+
+不得因本地无渲染器而静默把敏感案件信息发送到第三方在线图形服务。
 
 ## Native Editing / Track Changes Downgrade
 

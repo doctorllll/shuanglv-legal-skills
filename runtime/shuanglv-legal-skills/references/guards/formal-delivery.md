@@ -17,7 +17,8 @@
 3. Require adversarial review when material/high-stakes.
 4. Separate semantic finalization from rendering.
 5. Run `External Deliverable Hygiene Check` before FINAL.
-6. If the requested deliverable is a rendered/native document, require resolution of the applicable `DocumentStyleProfile` and rendering QA; authority/document-type/user template overrides the 爽律 default baseline.
+6. If the requested deliverable is a rendered/native document, require resolution of the applicable `DocumentStyleProfile` and rendering QA; authority/document-type/user template overrides the 爽律skill default baseline.
+7. If a legal visualization is FINAL, require semantic/cognitive/visual QA; interactive FINAL additionally passes the `Dynamic Delivery Fidelity Gate`.
 
 ## Deepening Conditions
 - High stakes/long complex formal document.
@@ -46,3 +47,21 @@
 - 实体文件须能正常打开，声称的 DOCX/PDF/Track Changes/comments/图形能力必须与真实 artifact 一致；
 - 同一正式版本导出的 Redline / Clean Copy / PDF / 其他派生交付物，其**实体内容必须一致**；差异只能来自修订标记、批注、版式或载体，不得出现一份已改而另一份仍保留旧实体内容；
 - 任何格式、工具或能力降级必须显式披露。
+
+
+## Dynamic Delivery Fidelity Gate｜动态正式交付保真门
+
+交互 HTML/Web/Host-native visual 可以作为正式成果，但必须额外验证：
+
+1. **Openability**：实际成果能够打开和运行，不以“已生成代码”冒充“可用交付物”；
+2. **Dependency truth**：外部网络/CDN/字体/脚本依赖真实披露；正式离线要求下不得暗含网络依赖；
+3. **Sensitive-data boundary**：交互包是否携带客户秘密、个人信息、证据原文等敏感数据，外发边界已处理；
+4. **Frozen semantics**：保存 `LegalVisualSpec` / 数据版本或 hash，不能在交付后静默改变底层数据；
+5. **Reproducible ViewState**：当前筛选、图层、时间窗口、聚焦路径可冻结/复现；
+6. **Static companion**：原则上同时保留可打印/归档的静态快照；确有例外必须显式说明；
+7. **Target compatibility**：目标浏览器/设备/演示环境可用，或明确兼容性限制；
+8. **No hidden counter-evidence by default**：默认筛选/折叠不得隐藏决定性反向证据、重大不确定性或关键限定条件；
+9. **Snapshot consistency**：从动态成果导出的 SVG/PNG/PDF/截图与同一 ViewState 语义一致；
+10. **Graceful degradation**：动态失败不得拖垮已经可靠完成的静态基础成果。
+
+动态交付的视觉交互状态不是事实状态。`隐藏 ≠ 删除；筛选 ≠ 否认；聚焦 ≠ 证明。`

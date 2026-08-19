@@ -38,14 +38,15 @@
 - review question results
 
 ## External / Delegated Capability
-- unit.external.input-data
+- `unit.external.input-data`：实际 OCR/多模态/表格/数据库等输入执行。
+- `unit.interop.batch`：当批量规模、语义不确定性、成本或恢复需求使共享 batch orchestration 有价值时加载；Facts 仍拥有 ReviewQuestionSet 与事实建模。
 
 
 ## Structured Review Method
 
 ## 一、目的
 
-复杂法律事项往往同时包含大量合同、卷宗、聊天记录、表格、交易凭证、行政材料、公司文件或其他来源。爽律 Skill 对这类材料不默认采用“逐份长摘要”的方式，而应优先建立**可横向比较、可追溯、可继续分析的结构化审阅记录**。
+复杂法律事项往往同时包含大量合同、卷宗、聊天记录、表格、交易凭证、行政材料、公司文件或其他来源。爽律skill 对这类材料不默认采用“逐份长摘要”的方式，而应优先建立**可横向比较、可追溯、可继续分析的结构化审阅记录**。
 
 该规范适用于刑事、民商事、合同、尽调、法律顾问、专项调查和复杂法律研究。它不是刑事阅卷专用工具。结构化审阅形成的材料记录和来源定位，应继续按 `references/capabilities/review.md` 的全链路溯源规则连接到事实、证据、问题、规则、论证和最终交付。
 
@@ -180,9 +181,9 @@
 
 ## 七、输出形态
 
-爽律 Skill 只规定审阅结果应具备的字段和质量。实际载体可以是 Markdown 表格、电子表格、数据库临时表、JSON 或当前 Agent 支持的其他结构。
+爽律skill 只规定审阅结果应具备的字段和质量。实际载体可以是 Markdown 表格、电子表格、数据库临时表、JSON 或当前 Agent 支持的其他结构。
 
-当数据量大、需要筛选排序、公式或批量操作时，应优先调用当前 Agent 可用的电子表格能力；爽律 Skill 本身不实现表格软件。
+当数据量大、需要筛选排序、公式或批量操作时，应优先调用当前 Agent 可用的电子表格能力；爽律skill 本身不实现表格软件。
 
 ## 八、质量要求
 
@@ -269,7 +270,7 @@ TaskProfile
 
 ## 一、定位
 
-当当前 Agent 或输入工具能够从文件、扫描件、表格、聊天、音视频中抽取结构化信息时，爽律 Skill 可以把这些结果转化为**法律对象候选**，以提高后续结构化审阅效率。
+当当前 Agent 或输入工具能够从文件、扫描件、表格、聊天、音视频中抽取结构化信息时，爽律skill 可以把这些结果转化为**法律对象候选**，以提高后续结构化审阅效率。
 
 候选对象不是已核验事实。其默认状态必须与原始材料和核验状态区分。
 
@@ -343,3 +344,14 @@ OCR、视觉、语音转写、表格解析或模型抽取得到的人物、组�
 `EXTRACTED / AMBIGUOUS / CONFLICTING / UNREADABLE`，核验状态另分 `NOT_VERIFIED / VERIFIED / REJECTED`。
 
 只有完成必要核验后，候选才进入正式 Fact / Evidence / Material 记录；未核验候选只能作为检索、追问或审阅线索。
+
+
+## Batch orchestration handoff
+
+Facts 负责定义**本次材料到底要回答什么问题**，不独占批次调度。需要批量处理时：
+
+`TaskProfile → IssueTree → ReviewQuestionSet (Facts) → BatchJobProfile / Pilot / checkpoint (Interop Batch) → StructuredReviewRecord (Facts) → downstream legal analysis`
+
+- 小批量、低风险、结构稳定任务可以直接执行，不强制 pilot；
+- 大规模/高成本/异质材料/错误易扩散时，由 `unit.interop.batch` 负责 Pilot Sample Gate、BatchRunRecord、异常分桶和恢复；
+- 任何批量状态不得改变 FactStatus、SourceLocator 或 Evidence 的 canonical authority。

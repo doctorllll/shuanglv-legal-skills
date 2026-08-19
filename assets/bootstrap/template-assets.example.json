@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.47-bootstrap-1",
+  "schema_version": "0.50-bootstrap-1",
   "registry_id": "TEMPLATE-REGISTRY-DEMO",
   "persistence_owner": "HOST",
   "assets": [

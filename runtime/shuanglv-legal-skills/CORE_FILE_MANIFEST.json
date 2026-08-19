@@ -1,29 +1,27 @@
 {
-  "version": "0.48",
-  "base_runtime_version": "0.47",
+  "version": "0.50",
   "release_status": "FINAL_RELEASE",
-  "build_source": "exact v0.47 baseline + v0.48 failure-driven minimal fixes: Internal Analysis→External Deliverable Boundary + vendor-neutral Legal Source Connector Contract + Jurisdiction Stack Closure research calibration + restored Agent Skills discovery metadata after capability-preservation regression",
-  "file_count_excluding_self": 32,
+  "file_count_excluding_self": 35,
   "files": [
     {
-      "path": "BUILD_MANIFEST.json",
-      "sha256": "3a9922e723d5d549bf38fca7b08b886fdaa81870a570a6c67e82a5c0991b002a",
-      "size_bytes": 3849
+      "path": "LICENSE",
+      "sha256": "0208b319b3ee975384c4ece7e057d777f4dbbc8e055446fc0472bf8e29b8bb7b",
+      "size_bytes": 3800
     },
     {
       "path": "SKILL.md",
-      "sha256": "cf5bee74e99e8376d302e2cfdb6e0904645bffcbf27d5b40d4baf82fed3b7eea",
-      "size_bytes": 17791
+      "sha256": "c2d258136fba300af9c3e6222cc1416c9dd8bf219830ff1eb3a9e5dd57d45052",
+      "size_bytes": 21399
     },
     {
       "path": "manifest.json",
-      "sha256": "9955d950f8687d5cc284f53e53972490be76a17ced916f8bef9e9a995fee0927",
-      "size_bytes": 1307
+      "sha256": "09656ed8ec769cd429a0ca6f1e66ab92ce9b1aa514283490f48e838ca22c8d68",
+      "size_bytes": 690
     },
     {
       "path": "references/capabilities/composition.md",
-      "sha256": "747d1028dd7a93a84b8c7e4ee082ded0901ffc928ef51fdc91f6eca6c266c0ae",
-      "size_bytes": 21580
+      "sha256": "bca22cc234444762c0e6f039a7bbd9ab926f667ef481fc4b3d661aa90c32cde4",
+      "size_bytes": 21586
     },
     {
       "path": "references/capabilities/evidence.md",
@@ -32,28 +30,33 @@
     },
     {
       "path": "references/capabilities/facts.md",
-      "sha256": "36d8239bcc945db0d7ca34092a1df1847bba19f8b5d23d6b7f519789758d357c",
-      "size_bytes": 12893
+      "sha256": "df795c2cf88206ec0a03d82d5c3b5abbbfa82eef901a7987385895f29cd82e0b",
+      "size_bytes": 13801
     },
     {
       "path": "references/capabilities/reasoning.md",
-      "sha256": "454177d085b5317cde0ce533f6ac8dd08145b4d336e4579a6b16fc5f55ec9362",
-      "size_bytes": 8376
+      "sha256": "ed8b850399737fc9d00e81895dbf9a9c4e86a240de4a3d7a6a79bb60c22fba4b",
+      "size_bytes": 8375
     },
     {
       "path": "references/capabilities/research.md",
-      "sha256": "cd0f4bc88f40beb8a83b4af62c121184cfdf88d9a77da80134525745faddb1f4",
-      "size_bytes": 25118
+      "sha256": "d5e8628b445f57032d7e8d5040852b077ba2d66bde7cf1bf3f223f0b70aedfd7",
+      "size_bytes": 25124
     },
     {
       "path": "references/capabilities/review.md",
-      "sha256": "8efed6557cbf71158a2f40b00bc164f8a5ca32e9ea9e9f81c09fd1f5d49e4722",
-      "size_bytes": 12574
+      "sha256": "da30ea40dc23fbd1862916c689e5e3048f5ead3f92f12750b8e59489e0193e93",
+      "size_bytes": 15303
     },
     {
       "path": "references/capabilities/strategy.md",
-      "sha256": "a73e4e0a8586d8c22efbe65f4a2c84b7f1495eda8a5c4f8953b5c688f46f471e",
-      "size_bytes": 3191
+      "sha256": "75c6bb98cbbab86b51e1b9982f1a4060441070339225c5b1160b72ea4c62a0b7",
+      "size_bytes": 3190
+    },
+    {
+      "path": "references/capabilities/visualization.md",
+      "sha256": "f476b5b6d7fef1a0eec0a498a92f2fee89c798b86dfd9310d046731307037941",
+      "size_bytes": 16527
     },
     {
       "path": "references/domains/advisory.md",
@@ -82,13 +85,13 @@
     },
     {
       "path": "references/external/document-render.md",
-      "sha256": "0f09d9e57b8d5ed7e29be0ec4cf4a246cd2ead8ab2b11d8243e9c5602612056a",
-      "size_bytes": 7904
+      "sha256": "1bcb579d89a6d677c35c68d5736eddd3399968f8166a7a035473d9d5f88e2713",
+      "size_bytes": 9960
     },
     {
       "path": "references/external/input-search-data.md",
-      "sha256": "8a2745675b94f94dad954359c7071d72fdfa554ec68e6cb7f384dad6bc84cdb9",
-      "size_bytes": 3458
+      "sha256": "23a70f788b399f40424ca506a9352201039153d57513c2605931e61399a757b1",
+      "size_bytes": 3469
     },
     {
       "path": "references/guards/current-law.md",
@@ -102,8 +105,8 @@
     },
     {
       "path": "references/guards/formal-delivery.md",
-      "sha256": "b1635fc3f52bfe6c9272eb9a7156c3aea03466b528f01cc23ac41008d2a939ef",
-      "size_bytes": 3037
+      "sha256": "b1e2584a529a7ffca6d72bf8aab45a8ab601fd719da2a1fc823cd105ab57cab0",
+      "size_bytes": 4641
     },
     {
       "path": "references/guards/human-decision.md",
@@ -126,9 +129,19 @@
       "size_bytes": 874
     },
     {
+      "path": "references/interop/artifact-contract.md",
+      "sha256": "2c9f983e58b13f54970cd7a7d76480d7f714323b387ebba19532b3b28d378af7",
+      "size_bytes": 5863
+    },
+    {
+      "path": "references/interop/batch-processing.md",
+      "sha256": "dfb5219bf57b46a33a338a48fe1c449286dd3ea1c7a8ed49a931737209b7028f",
+      "size_bytes": 4954
+    },
+    {
       "path": "references/interop/capability-requirement.md",
-      "sha256": "e4326a86f28c75057db5a69fb180c9504de055d3864b009cf6ae52cbb678cb9d",
-      "size_bytes": 2699
+      "sha256": "664f03ff484a3c7ef4183f94df9fdf49e0c54377ebc0a3cb45074d978a2b6916",
+      "size_bytes": 5831
     },
     {
       "path": "references/interop/least-necessary-disclosure.md",
@@ -137,33 +150,33 @@
     },
     {
       "path": "references/interop/specialist-ownership.md",
-      "sha256": "92299ab7b04d7100472b9f751ebfaa5233e271ea59232655c5f9cf2929db16c4",
-      "size_bytes": 1455
+      "sha256": "cc7197494813b0efb5c0cbc953ff321766b40425656d89fca5f2c51e34cb1a16",
+      "size_bytes": 1475
     },
     {
       "path": "references/matter/context-projection.md",
-      "sha256": "09ae8e7477ac48cce039cdf84deebf704e7262a76d84db21386a96d764b97456",
-      "size_bytes": 1629
+      "sha256": "f625dfd68ec16a0ae0a5d58ad17d2ba604528374acde1c01cbd3d09557d97ab3",
+      "size_bytes": 2084
     },
     {
       "path": "references/matter/professional-state.md",
-      "sha256": "8e9329ec5100bccc2299ff47689847ce328b6ecf376db9257e1ee1beff7be7c1",
-      "size_bytes": 2699
+      "sha256": "478d2d9869ecdcc032fe30af58549e3adacda44ad608f7442e6d1bc173dd7750",
+      "size_bytes": 5349
     },
     {
       "path": "references/matter/result-invalidation.md",
-      "sha256": "d7ef43728ded6d2e0d73295ed3bc5a25efed58f5beb34548685330fdd0010085",
-      "size_bytes": 1160
+      "sha256": "9acd9ce723d53d89f4df8a91ead4a3304fdd7606e7ec7cd3fa7df8072ffcca88",
+      "size_bytes": 2413
     },
     {
       "path": "references/preferences/activation-mode.md",
-      "sha256": "f35f9d3792e5895c321f1da0a54dcf186b4711325730ccb1cc18773ba17c9ed9",
-      "size_bytes": 1099
+      "sha256": "03093f9ef979f46428d00273997cffd7988f4a51cbc4b9062dba2307b2b189e9",
+      "size_bytes": 1283
     },
     {
       "path": "references/preferences/legal-work.md",
-      "sha256": "ce8145a7513165ef1ed7cfa9fece3c180b4b95661ff35c1cb16b9ef93963b33c",
-      "size_bytes": 2967
+      "sha256": "a42d939bffc09819a6f83dc4351a53a9514f532633742165c7dee842fac1d647",
+      "size_bytes": 6583
     }
   ]
 }
