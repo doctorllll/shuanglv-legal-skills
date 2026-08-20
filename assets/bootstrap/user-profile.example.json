@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.50-bootstrap-1",
+  "schema_version": "0.51-bootstrap-1",
   "profile_id": "USER-DEMO-001",
   "profile_type": "USER",
   "owner_label": "示例用户",

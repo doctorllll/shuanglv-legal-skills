@@ -32,7 +32,7 @@
   ·
   <a href="docs/User_Guide/快速开始指南.md">快速开始</a>
   ·
-  <a href="docs/User_Guide/爽律skill_v0.50_全模块操作手册.html">使用指南</a>
+  <a href="docs/User_Guide/爽律skill_v0.51_全模块操作手册.html">使用指南</a>
   ·
   <a href="LICENSE">许可</a>
   ·

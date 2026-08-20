@@ -362,6 +362,8 @@ L5 解释与实践补强
 
 “搜到”不等于“可用”。正式纳入研究的候选来源应形成 SourceCard / SourceProfile，说明 `SourceRole`、权威性、规范效力、事实证明力和允许用途。
 
+当复杂/深度任务加载 `unit.interop.execution-control` 时，Research 的 `SATURATED / INCOMPLETE / BLOCKED` 状态及其完成依据必须回写执行账本；只有搜索命中、打开数据库页面或获得候选案例，均不得把 Research 标记为 COMPLETE。
+
 ### LR-R013｜权威性、效力与证明力不得混写（HARD/L1）
 
 高质量官方解释可以很权威但不是正式法律规范；专业文章可以很有解释价值但不能自动证明本案事实；正式规范能证明规则但不能替代本案证据。

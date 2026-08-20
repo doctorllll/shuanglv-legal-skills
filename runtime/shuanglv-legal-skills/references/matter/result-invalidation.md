@@ -54,3 +54,7 @@
 - An `UNKNOWN` materiality edge cannot be silently treated as NON_MATERIAL when the conclusion is high-impact; inspect or require review.
 
 Result status remains: `CURRENT / STALE / REBUILD`. DependencyEdge is a lightweight invalidation aid, not an independent truth source.
+
+## Execution Ledger 接口
+
+当 `unit.interop.execution-control` 已加载，依赖失效的 canonical 判断仍由本文件负责；执行控制只接收结果并把受影响模块状态投影为 `INVALIDATED / IN_PROGRESS / REVIEW_REQUIRED`。不得由执行账本另造第二套依赖真值。

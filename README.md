@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <img alt="version" src="https://img.shields.io/badge/version-v0.50-blue?style=flat-square">
+  <img alt="version" src="https://img.shields.io/badge/version-v0.51-blue?style=flat-square">
   <img alt="stage" src="https://img.shields.io/badge/stage-%E6%AD%A3%E5%BC%8F%E7%89%88-orange?style=flat-square">
   <img alt="format" src="https://img.shields.io/badge/format-Agent%20Skills-8a2be2?style=flat-square">
   <img alt="language" src="https://img.shields.io/badge/lang-zh--CN-lightgrey?style=flat-square">
@@ -29,7 +29,7 @@
   <strong>发起及主导：卓建律师事务所 蔡诗爽律师</strong><br>
   <a href="https://csslaw.cn/">爽律刑法空间 · csslaw.cn</a>
   ·
-  <a href="docs/User_Guide/爽律skill_v0.50_全模块操作手册.html"><strong>全模块操作手册</strong></a>
+  <a href="docs/User_Guide/爽律skill_v0.51_全模块操作手册.html"><strong>全模块操作手册</strong></a>
   ·
   <a href="docs/User_Guide/快速开始指南.md">快速开始</a>
   ·
@@ -54,7 +54,7 @@
 
 简而言之，爽律skill 解决的不是“让 AI 多写一点”，而是让 AI 在处理法律任务时知道：**应该先理解什么、必须核验什么、何时继续深入、何时停止，以及怎样把内部专业工作转化为可以正式交付的成果。**
 
-> 📘 **完整操作方式请直接打开：** [`爽律skill v0.50 全模块操作手册`](docs/User_Guide/爽律skill_v0.50_全模块操作手册.html)
+> 📘 **完整操作方式请直接打开：** [`爽律skill v0.51 全模块操作手册`](docs/User_Guide/爽律skill_v0.51_全模块操作手册.html)
 
 ---
 
@@ -116,7 +116,7 @@
 
 ## 四、它怎样工作
 
-v0.50 **不是每个任务固定跑一条完整流水线**。
+v0.51 **不是每个任务固定跑一条完整流水线**。
 
 它先判断用户真正要求什么，再选择完成当前任务所需的**最小必要能力集合**。简单任务不强制展开完整流程；只有当新的事实、证据、法律、风险、策略、可视化或交付要求会实质影响结果时，才继续加深。
 
@@ -263,7 +263,7 @@ API Key、账号、连接器、数据库或其他工具能够调用，只说明�
 
 当材料存在明显结构时，还可以根据需要形成时间线、主体关系图、交易结构图、资金流、履行流程图、证据关系图、要件—证据图或论证图。
 
-这不是一个固定必跑模块。简单事项没有必要为了形式完整制造图表；图形也不能替代对决定性原始材料的核验。v0.50 进一步要求：图形必须直接消费已有事实、证据与分析结构，并保留来源、状态和必要的反向信息。
+这不是一个固定必跑模块。简单事项没有必要为了形式完整制造图表；图形也不能替代对决定性原始材料的核验。当前版本继续要求：图形必须直接消费已有事实、证据与分析结构，并保留来源、状态和必要的反向信息。
 
 ---
 
@@ -375,9 +375,9 @@ API Key、账号、连接器、数据库或其他工具能够调用，只说明�
 
 ## 十四、当前版本与能力边界
 
-**当前版本：v0.50 正式版。**
+**当前版本：v0.51 正式版。**
 
-v0.50 当前运行层采用：
+v0.51 当前运行层采用：
 
 > **轻量入口 + 按需共享能力 + 业务领域扩展 + 条件风险控制 + 最小事项状态 + 松耦合外部能力**
 
@@ -393,7 +393,7 @@ v0.50 当前运行层采用：
 
 ---
 
-## 十五、v0.49 与 v0.50 的主要升级
+## 十五、v0.49—v0.51 的主要升级
 
 ### v0.49
 
@@ -412,6 +412,15 @@ v0.50 当前运行层采用：
 - 静态、交互、快照共享同一法律语义与数据版本；
 - 增加“错但好看”防护，禁止金额、日期、方向、状态、来源和反向信息被视觉加工改变。
 
+### v0.51
+
+- 更新爽律skill自身时先区分官方程序层、用户资产与归属不明文件，UNKNOWN 默认保护；
+- 禁止在未完成用户资产盘点与保护前把整目录递归删除作为默认更新方式；
+- 实质性专业任务增加任务执行契约、模块状态与完成依据，避免“读过规则”被误当成“执行完成”；
+- 实体文件存在与专业成果完成分开判断，上游变化会定向使受影响下游结果失效或重审；
+- 深度研究增加充分性门，重大正式交付增加独立完成审查；
+- 用户可见进度来自真实执行状态投影，长任务阶段汇报后在无真实人工阻断时继续执行。
+
 ---
 
 ## 十六、文件入口、作者与许可
@@ -428,7 +437,7 @@ v0.50 当前运行层采用：
 
 | 文档 | 用途 |
 |---|---|
-| [爽律skill v0.50 全模块操作手册](docs/User_Guide/爽律skill_v0.50_全模块操作手册.html) | **完整操作说明，建议优先阅读** |
+| [爽律skill v0.51 全模块操作手册](docs/User_Guide/爽律skill_v0.51_全模块操作手册.html) | **完整操作说明，建议优先阅读** |
 | [快速开始指南](docs/User_Guide/快速开始指南.md) | 第一次使用 |
 | [Skill 能力地图](docs/User_Guide/Skill能力地图.md) | 查看当前能力与边界 |
 | [各 Skill 使用说明](docs/User_Guide/各Skill使用说明/) | 按业务领域深入 |
@@ -448,7 +457,7 @@ v0.50 当前运行层采用：
 
 ### 许可与反馈
 
-v0.50 适用根目录 [LICENSE](LICENSE) 所载的 **ShuangLaw Professional Use License 1.0**。
+v0.51 适用根目录 [LICENSE](LICENSE) 所载的 **ShuangLaw Professional Use License 1.0**。
 
 项目处于持续完善阶段。真实使用中如发现工作流程、专业规则、兼容性、风险控制或使用体验方面的问题，可通过 [开放反馈说明](docs/开放反馈说明.md) 或 [CONTRIBUTING](CONTRIBUTING.md) 提交反馈。
 
@@ -475,7 +484,7 @@ v0.50 适用根目录 [LICENSE](LICENSE) 所载的 **ShuangLaw Professional Use 
 
 ## 附：仓库层说明
 
-本仓库的 v0.50 正式运行层位于 `runtime/shuanglv-legal-skills/`。安装时应将仓库作为整体提供给 Agent，并以该目录下的 `SKILL.md` 作为运行入口。
+本仓库的 v0.51 正式运行层位于 `runtime/shuanglv-legal-skills/`。安装时应将仓库作为整体提供给 Agent，并以该目录下的 `SKILL.md` 作为运行入口。
 
 ### 目录结构
 
@@ -484,6 +493,7 @@ v0.50 适用根目录 [LICENSE](LICENSE) 所载的 **ShuangLaw Professional Use 
 ├── runtime/shuanglv-legal-skills/  # 唯一正式运行层
 ├── docs/                           # 用户指南、安装、反馈与许可说明
 ├── assets/bootstrap/               # 不含真实用户数据的初始化示例
+├── UPDATE_INSTRUCTIONS.md          # 安全更新与用户资产保护规则
 ├── PACKAGE_MANIFEST.json           # 正式成果包清单
 ```
 
@@ -503,12 +513,12 @@ git clone https://github.com/zj-ai-lab/shuanglv-legal-skills.git
 帮我把这个爽律skill更新到最新正式版。
 ```
 
-Agent 应核对当前安装版本、获取最新正式版、保留用户自己的模板/偏好/事项资产、替换正式运行层与同版本用户文档，并完成基本完整性检查；如果当前宿主没有相应权限，应明确说明，不能假装已经更新。
+Agent 应先读取 [`UPDATE_INSTRUCTIONS.md`](UPDATE_INSTRUCTIONS.md)，核对当前安装版本并扫描程序层、用户资产与归属不明文件；只有已确认的官方程序层可以被替换。用户模板、偏好/配置、Matter/Resume、用户文件和 UNKNOWN 默认保护；更新后必须同时验证新版运行入口和用户资产。如果当前宿主没有相应权限，应在破坏性修改前停止，不能假装已经更新。
 
 ### 版本与历史
 
-当前版本为 v0.50 正式版。历史版本继续保留在 Git tag 和历史提交中，可通过对应 tag 下载。
+当前版本为 v0.51 正式版。历史版本继续保留在 Git tag 和历史提交中，可通过对应 tag 下载。
 
 ### 许可
 
-v0.50 适用根目录 `LICENSE` 所载的 **ShuangLaw Professional Use License 1.0**。品牌标识另受权利人控制。
+v0.51 适用根目录 `LICENSE` 所载的 **ShuangLaw Professional Use License 1.0**。品牌标识另受权利人控制。

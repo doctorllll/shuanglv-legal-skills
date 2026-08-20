@@ -61,6 +61,7 @@
 - `finding_refs`：已形成分析发现/法律结论引用；
 - `decision_refs`：人工保留决定及其状态；
 - `deliverable_state_refs`：报告、文书、合同稿、矩阵等交付物状态引用；
+- `execution_state_refs`：仅对跨轮次仍未结束的复杂任务保存 TaskExecutionContract / ModuleExecutionLedger 的最小续跑引用；简单任务不持久化执行台账；
 - `open_issue_refs`：待解决问题；
 - `dependency_edges`：上游变化影响下游结果的轻量依赖边；
 - `recommended_next_units`；
@@ -111,3 +112,7 @@
 ## 6. Host persistence boundary
 
 Host 不支持持久化时，输出可携带的最小状态/Resume Capsule，不声称已经长期保存。爽律skill 定义状态语义，不自建 CRM、数据库或项目管理软件。
+
+## 长任务执行状态续接
+
+跨轮次长任务需要继续执行时，可以保存 `execution_state_refs`，用于恢复尚未完成、受阻或已失效的主要模块状态。恢复时仍遵循 `Persistent Rich, Recover Minimal`，只投影当前子任务需要的状态和完成依据，不把执行账本扩张成通用项目管理数据库。

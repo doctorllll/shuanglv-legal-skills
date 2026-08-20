@@ -17,8 +17,9 @@
 3. Require adversarial review when material/high-stakes.
 4. Separate semantic finalization from rendering.
 5. Run `External Deliverable Hygiene Check` before FINAL.
-6. If the requested deliverable is a rendered/native document, require resolution of the applicable `DocumentStyleProfile` and rendering QA; authority/document-type/user template overrides the 爽律skill default baseline.
-7. If a legal visualization is FINAL, require semantic/cognitive/visual QA; interactive FINAL additionally passes the `Dynamic Delivery Fidelity Gate`.
+6. When `unit.interop.execution-control` is triggered, require Completion Audit and verify no required `NOT_STARTED / PARTIAL / BLOCKED / INVALIDATED` state is hidden before FINAL.
+7. If the requested deliverable is a rendered/native document, require resolution of the applicable `DocumentStyleProfile` and rendering QA; authority/document-type/user template overrides the 爽律skill default baseline.
+8. If a legal visualization is FINAL, require semantic/cognitive/visual QA; interactive FINAL additionally passes the `Dynamic Delivery Fidelity Gate`.
 
 ## Deepening Conditions
 - High stakes/long complex formal document.
@@ -65,3 +66,17 @@
 10. **Graceful degradation**：动态失败不得拖垮已经可靠完成的静态基础成果。
 
 动态交付的视觉交互状态不是事实状态。`隐藏 ≠ 删除；筛选 ≠ 否认；聚焦 ≠ 证明。`
+
+## Execution Completion Gate｜v0.51 执行完成门
+
+当任务加载 `references/interop/execution-control.md` 时，Formal Delivery 在 FINAL 前必须读取其 `TaskExecutionContract / ModuleExecutionLedger / proof_of_work` 投影：
+
+- 目标交付物与用户原始目标一致；
+- 所有必需模块均达到可接受退出状态；
+- `COMPLETE` 均有最小完成依据；
+- `PARTIAL / BLOCKED / INVALIDATED` 未被隐藏；
+- 上游变化已传播到受影响成果；
+- 必要的 Completion Audit 已完成；
+- 实体文件存在状态没有被偷换成专业完成状态。
+
+任一必需缺口仍未关闭且未被明确降级/披露时，只能交付工作稿、部分成果或受阻说明，不得无保留标记 `FINAL_DELIVERABLE`。

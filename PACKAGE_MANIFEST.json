@@ -1,8 +1,8 @@
 {
   "package": "爽律skill｜律师专业工作流系统",
-  "version": "0.50",
+  "version": "0.51",
   "release_status": "正式版",
-  "file_count_excluding_manifest": 61,
+  "file_count_excluding_manifest": 64,
   "files": [
     {
       "path": "ACKNOWLEDGEMENTS.md",
@@ -22,12 +22,17 @@
     {
       "path": "NOTICE",
       "size_bytes": 522,
-      "sha256": "15d1a2512dc1ec56dcf448196772493f76a26c21d5fc56616b383eb548fb911f"
+      "sha256": "3b1f3096fa28d8854a2d010e2d4370ad35fefd3405782e84d99e55a3a1e0535c"
     },
     {
       "path": "README.md",
-      "size_bytes": 27861,
-      "sha256": "bc801bf1623c8632df404d001d40a71ae265a37af1f53a5dcddb571d76fe101e"
+      "size_bytes": 28811,
+      "sha256": "f0c4739fc8fdbc56d193beb2247dac03f43d9e0ebf6c7bd4fd507f6524822c9a"
+    },
+    {
+      "path": "UPDATE_INSTRUCTIONS.md",
+      "size_bytes": 5290,
+      "sha256": "d80c64b34c2b240e0befbb5bf09067e3a1f8a53f587933f4cf4bd12ad4114db5"
     },
     {
       "path": "assets/bootstrap/README.md",
@@ -37,17 +42,17 @@
     {
       "path": "assets/bootstrap/template-assets.example.json",
       "size_bytes": 786,
-      "sha256": "a488a0f98fa6e4e4846dcea10606eda35a60fd0c84e36df96e9c5dff53000841"
+      "sha256": "ff8d7fb1ab9048545b9894735cac8458fa53f65e3b78979ae125948b6b65fff0"
     },
     {
       "path": "assets/bootstrap/user-profile.example.json",
       "size_bytes": 802,
-      "sha256": "3a62599a0dc04772266bcd9dcd03296e51ac062a0813034dab8eabe75b713deb"
+      "sha256": "1390cddfafd6d64e7bf420af9a4009b3f8d5ea8a38ebfd479f9efecab7aeb529"
     },
     {
       "path": "docs/User_Guide/Skill能力地图.md",
-      "size_bytes": 6476,
-      "sha256": "3ca74c44e4b84e55ac33ebc6166a772b4bc6bea4c9b165696d5f7e86220b9627"
+      "size_bytes": 7085,
+      "sha256": "21e0e6039e5de7ccd387b269cc221ff238229e4de13b69f97f7b117c280b728e"
     },
     {
       "path": "docs/User_Guide/各Skill使用说明/刑事案件办理.md",
@@ -86,8 +91,8 @@
     },
     {
       "path": "docs/User_Guide/快速开始指南.md",
-      "size_bytes": 4357,
-      "sha256": "41139e1626b91a7a6ce042509ed1207a6510d66ac9df653ae40bd576b3cae1b4"
+      "size_bytes": 4813,
+      "sha256": "83ab978c97fc3ca8da5bcb1526b00a23fb5d2258b228a52db3bc136af7be53e3"
     },
     {
       "path": "docs/User_Guide/法律可视化使用说明.md",
@@ -95,24 +100,24 @@
       "sha256": "751c9c835c9b5039339e3a031aff7c1a15a0959f0ce56cda4357a690a9fcacf2"
     },
     {
-      "path": "docs/User_Guide/爽律skill_v0.50_全模块操作手册.html",
-      "size_bytes": 756941,
-      "sha256": "f6df2f0d14a7b0691210b7e0b0420fa262b82799b2ec52b6295e5de3d6e4058f"
+      "path": "docs/User_Guide/爽律skill_v0.51_全模块操作手册.html",
+      "size_bytes": 759300,
+      "sha256": "fddf9e7d7650313ee94b0c4d6033f207d7644b775e32173b15d1b0b7eda3d96a"
     },
     {
       "path": "docs/User_Guide/输出质量控制指南.md",
-      "size_bytes": 5945,
-      "sha256": "d37e2b175debca57a0085042031cd8628dc51068fead525b110462107a3b6bc9"
+      "size_bytes": 6305,
+      "sha256": "422ff2576840a73ed3b749c10b0050e920ae5488b5d507b6b25bc4ad1d9bd7d8"
     },
     {
-      "path": "docs/v0.50版本说明.md",
-      "size_bytes": 1170,
-      "sha256": "760ba7ec9af81bbb3689a1e06600868e3ca3f1ec9df7ee648487242fd699716a"
+      "path": "docs/v0.51版本说明.md",
+      "size_bytes": 1310,
+      "sha256": "bf7fa16d90c12253c5c51e6f64ff4df45939c2612ca560c1c806220480322f7b"
     },
     {
       "path": "docs/安装与调用说明.md",
-      "size_bytes": 1553,
-      "sha256": "70dc63aa7b55203a132d74632d3627863e4e9c0e4420af79aff3b49221a7876b"
+      "size_bytes": 1891,
+      "sha256": "a9ae33dca3feb06e2c1b639b79f4c152fd4f19c61dc90c74eb1cbd97d3b857a5"
     },
     {
       "path": "docs/开放反馈说明.md",
@@ -122,17 +127,17 @@
     {
       "path": "docs/系统说明.md",
       "size_bytes": 1209,
-      "sha256": "a7758065c3f0b8463779ede74d2924c81a0a54b1f38a678cea9db2785690d450"
+      "sha256": "483eb17a239c6507ecc2683f6ee68179cccc9a5f249a12e2d4d1079afd2a8538"
     },
     {
       "path": "docs/许可与使用声明.md",
       "size_bytes": 621,
-      "sha256": "c598ff78d346dc0d0fbe63515b0647c167b713ac3c918b47cd3db65f0ead4d7a"
+      "sha256": "42821b6f8a9368ba94d9ea3821aeb0529b540ece6bbef44dd99007da730417a6"
     },
     {
       "path": "runtime/shuanglv-legal-skills/CORE_FILE_MANIFEST.json",
-      "size_bytes": 6242,
-      "sha256": "4b2b15b5d7d0bc65ba0bf16d5312e338c6f6e187fd99dff3df2876c6b3507c08"
+      "size_bytes": 6584,
+      "sha256": "ebf47e4794825ea1ede77cf58c81c69a133e439d8435245f80870c891a52a34a"
     },
     {
       "path": "runtime/shuanglv-legal-skills/LICENSE",
@@ -141,13 +146,18 @@
     },
     {
       "path": "runtime/shuanglv-legal-skills/SKILL.md",
-      "size_bytes": 21399,
-      "sha256": "c2d258136fba300af9c3e6222cc1416c9dd8bf219830ff1eb3a9e5dd57d45052"
+      "size_bytes": 24100,
+      "sha256": "2a601e528c46fa7a4227c51fef8d1981ab04aa5a0142fe9b839d5449d3bbc191"
+    },
+    {
+      "path": "runtime/shuanglv-legal-skills/UPDATE_INSTRUCTIONS.md",
+      "size_bytes": 5290,
+      "sha256": "d80c64b34c2b240e0befbb5bf09067e3a1f8a53f587933f4cf4bd12ad4114db5"
     },
     {
       "path": "runtime/shuanglv-legal-skills/manifest.json",
-      "size_bytes": 690,
-      "sha256": "09656ed8ec769cd429a0ca6f1e66ab92ce9b1aa514283490f48e838ca22c8d68"
+      "size_bytes": 735,
+      "sha256": "146bc0b26e98ac38ca9dbcc8c5cc4604be78311f4a0cabc53225ff6c0150cec2"
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/capabilities/composition.md",
@@ -171,13 +181,13 @@
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/capabilities/research.md",
-      "size_bytes": 25124,
-      "sha256": "d5e8628b445f57032d7e8d5040852b077ba2d66bde7cf1bf3f223f0b70aedfd7"
+      "size_bytes": 25402,
+      "sha256": "46d959fca25de81464290db7c132fb517b1576f90db617c9d01a5ce0b3e14d39"
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/capabilities/review.md",
-      "size_bytes": 15303,
-      "sha256": "da30ea40dc23fbd1862916c689e5e3048f5ead3f92f12750b8e59489e0193e93"
+      "size_bytes": 15871,
+      "sha256": "e4ab34133bf6f8e57c8042a491b3dcc2936a67491ff664943e7e6bc34b81cc2a"
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/capabilities/strategy.md",
@@ -186,8 +196,8 @@
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/capabilities/visualization.md",
-      "size_bytes": 16527,
-      "sha256": "f476b5b6d7fef1a0eec0a498a92f2fee89c798b86dfd9310d046731307037941"
+      "size_bytes": 16547,
+      "sha256": "78d802712096bed724858ac290e8fcd72ec03315bea1ff258102ccd2ade54b49"
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/domains/advisory.md",
@@ -236,8 +246,8 @@
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/guards/formal-delivery.md",
-      "size_bytes": 4641,
-      "sha256": "b1e2584a529a7ffca6d72bf8aab45a8ab601fd719da2a1fc823cd105ab57cab0"
+      "size_bytes": 5573,
+      "sha256": "2370b4bfb1894d9c98e67dfc2145a17f48976d163647ce1c9347ca133bdfa716"
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/guards/human-decision.md",
@@ -246,13 +256,13 @@
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/guards/migration-assets.md",
-      "size_bytes": 1449,
-      "sha256": "667a639370dffdac1d6daa5f2526e2bff1e8b77bcb7b5d37579d49654863d6a7"
+      "size_bytes": 2015,
+      "sha256": "38c5aa57d222372cf73af15567f73ea312d4a7578cb03da0789493a92c7f4327"
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/guards/side-effect-authorization.md",
-      "size_bytes": 1619,
-      "sha256": "f0b793eae84980aa637ed96650579f056d4e6f8e12348abc8dd97bb16dc787c5"
+      "size_bytes": 2082,
+      "sha256": "246fb8db03a723bb4d54ffe53594d3a660382114f32bfb91c96db0313ae74b2b"
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/guards/source-preservation.md",
@@ -261,8 +271,8 @@
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/interop/artifact-contract.md",
-      "size_bytes": 5863,
-      "sha256": "2c9f983e58b13f54970cd7a7d76480d7f714323b387ebba19532b3b28d378af7"
+      "size_bytes": 6469,
+      "sha256": "7113f5ebed3329c20b7a204bdff9851c0f6d86ea9f59c104d5b5e6f8affa9bb8"
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/interop/batch-processing.md",
@@ -273,6 +283,11 @@
       "path": "runtime/shuanglv-legal-skills/references/interop/capability-requirement.md",
       "size_bytes": 5831,
       "sha256": "664f03ff484a3c7ef4183f94df9fdf49e0c54377ebc0a3cb45074d978a2b6916"
+    },
+    {
+      "path": "runtime/shuanglv-legal-skills/references/interop/execution-control.md",
+      "size_bytes": 10195,
+      "sha256": "ff969f0685125652dc76488b5c43b08760952c2fb6af49ad5f1154843a0ed5ad"
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/interop/least-necessary-disclosure.md",
@@ -291,13 +306,13 @@
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/matter/professional-state.md",
-      "size_bytes": 5349,
-      "sha256": "478d2d9869ecdcc032fe30af58549e3adacda44ad608f7442e6d1bc173dd7750"
+      "size_bytes": 5888,
+      "sha256": "cfe8400a2b8228d573aeb1f7f30b2fd655ec37dfd5d120246f0908087ff3db23"
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/matter/result-invalidation.md",
-      "size_bytes": 2413,
-      "sha256": "9acd9ce723d53d89f4df8a91ead4a3304fdd7606e7ec7cd3fa7df8072ffcca88"
+      "size_bytes": 2711,
+      "sha256": "9ccbea8c23272fd66ab3f607068f579618418814019e593ed404d8710371abf2"
     },
     {
       "path": "runtime/shuanglv-legal-skills/references/preferences/activation-mode.md",

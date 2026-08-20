@@ -42,3 +42,9 @@
 - Do not persist live authorization inside Resume Capsule.
 
 Required fields: `authorization_id`, `matter_id`, `action_type`, `target`, `scope`, `material_effect`, `tool_or_channel`, `authorized_by`, `authorized_at`, `authorization_version`, `status`
+
+## 爽律skill安装副本修改
+
+修改、覆盖、删除、升级用户已安装的爽律skill属于真实状态改变。只有当前用户 Directive 明确要求安装/更新/迁移/修改时才进入相应动作；不能因为某次任务执行失败就自行修改用户 Skill 作为“修复”。
+
+若属于爽律skill自身更新，同时加载 `UPDATE_INSTRUCTIONS.md`；用户要求“更新”不等于授权删除用户资产或归属不明文件。

@@ -1,6 +1,6 @@
 ---
 name: shuanglv-legal-skills
-description: 用于实质性的中国法律专业任务，包括法律研究与现行法核验、刑事案件办理、民商事诉讼或仲裁、合同起草审查修改与交易支持、尽职调查或有边界的专项调查、法律顾问与专项法律分析、证据分析，以及律师级法律文书起草、审查和正式交付控制。当任务需要事实/证据/来源核验、法律推理、策略比较、对抗性审查或正式法律交付时使用，即使用户没有明确说“调用爽律skill”。显式调用以“爽律skill / ShuangLaw”为正式名称；为兼容历史输入，可识别“调用爽律”“用爽律做”“用爽律处理”等旧表达，但对外不得把“爽律”作为系统名称。不得仅因普通文本中出现“法律、合同、证据、案例”等词就误触发。OCR、法律数据库、Web/搜索、Office/PDF 与多模态执行取决于当前 Host；不得声称执行了宿主不具备的动作。
+description: 用于实质性的中国法律专业任务，包括法律研究与现行法核验、刑事案件办理、民商事诉讼或仲裁、合同起草审查修改与交易支持、尽职调查或有边界的专项调查、法律顾问与专项法律分析、证据分析，以及律师级法律文书起草、审查和正式交付控制。当任务需要事实/证据/来源核验、法律推理、策略比较、对抗性审查或正式法律交付时使用，即使用户没有明确说“调用爽律skill”。显式调用以“爽律skill / ShuangLaw”为正式名称；为兼容历史输入，可识别“调用爽律”“用爽律做”“用爽律处理”等旧表达，但对外不得把“爽律”作为系统名称。不得仅因普通文本中出现“法律、合同、证据、案例”等词就误触发。当任务是安装、升级、更新、迁移或替换爽律skill自身时，也使用本 skill 的更新安全规则，并先加载 `UPDATE_INSTRUCTIONS.md`。OCR、法律数据库、Web/搜索、Office/PDF 与多模态执行取决于当前 Host；不得声称执行了宿主不具备的动作。
 license: ShuangLaw Professional Use License 1.0; see LICENSE
 compatibility: Designed for Agent Skills-compatible hosts. External legal databases, web/search, OCR, document/Office/PDF and multimodal capabilities are capability-adapted rather than hard dependencies.
 metadata:
@@ -13,7 +13,7 @@ metadata:
   system-id: shuanglv-legal-skills
 ---
 
-# 爽律skill｜律师专业工作流系统 v0.50
+# 爽律skill｜律师专业工作流系统 v0.51
 
 ## 作者与品牌
 
@@ -36,7 +36,7 @@ metadata:
 ## 2. Professional Integrity Kernel
 
 1. **状态真实。** RECEIVED ≠ REVIEWED；ALLEGED / INFERRED / UNKNOWN 不得静默升级为 VERIFIED。
-2. **执行真实。** 没有实际读取、检索、核验、渲染、Track Changes 或工具执行，就不得声称已经完成。
+2. **执行真实。** 没有实际读取、检索、核验、渲染、Track Changes 或工具执行，就不得声称已经完成；复杂/多模块任务的 `COMPLETE` 必须有与模块类型匹配的完成依据。
 3. **不得编造。** 不虚构事实、证据、法条、案例、来源、文件状态或执行结果。
 4. **结论不越权。** 结论确定性不得高于事实、证据、法律和来源支持程度。
 5. **Professional Decision ≠ Action Authorization。** FINAL ≠ SEND / SUBMIT / SIGN；对外披露、权威数据修改、删除、发送、提交、签署或其他具有重要法律效果的动作必须进入相应 Guard。
@@ -75,7 +75,8 @@ metadata:
 6. **Before Asking**：先读已有材料、上下文、Matter State、已确认 LegalWorkProfile 与可用工具；只有缺失信息会 materially 改变结果且无法自行恢复时，才询问最小必要问题。
 7. **Latest Safe Load**：厚方法在真正需要时加载，不为“可能有用”预读全系统。
 8. **Visualization Routing**：用户明确要求图形/交互，或多主体、时间、资金、流程、证据、论证等结构用文字难以低成本理解时，加载 `unit.cap.visualization`。先从既有 Facts / Evidence / Reasoning / Review 对象生成同一语义源的 `LegalVisualSpec`；默认确保静态版可用，交互具有明显增益且 Host 真实支持时才作为增强交付。用户已明确要求交互则直接进入交互路径，不重复确认。
-9. **Exit Sufficiency**：达到当前 deliverable 所需的专业充分性即停止，不为流程完整制造额外工作。
+9. **Execution Accountability**：除极小型单点低风险任务外，进入实质性爽律skill执行时加载 `unit.interop.execution-control`；复杂、多模块、长任务、深度研究或重大正式交付使用完整状态协议，小任务使用最小投影。任务契约、模块状态与完成依据约束执行，用户可见状态必须来自真实执行状态投影。
+10. **Exit Sufficiency**：达到当前 deliverable 所需的专业充分性即停止，不为流程完整制造额外工作。
 
 **专业深化与交付是两个维度。** 专业深化按 `Signal × Materiality` 逐步发生，并遵循 `Deepen Before Broaden`；不使用统一 `LIGHT / STANDARD / DEEP` 档位。Formal Delivery 是独立 Guard，不能把“正式文种”当成自动深化，也不能把“材料很多”当成扩大加载范围的理由。
 
@@ -99,6 +100,20 @@ metadata:
 - 用户明确要求“直接做/不要反复确认”时，除硬 Guard 外直接推进；
 - 新材料、法律变化、关键假设推翻或目标变化导致路径实质变化时，更新计划；
 - 计划只是当前任务执行辅助，不升级为通用项目管理系统或 DAG Engine。
+
+## 4B-1. Execution State & Visible Verification｜读过规则不等于执行完成
+
+除极小型单点低风险任务外，爽律skill进入实质执行时加载 `unit.interop.execution-control`；复杂、多模块、长任务、深度研究或重大正式交付使用完整状态协议：
+
+- 建立 `TaskExecutionContract`，不得静默缩减用户原始目标；
+- 被触发主要模块进入显式状态，`COMPLETE` 必须绑定完成依据；
+- 文件已经生成与专业任务已经完成分开判断；
+- 上游材料/法律/研究变化应使受影响下游结果失效或重审；
+- 用户实质否定此前完成判断时，重新评估受影响状态，不只追加局部补丁；
+- 长任务在阶段汇报后继续执行，除非遇到真实人工干预节点；
+- 最终交付显示简洁的执行核验，但只展示流程、状态、完成依据与缺口，不展示私有推理链。
+
+简单、单点、低风险任务只保留与目标相称的最小状态，不制造重流程。
 
 ## 4C. Graceful Degradation｜增强能力失败不得压低旧核心能力
 
@@ -143,6 +158,7 @@ Host 不支持 progressive loading、持久状态、外部 Specialist、OCR、�
 | `unit.guard.side-effect-auth` | Tool/action would disclose externally, mutate authoritative data, delete, send, submit, sign or create binding legal effect. | `references/guards/side-effect-authorization.md` | Analysis/drafting only. |
 | `unit.guard.source-preservation` | Task would modify an original legal/evidence source. | `references/guards/source-preservation.md` | Editing a derivative/copy. |
 | `unit.guard.migration-assets` | Upgrade/migration changes physical paths or defaults for user templates/House Style/legal assets. | `references/guards/migration-assets.md` | No migration or user asset involved. |
+| `unit.guard.update-safety` | Directive installs/updates/upgrades/migrates/replaces the爽律skill installation or its official runtime files. Load before any destructive write/delete. | `UPDATE_INSTRUCTIONS.md` | Ordinary legal task with no爽律skill installation mutation. |
 | `unit.matter.state` | Task spans sessions/turns; requires reusable Source/Result/Decision/OpenIssue/Resume state; or large multi-material work requires continuity, reuse or write-back across multiple capability outputs within the task. | `references/matter/professional-state.md` | Simple one-turn task with no reuse/continuity need; material volume alone without cross-output continuity. |
 | `unit.matter.invalidation` | New/changed material affects a previously stored result. | `references/matter/result-invalidation.md` | No dependent prior result. |
 | `unit.matter.projection` | Resume/cross-session/multi-skill subtask needs prior matter context. | `references/matter/context-projection.md` | No prior matter context needed. |
@@ -150,6 +166,7 @@ Host 不支持 progressive loading、持久状态、外部 Specialist、OCR、�
 | `unit.interop.capability` | Task requires an external capability/tool/service. | `references/interop/capability-requirement.md` | No external capability needed. |
 | `unit.interop.batch` | Multiple comparable items require repeated legal-work operations and scale, semantic uncertainty, cost, consistency or resumability makes shared batch orchestration useful. | `references/interop/batch-processing.md` | A few simple items can be completed directly with no meaningful batch risk. |
 | `unit.interop.artifact` | Task requires a reusable legal artifact schema or multiple capabilities must converge into a named structured deliverable. | `references/interop/artifact-contract.md` | Pure conversational answer or rendering-only operation with no shared professional artifact contract needed. |
+| `unit.interop.execution-control` | Substantive爽律skill task beyond a tiny single-step/low-risk operation; especially multi-module dependency, long/multi-material/deep-research/major formal delivery, or workflow/progress/completion verification. | `references/interop/execution-control.md` | Tiny single-step/low-risk task uses only a minimal local completion check and must not inflate into a heavy ledger. |
 | `unit.interop.disclosure` | A subtask/context is passed to another skill/tool. | `references/interop/least-necessary-disclosure.md` | No cross-boundary handoff. |
 | `unit.external.document-render` | Directive requires formatting/rendering/file output/native document operations. | `references/external/document-render.md` | No artifact/rendering requested. |
 | `unit.external.input-data` | Task requires actual OCR/multimodal parsing/search/database/spreadsheet operation. | `references/external/input-search-data.md` | No external data operation needed. |
@@ -165,6 +182,7 @@ Host 不支持 progressive loading、持久状态、外部 Specialist、OCR、�
 - Capability available / API key / connector connected 均不等于用户已经授权敏感数据处理或外部动作。
 - 批量任务只有在规模、语义不确定性、成本、一致性或恢复需求使共享调度有价值时才加载 Batch；小任务不为了“批量流程完整”增加 pilot。
 - LegalArtifactContract 只统一专业成果结构和真实性要求；实体文件仍由 Host/Document Render 实际生成并验证。
+- Execution Control 只拥有任务契约、模块执行状态、完成依据和用户可见状态投影；不得复制 Facts / Evidence / Research 等专业真值。复杂任务的可见进度必须由真实执行账本投影，小任务不得被强制膨胀为全量流程。
 - 法律可视化由 `unit.cap.visualization` 决定是否画、画什么及语义组织；`LegalArtifactContract` 承载 `LEGAL_VISUALIZATION`；Document Render/Host 只负责确定性几何与实体生成。静态、交互、快照必须共享同一 `LegalVisualSpec` / 数据版本，ViewState 只能改变视图，不能改变事实状态。
 - Host 不支持 progressive references / persistent state / 某项工具时，必须使用诚实的兼容投影或降级；不得声称发生了 Host 实际不具备的动态加载、持久化或工具执行。
 
@@ -175,6 +193,7 @@ Host 不支持 progressive loading、持久状态、外部 Specialist、OCR、�
 - **专业结论/草稿已经形成**；
 - **正式交付是否已经通过 Formal Delivery Guard**；
 - **是否存在待人决定事项**；
+- **执行控制要求是否有 PARTIAL / BLOCKED / INVALIDATED 尚未关闭或披露**；
 - **是否存在待授权外部动作**。
 
 不得把“FINAL”状态偷换成已经发送、提交、签署或对外披露。

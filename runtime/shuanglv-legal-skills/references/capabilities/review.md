@@ -421,3 +421,9 @@ DeliverableClaim（交付物中的重要命题）
 - materially relevant 的 `UNRESOLVED / STALE / BLOCKED / NEEDS_HUMAN` 必须在正式交付前关闭、降格表达、披露限制或阻断；
 - 非决定性未解决项可以保留，但不得在成品中被写成已确认事实/法律；
 - 最终文书不必展示内部 ledger ID，但关键命题应能够反向追溯到 ledger/object chain。
+
+## Completion Audit 接口｜完成性审查不是重复写一遍对抗意见
+
+当重大正式交付加载 `unit.interop.execution-control` 时，对抗性审查完成后还需进行独立 Completion Audit。该审查只检查任务目标、触发模块、完成依据、失效传播、未关闭缺口和文件/专业状态是否一致；它不替代本模块的最强反方审查，也不要求暴露私有推理链。
+
+如果本模块发现实质问题但没有回写受影响结论/正文，Review 不得进入 COMPLETE，Completion Audit 也不得放行 FINAL。

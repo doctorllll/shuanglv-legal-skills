@@ -118,3 +118,12 @@ Artifact Contract 只规定成品需要什么，**不重新拥有** Facts/Eviden
 - `CREATED_UNVERIFIED` 不得对用户表述为“文件已经存在且可用”；
 - 只有实际创建并检查路径/附件/内容后才能使用 `VERIFIED_EXISTS`；
 - 原生修订、批注、PDF 页码、图形等必须以当前 Host 真实能力为准。
+
+## Physical State ≠ Professional State｜实体存在不等于专业完成
+
+当 `unit.interop.execution-control` 已加载，LegalArtifactContract 至少区分：
+
+- `artifact_physical_state`：是否真实生成、可打开、可验证；
+- `professional_lifecycle_state`：STRUCTURE_PROTOTYPE / WORKING_DRAFT / RESEARCH_COMPLETE / REVIEWED_DRAFT / FINAL_DELIVERABLE。
+
+实体文件已生成不得自动把专业状态提升为 FINAL；专业任务已完成也不得反向虚构实体文件已经存在。两类状态分别由 Execution Control 与 Document Render/Host 的真实执行证据支撑。

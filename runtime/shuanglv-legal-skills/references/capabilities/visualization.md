@@ -230,7 +230,7 @@ data_version_or_hash?
 
 **P1：** 时间滑块、focus+context、路径高亮、多视图联动、展开/折叠、事实状态筛选、观点切换、保存/恢复 ViewState。
 
-**P2 预留：** 自动聚类、异常关系提示、证据缺口提示、冲突事实提示、大规模 Canvas/WebGL、Visual Analytics 工作台。P2 不作为 v0.50 核心 Release 必须项。
+**P2 预留：** 自动聚类、异常关系提示、证据缺口提示、冲突事实提示、大规模 Canvas/WebGL、Visual Analytics 工作台。P2 仍为后续预留，不作为当前核心 Release 必须项。
 
 ---
 

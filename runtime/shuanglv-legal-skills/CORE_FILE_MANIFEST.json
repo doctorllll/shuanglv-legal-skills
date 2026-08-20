@@ -1,7 +1,7 @@
 {
-  "version": "0.50",
+  "version": "0.51",
   "release_status": "FINAL_RELEASE",
-  "file_count_excluding_self": 35,
+  "file_count_excluding_self": 37,
   "files": [
     {
       "path": "LICENSE",
@@ -10,13 +10,18 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "c2d258136fba300af9c3e6222cc1416c9dd8bf219830ff1eb3a9e5dd57d45052",
-      "size_bytes": 21399
+      "sha256": "2a601e528c46fa7a4227c51fef8d1981ab04aa5a0142fe9b839d5449d3bbc191",
+      "size_bytes": 24100
+    },
+    {
+      "path": "UPDATE_INSTRUCTIONS.md",
+      "sha256": "d80c64b34c2b240e0befbb5bf09067e3a1f8a53f587933f4cf4bd12ad4114db5",
+      "size_bytes": 5290
     },
     {
       "path": "manifest.json",
-      "sha256": "09656ed8ec769cd429a0ca6f1e66ab92ce9b1aa514283490f48e838ca22c8d68",
-      "size_bytes": 690
+      "sha256": "146bc0b26e98ac38ca9dbcc8c5cc4604be78311f4a0cabc53225ff6c0150cec2",
+      "size_bytes": 735
     },
     {
       "path": "references/capabilities/composition.md",
@@ -40,13 +45,13 @@
     },
     {
       "path": "references/capabilities/research.md",
-      "sha256": "d5e8628b445f57032d7e8d5040852b077ba2d66bde7cf1bf3f223f0b70aedfd7",
-      "size_bytes": 25124
+      "sha256": "46d959fca25de81464290db7c132fb517b1576f90db617c9d01a5ce0b3e14d39",
+      "size_bytes": 25402
     },
     {
       "path": "references/capabilities/review.md",
-      "sha256": "da30ea40dc23fbd1862916c689e5e3048f5ead3f92f12750b8e59489e0193e93",
-      "size_bytes": 15303
+      "sha256": "e4ab34133bf6f8e57c8042a491b3dcc2936a67491ff664943e7e6bc34b81cc2a",
+      "size_bytes": 15871
     },
     {
       "path": "references/capabilities/strategy.md",
@@ -55,8 +60,8 @@
     },
     {
       "path": "references/capabilities/visualization.md",
-      "sha256": "f476b5b6d7fef1a0eec0a498a92f2fee89c798b86dfd9310d046731307037941",
-      "size_bytes": 16527
+      "sha256": "78d802712096bed724858ac290e8fcd72ec03315bea1ff258102ccd2ade54b49",
+      "size_bytes": 16547
     },
     {
       "path": "references/domains/advisory.md",
@@ -105,8 +110,8 @@
     },
     {
       "path": "references/guards/formal-delivery.md",
-      "sha256": "b1e2584a529a7ffca6d72bf8aab45a8ab601fd719da2a1fc823cd105ab57cab0",
-      "size_bytes": 4641
+      "sha256": "2370b4bfb1894d9c98e67dfc2145a17f48976d163647ce1c9347ca133bdfa716",
+      "size_bytes": 5573
     },
     {
       "path": "references/guards/human-decision.md",
@@ -115,13 +120,13 @@
     },
     {
       "path": "references/guards/migration-assets.md",
-      "sha256": "667a639370dffdac1d6daa5f2526e2bff1e8b77bcb7b5d37579d49654863d6a7",
-      "size_bytes": 1449
+      "sha256": "38c5aa57d222372cf73af15567f73ea312d4a7578cb03da0789493a92c7f4327",
+      "size_bytes": 2015
     },
     {
       "path": "references/guards/side-effect-authorization.md",
-      "sha256": "f0b793eae84980aa637ed96650579f056d4e6f8e12348abc8dd97bb16dc787c5",
-      "size_bytes": 1619
+      "sha256": "246fb8db03a723bb4d54ffe53594d3a660382114f32bfb91c96db0313ae74b2b",
+      "size_bytes": 2082
     },
     {
       "path": "references/guards/source-preservation.md",
@@ -130,8 +135,8 @@
     },
     {
       "path": "references/interop/artifact-contract.md",
-      "sha256": "2c9f983e58b13f54970cd7a7d76480d7f714323b387ebba19532b3b28d378af7",
-      "size_bytes": 5863
+      "sha256": "7113f5ebed3329c20b7a204bdff9851c0f6d86ea9f59c104d5b5e6f8affa9bb8",
+      "size_bytes": 6469
     },
     {
       "path": "references/interop/batch-processing.md",
@@ -142,6 +147,11 @@
       "path": "references/interop/capability-requirement.md",
       "sha256": "664f03ff484a3c7ef4183f94df9fdf49e0c54377ebc0a3cb45074d978a2b6916",
       "size_bytes": 5831
+    },
+    {
+      "path": "references/interop/execution-control.md",
+      "sha256": "ff969f0685125652dc76488b5c43b08760952c2fb6af49ad5f1154843a0ed5ad",
+      "size_bytes": 10195
     },
     {
       "path": "references/interop/least-necessary-disclosure.md",
@@ -160,13 +170,13 @@
     },
     {
       "path": "references/matter/professional-state.md",
-      "sha256": "478d2d9869ecdcc032fe30af58549e3adacda44ad608f7442e6d1bc173dd7750",
-      "size_bytes": 5349
+      "sha256": "cfe8400a2b8228d573aeb1f7f30b2fd655ec37dfd5d120246f0908087ff3db23",
+      "size_bytes": 5888
     },
     {
       "path": "references/matter/result-invalidation.md",
-      "sha256": "9acd9ce723d53d89f4df8a91ead4a3304fdd7606e7ec7cd3fa7df8072ffcca88",
-      "size_bytes": 2413
+      "sha256": "9ccbea8c23272fd66ab3f607068f579618418814019e593ed404d8710371abf2",
+      "size_bytes": 2711
     },
     {
       "path": "references/preferences/activation-mode.md",

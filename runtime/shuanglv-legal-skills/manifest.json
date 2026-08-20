@@ -1,16 +1,16 @@
 {
   "name": "爽律skill｜律师专业工作流系统",
-  "version": "0.50",
-  "architecture": "Thin SKILL.md + On-demand Shared Capabilities + Native Visualization Capability + Domain Extensions + Conditional Guards + Minimal Matter State + Loose Interop + Shared Batch/Artifact/Visual Contracts",
+  "version": "0.51",
+  "architecture": "Thin SKILL.md + On-demand Shared Capabilities + Native Visualization Capability + Task Execution Control + Safe Update Guard + Domain Extensions + Conditional Guards + Minimal Matter State + Loose Interop + Shared Batch/Artifact/Visual Contracts",
   "l0_files": [
     "SKILL.md"
   ],
-  "planner_load_unit_count": 32,
+  "planner_load_unit_count": 34,
   "shared_capability_count": 8,
   "domain_count": 5,
-  "guard_count": 7,
+  "guard_count": 8,
   "matter_units": 3,
-  "interop_units": 5,
+  "interop_units": 6,
   "external_units": 2,
   "preference_units": 2,
   "status": "STABLE",
